@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd"
+	version="1.2">
+	<managed-bean>
+		<description>contain doctor related info</description>
+		<managed-bean-name>doctorBean</managed-bean-name>
+		<managed-bean-class>com.ehm.web.managebeans.DoctorBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<description>contain login info</description>
+		<managed-bean-name>loginBean</managed-bean-name>
+		<managed-bean-class>com.ehm.web.managebeans.LoginBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<description>contain homepage functions</description>
+		<managed-bean-name>welcomeBean</managed-bean-name>
+		<managed-bean-class>com.ehm.web.managebeans.WelcomeBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<description>contain new account info</description>
+		<managed-bean-name>newAccountBean</managed-bean-name>
+		<managed-bean-class>com.ehm.web.managebeans.NewAccountBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<description>contain patient query info</description>
+		<managed-bean-name>patientBean</managed-bean-name>
+		<managed-bean-class>com.ehm.web.managebeans.PatientBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<description>contain login info</description>
+		<managed-bean-name>adminBean</managed-bean-name>
+		<managed-bean-class>com.ehm.web.managebeans.AdminBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>navigateToHomePage</from-outcome>
+			<to-view-id>/jsp/homePage.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>navigateToSearchDoctor</from-outcome>
+			<to-view-id>/jsp/searchForDoctor.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>navigateToCreateAccount</from-outcome>
+			<to-view-id>/jsp/createaccount.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>navigateToLogin</from-outcome>
+			<to-view-id>/jsp/Login.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/jsp/loginHome.jsp</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>navigatePatientHome</from-outcome>
+			<to-view-id>/jsp/loginHome.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>failure</from-outcome>
+			<to-view-id>/jsp/Login.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>navigateToDoctorProfile</from-outcome>
+			<to-view-id>/jsp/viewDoctorProfile.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>navigatePatientProfile</from-outcome>
+			<to-view-id>/jsp/patientProfile.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>navigateToQuery</from-outcome>
+			<to-view-id>/jsp/postQuery.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>navigateToQueryPage</from-outcome>
+			<to-view-id>/jsp/PatientQuery.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>goToAllPatientQueries</from-outcome>
+			<to-view-id>/jsp/allPatientQueries.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>navigateAdminHome</from-outcome>
+			<to-view-id>/jsp/adminHome.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+</faces-config>
