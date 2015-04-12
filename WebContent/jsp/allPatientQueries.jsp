@@ -47,83 +47,58 @@
 			</div>
 		</h:form>
 		<div class="jumbotron">
-		<h3>All queries</h3>
-		<h:form id="searchParamForm">
+			<div class="container">
+				<h3>All queries</h3>
+				<h:form id="PatientQueries">
+					<h:dataTable id="patientQueryTable"
+						value="#{adminBean.displayQueryList}" var="patque" border="1">
 
-			<h:panelGrid columns="10">
-				<h:outputLabel value="First Name" for="doct_fname"></h:outputLabel>
-				<h:inputText value="#{doctorBean.firstName}" id="doct_fname"
-				styleClass="form-control"></h:inputText>
-				&nbsp;
-				<h:outputLabel value="Last Name" for="doct_lname"></h:outputLabel>
-				<h:inputText value="#{doctorBean.lastName}" id="doct_lname"
-				styleClass="form-control"></h:inputText>
-				&nbsp;
-				<h:outputLabel value="Specialization" for="doct_spcl"></h:outputLabel>
-				<h:selectOneMenu value="#{doctorBean.specialization}" id="doct_spcl" styleClass="form-control">
-					<f:selectItems value="#{doctorBean.specializationList}" />
-				</h:selectOneMenu>
-				&nbsp;
-			<h:commandButton action="#{doctorBean.searchDoctor}" value="Search" styleClass="btn btn-success">
-			</h:commandButton>
-			</h:panelGrid>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Query Category" />
+							</f:facet>
+							<h:outputText value="#{patque.queryCategory}"></h:outputText>
 
+						</h:column>
 
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Query Description" />
+							</f:facet>
+							<h:outputText value="#{patque.queryDescription}"></h:outputText>
 
-		</h:form>
-		<br />
-		<br />
-		<h:form id="searchResultForm">
-			<h:dataTable id="doctTable" value="#{doctorBean.doctorSearchList}"
-				var="doct" rendered="#{doctorBean.showSearch}" border="1">
+						</h:column>
 
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Name" />
-					</f:facet>
-					<h:outputText value="#{doct.firstName}"></h:outputText>&nbsp;
-				<h:outputText value="#{doct.lastName}"></h:outputText>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Query Status" />
+							</f:facet>
+							<h:outputText value="#{patque.queryStatus}"></h:outputText>
 
-				</h:column>
+						</h:column>
 
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Specialization" />
-					</f:facet>
-					<h:outputText value="#{doct.specialization}"></h:outputText>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Query Date" />
+							</f:facet>
+							<h:outputText value="#{patque.queryDate}"></h:outputText>
 
-				</h:column>
+						</h:column>
 
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Desination" />
-					</f:facet>
-					<h:outputText value="#{doct.designation}"></h:outputText>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Doctors Reply" />
+							</f:facet>
+							<h:outputText value="#{patque.doctorsReply}"></h:outputText>
 
-				</h:column>
+						</h:column>
 
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Visiting Days" />
-					</f:facet>
-					<h:outputText value="#{doct.visitingDays}"></h:outputText>
-
-				</h:column>
-
-				<h:column>
-					<f:facet name="header">
-					</f:facet>
-					<h:commandLink value="Show details"
-						action="#{doctorBean.goToDetailProfile}">
-						<f:param name="doctorId" value="#{doct.doctorId}" />
-					</h:commandLink>
-				</h:column>
-
-
-			</h:dataTable>
-
-		</h:form>
-	</div>
+					</h:dataTable>
+					<br>
+				<h:commandButton value="Back" action="#{loginBean.goToMyHome}" styleClass="btn btn-success"></h:commandButton>
+				</h:form>
+			</div>
+		</div>
 	</f:view>
 
 </body>
