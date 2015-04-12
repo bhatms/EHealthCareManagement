@@ -11,6 +11,15 @@
 <link
 	href="/EHealthcareManagement/resources/css/bootstrap-theme.min.css"
 	rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+function cancelPage(){
+	
+	document.getElementById("profileForm:cmdLnkIdSuppliers").click();
+	
+}
+
+</script>
 </head>
 
 
@@ -49,11 +58,8 @@
 		<div class="jumbotron">
 			<br>
 
-			<div class="panel panel-primary">
-				<div class="panel-heading">
 					<h3 class="panel-title">Pofile</h3>
-				</div>
-			</div>
+			<br>		
 			<!-- <div class="panel-body"> -->
 			<h:form id="profileForm">
 				<h:message for="profileForm"></h:message>
