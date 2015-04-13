@@ -45,7 +45,8 @@
 		<h3>Patient Queries</h3>
 		<h:form id="PatientQueries">
 			<h:dataTable id="patientQueryTable" value="#{patientBean.patientQueryList}"
-				var="patque"  border="1">
+				var="patque"  border="1"
+				styleClass="form-control">
 
 				<h:column>
 					<f:facet name="header">
@@ -89,6 +90,7 @@
 
 			</h:dataTable>
 
+			
 		</h:form>
 		</div>
 	</f:view>

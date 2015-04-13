@@ -1,11 +1,16 @@
 package com.ehm.web.managebeans;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 import com.ehm.db.impl.AdminDao;
 import com.ehm.db.impl.AdminDaoImpl;
+import com.ehm.db.impl.EhealthUtilDao;
+import com.ehm.db.impl.EhealthUtilDaoImpl;
 import com.ehm.db.model.Doctor;
 import com.ehm.db.model.Patient;
 import com.ehm.db.model.PatientQuery;
@@ -13,11 +18,11 @@ import com.ehm.db.model.PatientQuery;
 public class AdminBean {
 
 
-	private List<Doctor> allDoctors;
+	private List<SelectItem> doctorByCateg;
 
 	private List<SelectItem> specalizationList;
 
-	private List<Patient> patientList	;
+	private List<Patient> patientList;
 
 	private String filterSpecalization;
 
@@ -28,31 +33,36 @@ public class AdminBean {
 	private String filterFromDate;
 
 	private String filterToDate;
-	
+
 	private List<PatientQuery> displayQueryList;
 
+	private List<SelectItem> queryByCategoryList;
 
+	private String selectedQueryId;
 
+	private String selectedDoctorId;
 
+	private boolean showQueryList;
 
-	/**
-	 * @return the allDoctors
-	 */
-	public List<Doctor> getAllDoctors() {
-		return allDoctors;
-	}
+	private boolean showDoctorList;
 
-	/**
-	 * @param allDoctors the allDoctors to set
-	 */
-	public void setAllDoctors(List<Doctor> allDoctors) {
-		this.allDoctors = allDoctors;
-	}
+	private boolean showAssignBtn;
+
 
 	/**
 	 * @return the specalizationList
 	 */
 	public List<SelectItem> getSpecalizationList() {
+
+
+		EhealthUtilDao eDao = new EhealthUtilDaoImpl();
+		try {
+			specalizationList = eDao.getCategoryList();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		return specalizationList;
 	}
 
@@ -151,9 +161,91 @@ public class AdminBean {
 
 
 		AdminDao adminDao = new AdminDaoImpl();
-		
-		displayQueryList = adminDao.getAllQyeries();
+
+		try {
+			displayQueryList = adminDao.getAllQyeries();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return "goToAllPatientQueries";
+	}
+
+	public String viewAssignQueries(){
+
+
+		showAssignBtn = false;
+
+		showDoctorList = false;
+
+		showQueryList = false;
+
+		return "goToAllPatientQueries";
+
+	}
+
+
+	public String getFilterQueries(){
+
+		/*String selectedSpecl = FacesContext.getCurrentInstance()
+				.getExternalContext().getRequestParameterMap()
+				.get("specl");
+
+		 */
+
+		AdminDao adminDao = new AdminDaoImpl();
+
+		System.out.println(filterSpecalization);
+
+		try {
+			queryByCategoryList = adminDao.getQyeryByCateg(filterSpecalization);
+
+
+			if(queryByCategoryList != null && queryByCategoryList.size() > 1){
+				showQueryList = true;
+				doctorByCateg = adminDao.getDoctorByCateg(filterSpecalization);
+
+			} else{
+
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_WARN,
+								"No queries under this category",
+								"Please Try Again!"));
+
+			}
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public String assignQueries(){
+
+
+		AdminDao adminDao = new AdminDaoImpl();
+
+		try {
+			PatientQuery patientQuery = new PatientQuery();
+			patientQuery.setQueryId(Integer.parseInt(selectedQueryId));
+			patientQuery.setDoctorId(Integer.parseInt(selectedDoctorId));
+			adminDao.assignQueryToDoctor(patientQuery);
+
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO,
+							"Operation completed successfully.",
+							"Please Try Again!"));
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public String filterPatientQueries(){
@@ -163,11 +255,11 @@ public class AdminBean {
 		return "patientQueryList";
 	}
 
-	public String assignQueriesToDoctor(){
+	public String goToAssignQueries(){
 
 
 
-		return "patientQueryList";
+		return "navigateAssignQuery";
 	}
 
 	/**
@@ -183,6 +275,105 @@ public class AdminBean {
 	public void setDisplayQueryList(List<PatientQuery> displayQueryList) {
 		this.displayQueryList = displayQueryList;
 	}
-	
-	
+
+	/**
+	 * @return the doctorByCateg
+	 */
+	public List<SelectItem> getDoctorByCateg() {
+		return doctorByCateg;
+	}
+
+	/**
+	 * @param doctorByCateg the doctorByCateg to set
+	 */
+	public void setDoctorByCateg(List<SelectItem> doctorByCateg) {
+		this.doctorByCateg = doctorByCateg;
+	}
+
+	/**
+	 * @return the queryBuCategoryList
+	 */
+	public List<SelectItem> getQueryByCategoryList() {
+		return queryByCategoryList;
+	}
+
+	/**
+	 * @param queryBuCategoryList the queryBuCategoryList to set
+	 */
+	public void setQueryByCategoryList(List<SelectItem> queryBuCategoryList) {
+		this.queryByCategoryList = queryBuCategoryList;
+	}
+
+
+	/**
+	 * @return the showQueryList
+	 */
+	public boolean isShowQueryList() {
+		return showQueryList;
+	}
+
+	/**
+	 * @param showQueryList the showQueryList to set
+	 */
+	public void setShowQueryList(boolean showQueryList) {
+		this.showQueryList = showQueryList;
+	}
+
+
+	/**
+	 * @return the showDoctorList
+	 */
+	public boolean isShowDoctorList() {
+		return showDoctorList;
+	}
+
+	/**
+	 * @param showDoctorList the showDoctorList to set
+	 */
+	public void setShowDoctorList(boolean showDoctorList) {
+		this.showDoctorList = showDoctorList;
+	}
+
+	/**
+	 * @return the showAssignBtn
+	 */
+	public boolean isShowAssignBtn() {
+		return showAssignBtn;
+	}
+
+	/**
+	 * @param showAssignBtn the showAssignBtn to set
+	 */
+	public void setShowAssignBtn(boolean showAssignBtn) {
+		this.showAssignBtn = showAssignBtn;
+	}
+
+	/**
+	 * @return the selectedQueryId
+	 */
+	public String getSelectedQueryId() {
+		return selectedQueryId;
+	}
+
+	/**
+	 * @param selectedQueryId the selectedQueryId to set
+	 */
+	public void setSelectedQueryId(String selectedQueryId) {
+		this.selectedQueryId = selectedQueryId;
+	}
+
+	/**
+	 * @return the selectedDoctorId
+	 */
+	public String getSelectedDoctorId() {
+		return selectedDoctorId;
+	}
+
+	/**
+	 * @param selectedDoctorId the selectedDoctorId to set
+	 */
+	public void setSelectedDoctorId(String selectedDoctorId) {
+		this.selectedDoctorId = selectedDoctorId;
+	}
+
 }

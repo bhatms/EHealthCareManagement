@@ -47,6 +47,7 @@
 			</div>
 		</h:form>
 		<div class="jumbotron">
+		<div class="container">
 		<h3>Search For Doctor</h3>
 		<h:form id="searchParamForm">
 
@@ -75,7 +76,7 @@
 		<br />
 		<h:form id="searchResultForm">
 			<h:dataTable id="doctTable" value="#{doctorBean.doctorSearchList}"
-				var="doct" rendered="#{doctorBean.showSearch}" border="1">
+				var="doct" rendered="#{doctorBean.showSearch}" border="1" styleClass="form-control">
 
 				<h:column>
 					<f:facet name="header">
@@ -123,6 +124,7 @@
 			</h:dataTable>
 
 		</h:form>
+	</div>
 	</div>
 	</f:view>
 

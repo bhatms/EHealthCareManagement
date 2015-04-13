@@ -14,12 +14,7 @@
 
 <script type="text/javascript">
 
-function checkPassword(){
-	
-	var passwd = document.getElementById("").value
-	
-	
-}
+
 
 </script>
 </head>
@@ -58,13 +53,11 @@ function checkPassword(){
 			</div>
 		</h:form>
 		<div class="jumbotron">
-			<h:form>
+			<h:form id="acc_form">
+			<br>
+				<h:messages globalOnly="true" style="color:red" />
 				<br>
 				<table>
-					<tr>
-						<td><h:outputLabel value="Personal Information:"
-								style="font-weight: bold;" /></td>
-					</tr>
 					<tr>
 						<td><h:outputLabel value="First Name"></h:outputLabel></td>
 						<td><h:inputText value="#{newAccountBean.firstName}"
@@ -107,10 +100,6 @@ function checkPassword(){
 								styleClass="form-control"></h:inputText></td>
 
 						<td><h:message for="phone_no" style="color:red" /></td>
-					</tr>
-					<tr>
-						<td><h:outputLabel value="Address Information:"
-								style="font-weight: bold;" /></td>
 					</tr>
 
 					<tr>
@@ -166,16 +155,17 @@ function checkPassword(){
 					</tr>
 					<tr>
 						<td><h:outputLabel value="Confirm Password" for="cnf_password"></h:outputLabel></td>
-						<td><h:inputSecret value=""
+						<td><h:inputSecret value="#{newAccountBean.confPassword}"
 								id="cnf_password" required="true"
 								requiredMessage="Please Confirm Password"
-								styleClass="form-control"></h:inputSecret></td>
-						<td><h:message for="set_password" style="color:red" /></td>
+								styleClass="form-control">
+								</h:inputSecret></td>
+						<td><h:message for="cnf_password" style="color:red" id="cnf_pswd_err"/></td>
 					</tr>
 					<tr>
 						<td><h:commandButton value="Save and Create Account"
 								styleClass="btn btn-success"
-								action="#{newAccountBean.saveAccount}"></h:commandButton></td>
+								action="#{newAccountBean.saveAccount}"></h:commandButton></td> 
 						<td></td>
 						<td></td>
 					</tr>

@@ -25,6 +25,7 @@ public class NewAccountBean {
 	private List<SelectItem> stateList;
 	private String phoneNo;
 	private String password;
+	private String confPassword;
 	private String gender;
 	private String dateOfBirth;
 	private Patient currentPatient;
@@ -197,40 +198,58 @@ public class NewAccountBean {
 	public String saveAccount() {
 
 		String saveResult = null;
-		Patient newPatient = new Patient();
-		newPatient.setFirstName(firstName);
-		newPatient.setLastName(lastName);
-		newPatient.setGender(gender);
-		newPatient.setDob(dateOfBirth);
-		newPatient.setPhoneNum(phoneNo);
-		newPatient.setAddrLine1(addressLine);
-		newPatient.setState(state);
-		newPatient.setCity(city);
-		newPatient.setZip(zip);
-		newPatient.setEmailId(emailId);
-		newPatient.setPassword(password);
 
-		PatientDaoImpl patientDaoObj = new PatientDaoImpl();
+		if(!password.equals(confPassword)){
 
-		try {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Password entered doesn't match please reenter.",
+							"Please Try Again!"));
+		}else{
 
-			Patient addedPatient = patientDaoObj.ceateNewAccount(newPatient);
-			saveResult = "success";
+			Patient newPatient = new Patient();
+			newPatient.setFirstName(firstName);
+			newPatient.setLastName(lastName);
+			newPatient.setGender(gender);
+			newPatient.setDob(dateOfBirth);
+			newPatient.setPhoneNum(phoneNo);
+			newPatient.setAddrLine1(addressLine);
+			newPatient.setState(state);
+			newPatient.setCity(city);
+			newPatient.setZip(zip);
+			newPatient.setEmailId(emailId);
+			newPatient.setPassword(password);
 
-			FacesContext context = FacesContext.getCurrentInstance();
-			HttpSession session = (HttpSession) context.getExternalContext()
-					.getSession(true);
-			session.setAttribute("loggedInPatient", addedPatient);
-			session.setAttribute("username", addedPatient.getEmailId());
-			session.setAttribute("userfName", addedPatient.getFirstName());
-			reset();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
+			PatientDaoImpl patientDaoObj = new PatientDaoImpl();
+
+			try {
+
+				Patient addedPatient = patientDaoObj.ceateNewAccount(newPatient);
+				if(addedPatient != null){
+					saveResult = "success";
+
+					FacesContext context = FacesContext.getCurrentInstance();
+					HttpSession session = (HttpSession) context.getExternalContext()
+							.getSession(true);
+					session.setAttribute("loggedInPatient", addedPatient);
+					session.setAttribute("username", addedPatient.getEmailId());
+					session.setAttribute("userfName", addedPatient.getFirstName());
+					reset();
+				}
+
+
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}
+
+
 		return saveResult;
 	}
 
@@ -373,7 +392,7 @@ public class NewAccountBean {
 	 * @return the stateList
 	 */
 	public List<SelectItem> getStateList() {
-	
+
 		if(stateList == null){
 			EhealthUtilDao utilDao = new EhealthUtilDaoImpl();
 			try {
@@ -393,6 +412,19 @@ public class NewAccountBean {
 	public void setStateList(List<SelectItem> stateList) {
 		this.stateList = stateList;
 	}
-	
-	
+
+	/**
+	 * @return the confPassword
+	 */
+	public String getConfPassword() {
+		return confPassword;
+	}
+
+	/**
+	 * @param confPassword the confPassword to set
+	 */
+	public void setConfPassword(String confPassword) {
+		this.confPassword = confPassword;
+	}
+
 }

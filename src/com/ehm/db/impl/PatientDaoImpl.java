@@ -3,6 +3,7 @@ package com.ehm.db.impl;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,27 +16,52 @@ public class PatientDaoImpl {
 	public Patient ceateNewAccount(Patient insertPatient) throws SQLException,
 	ClassNotFoundException {
 
-		String insertTableSQL = " INSERT INTO patient "
-				+ " (first_name, last_name, address_line1, address_city,address_state, address_zip , "
-				+ "phone_no , email , password, dob, gender ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ;";
 
-		PreparedStatement preparedStatement = EHMDataConnect.getDataConn()
-				.prepareStatement(insertTableSQL);
-		preparedStatement.setString(1, insertPatient.getFirstName());
-		preparedStatement.setString(2, insertPatient.getLastName());
-		preparedStatement.setString(3, insertPatient.getAddrLine1());
-		preparedStatement.setString(4, insertPatient.getCity());
-		preparedStatement.setString(5, insertPatient.getState());
-		preparedStatement.setString(6, insertPatient.getZip());
-		preparedStatement.setString(7, insertPatient.getPhoneNum());
-		preparedStatement.setString(8, insertPatient.getEmailId());
-		preparedStatement.setString(9, insertPatient.getPassword());
-		preparedStatement.setString(10, insertPatient.getDob());
-		preparedStatement.setString(11, insertPatient.getGender());
+		String insertUserSQL = " INSERT INTO user "
+				+ " ( email , password, role ) values ( ?, ?, ? ) ;";
 
-		preparedStatement.executeUpdate();
+		PreparedStatement preparedStatement1 = EHMDataConnect.getDataConn()
+				.prepareStatement(insertUserSQL, Statement.RETURN_GENERATED_KEYS);
 
-		return getPatientByEmail(insertPatient.getEmailId());
+		preparedStatement1.setString(1, insertPatient.getEmailId());
+		preparedStatement1.setString(2, insertPatient.getPassword());
+		preparedStatement1.setString(3, "P");
+
+		preparedStatement1.executeUpdate();
+		ResultSet rs1 = preparedStatement1.getGeneratedKeys();
+
+		//System.out.println(rs1.getInt("user_id"));
+		if(rs1.next()){
+			int newUserId = rs1.getInt(1);
+			
+
+
+			
+			String insertTableSQL = " INSERT INTO patient "
+					+ " (first_name, last_name, address_line1, address_city,address_state, address_zip , "
+					+ "phone_no , email , password, dob, gender, user_id ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ;";
+
+			PreparedStatement preparedStatement2 = EHMDataConnect.getDataConn()
+					.prepareStatement(insertTableSQL, Statement.RETURN_GENERATED_KEYS);
+			preparedStatement2.setString(1, insertPatient.getFirstName());
+			preparedStatement2.setString(2, insertPatient.getLastName());
+			preparedStatement2.setString(3, insertPatient.getAddrLine1());
+			preparedStatement2.setString(4, insertPatient.getCity());
+			preparedStatement2.setString(5, insertPatient.getState());
+			preparedStatement2.setString(6, insertPatient.getZip());
+			preparedStatement2.setString(7, insertPatient.getPhoneNum());
+			preparedStatement2.setString(8, insertPatient.getEmailId());
+			preparedStatement2.setString(9, insertPatient.getPassword());
+			preparedStatement2.setString(10, insertPatient.getDob());
+			preparedStatement2.setString(11, insertPatient.getGender());
+			preparedStatement2.setInt(12, newUserId);
+
+			preparedStatement2.executeUpdate();
+
+			return getPatientByEmail(insertPatient.getEmailId());
+
+		} 
+			return null;
 	}
 
 	public Patient getPatientByEmail(String emailId)
@@ -151,12 +177,12 @@ public class PatientDaoImpl {
 
 		sqlStr.append(" where email = ?");
 		paramList.add(newPatient.getEmailId());
-		
+
 		System.out.println("**update patient query :"+sqlStr.toString());
-		
+
 		PreparedStatement preparedStatement = EHMDataConnect.getDataConn()
 				.prepareStatement(sqlStr.toString());
-		
+
 		int cnt = 1;
 		for (String paramVal : paramList) {
 			preparedStatement.setString(cnt, paramVal);

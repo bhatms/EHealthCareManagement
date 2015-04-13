@@ -64,11 +64,14 @@
 
 				<ul class="nav nav-pills nav-stacked col-md-2">
 					<h:commandLink value="Profile"
-						action="#{newAccountBean.viewPatientProfile}"
+						action="#{patientBean.viewPatientProfile}"
 						styleClass="list-group-item"></h:commandLink>
 					<h:commandLink value="History" styleClass="list-group-item"></h:commandLink>
 
-					<h:commandLink value="Patient Past Queries"
+					<h:commandLink value="Post a query"
+						action="#{patientBean.goToQuery}" styleClass="list-group-item"></h:commandLink>
+
+					<h:commandLink value="View Past Queries"
 						action="#{patientBean.displayQuery}" styleClass="list-group-item"></h:commandLink>
 
 				</ul>

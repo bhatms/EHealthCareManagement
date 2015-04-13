@@ -1,5 +1,7 @@
 package com.ehm.db.model;
 
+import java.util.Date;
+
 
 public class PatientQuery {
 
@@ -9,8 +11,10 @@ public class PatientQuery {
 	private String queryDescription;
 	private String queryStatus;
 	// private Date queryDate;
+	private String patientCategory;
+	private String patientDescription;
 	
-	private String queryDate;
+	private Date queryDate;
 	private int doctorId;
 	private String doctorsReply;
 	public int getPatientId() {
@@ -54,18 +58,7 @@ public class PatientQuery {
 	public int getDoctorId() {
 		return doctorId;
 	}
-	/**
-	 * @return the queryDate
-	 */
-	public String getQueryDate() {
-		return queryDate;
-	}
-	/**
-	 * @param queryDate the queryDate to set
-	 */
-	public void setQueryDate(String queryDate) {
-		this.queryDate = queryDate;
-	}
+	
 	public void setDoctorId(int doctorId) {
 		this.doctorId = doctorId;
 	}
@@ -76,5 +69,43 @@ public class PatientQuery {
 		this.doctorsReply = doctorsReply;
 	}
 	
+	/**
+	 * @return the patientCategory
+	 */
+	public String getPatientCategory() {
+		return patientCategory;
+	}
+	/**
+	 * @param patientCategory the patientCategory to set
+	 */
+	public void setPatientCategory(String patientCategory) {
+		this.patientCategory = patientCategory;
+	}
+	
+	
+	/**
+	 * @return the patientDescription
+	 */
+	public String getPatientDescription() {
+		return patientDescription;
+	}
+	/**
+	 * @param patientDescription the patientDescription to set
+	 */
+	public void setPatientDescription(String patientDescription) {
+		this.patientDescription = patientDescription;
+	}
+	/**
+	 * @return the queryDate
+	 */
+	public Date getQueryDate() {
+		return queryDate;
+	}
+	/**
+	 * @param queryDate the queryDate to set
+	 */
+	public void setQueryDate(Date queryDate) {
+		this.queryDate = queryDate;
+	}
 	
 }

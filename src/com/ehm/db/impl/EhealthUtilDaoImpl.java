@@ -52,5 +52,25 @@ public class EhealthUtilDaoImpl implements EhealthUtilDao{
 
 		return list;
 	}
+	
+	public List<SelectItem> getCategoryList()
+			throws ClassNotFoundException, SQLException {
+		StringBuffer sqlBuf = new StringBuffer("select * from specializations ");
+
+
+		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
+		// get customer data from database
+		ResultSet result = ps.executeQuery();
+
+		List<SelectItem> list = new ArrayList<SelectItem>();
+		while (result.next()) {
+			SelectItem item = new SelectItem();
+			item.setValue(result.getString("special_id"));
+			item.setLabel(result.getString("special_title"));
+			list.add(item);
+		}
+
+		return list;
+	}
 
 }
