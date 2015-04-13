@@ -63,14 +63,22 @@
 			</div>
 
 			<ul class="nav nav-pills nav-stacked col-md-2">
-				<li><h:commandLink value="All Queries"
+				<li><h:commandLink value="New Queries"
 						action="#{adminBean.viewPatientQueries}"
 						styleClass="list-group-item"></h:commandLink></li>
 
-				<li><h:commandLink value="Asign Query"
+				<li><h:commandLink value="Assign New Query"
 						action="#{adminBean.goToAssignQueries}"
 						styleClass="list-group-item"></h:commandLink></li>
-
+				
+				<li><h:commandLink value="View Assigned Queries"
+						action="#{adminBean.viewInProgressQueries}"
+						styleClass="list-group-item"></h:commandLink></li>
+					
+				<li><h:commandLink value="View Closed Queries"
+						action="#{adminBean.viewClosedQueries}"
+						styleClass="list-group-item"></h:commandLink></li>
+					
 			</ul>
 
 		</h:form>

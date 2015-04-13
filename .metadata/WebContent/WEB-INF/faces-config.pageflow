@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14288641281380" configfile="/EHealthcareManagement/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="1714" id="pf142887716087323" referenceLink="//@navigationRule.9/@fromViewId|" outlinks="pf142887716087324 pf142887716087325 pf142887716087326 pf142887716087327 pf142887716087328 pf142887716087329 pf142887716087330 pf142887716087331 pf142887716087332 pf142887716087333 pf142887716087334 pf142887716087335 pf142887716087336" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="2098" id="pf142887716087323" referenceLink="//@navigationRule.10/@fromViewId|" outlinks="pf142887716087324 pf142887716087325 pf142887716087326 pf142887716087327 pf142887716087328 pf142887716087329 pf142887716087330 pf142887716087331 pf142887716087332 pf142887716087333 pf142887716087334 pf142887716087335 pf142887716087336 pf14289513727410" path="*"/>
   <nodes xsi:type="pageflow:PFPage" name="jsp/homePage" x="338" y="178" id="pf142887716087337" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf142887716087324" path="/jsp/homePage.jsp"/>
   <nodes xsi:type="pageflow:PFPage" name="jsp/searchForDoctor" x="338" y="562" id="pf142887716087338" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf142887716087325" path="/jsp/searchForDoctor.jsp"/>
   <nodes xsi:type="pageflow:PFPage" name="jsp/createaccount" x="338" y="946" id="pf142887716087339" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf142887716087326" path="/jsp/createaccount.jsp"/>
@@ -12,6 +12,7 @@
   <nodes xsi:type="pageflow:PFPage" name="jsp/PatientQuery" x="338" y="3250" id="pf142887888543145" referenceLink="//@navigationRule.7/@navigationCase.0/@toViewId|" inlinks="pf142887716087334" path="/jsp/PatientQuery.jsp"/>
   <nodes xsi:type="pageflow:PFPage" name="jsp/allPatientQueries" x="338" y="3634" id="pf142887888543146" referenceLink="//@navigationRule.8/@navigationCase.0/@toViewId|" inlinks="pf142887716087335" path="/jsp/allPatientQueries.jsp"/>
   <nodes xsi:type="pageflow:PFPage" name="jsp/adminHome" x="338" y="4018" id="pf142887888543144" referenceLink="//@navigationRule.9/@navigationCase.0/@toViewId|" inlinks="pf142887716087336" path="/jsp/adminHome.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="jsp/assignQuery" x="338" y="4402" id="pf14289513727431" referenceLink="//@navigationRule.10/@navigationCase.0/@toViewId|" inlinks="pf14289513727410" path="/jsp/assignQuery.jsp"/>
   <links id="pf142887716087324" target="pf142887716087337" source="pf142887716087323" outcome="navigateToHomePage"/>
   <links id="pf142887716087325" target="pf142887716087338" source="pf142887716087323" outcome="navigateToSearchDoctor"/>
   <links id="pf142887716087326" target="pf142887716087339" source="pf142887716087323" outcome="navigateToCreateAccount"/>
@@ -25,4 +26,5 @@
   <links id="pf142887716087334" target="pf142887888543145" source="pf142887716087323" outcome="navigateToQueryPage"/>
   <links id="pf142887716087335" target="pf142887888543146" source="pf142887716087323" outcome="goToAllPatientQueries"/>
   <links id="pf142887716087336" target="pf142887888543144" source="pf142887716087323" outcome="navigateAdminHome"/>
+  <links id="pf14289513727410" target="pf14289513727431" source="pf142887716087323" outcome="navigateAssignQuery"/>
 </pageflow:Pageflow>

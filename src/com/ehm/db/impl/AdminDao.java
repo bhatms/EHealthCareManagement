@@ -17,4 +17,8 @@ public interface AdminDao {
 	List<SelectItem> getQyeryByCateg(String category) throws ClassNotFoundException, SQLException;
 
 	List<SelectItem> getDoctorByCateg(String selectedSpecl) throws ClassNotFoundException, SQLException;
+	
+	List<PatientQuery> getClosedQuery() throws SQLException, ClassNotFoundException;
+	
+	List<PatientQuery> getInProgressQuery() throws SQLException, ClassNotFoundException;
 }

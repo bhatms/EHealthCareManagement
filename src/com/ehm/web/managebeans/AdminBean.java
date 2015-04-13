@@ -48,7 +48,61 @@ public class AdminBean {
 
 	private boolean showAssignBtn;
 
+	private List<PatientQuery> closedQueriesList;
+	private List<PatientQuery> inProgressQueriesList;
+	private boolean showClosed;
+	private boolean showInProgress;
 
+	
+	
+
+
+
+	public String viewClosedQueries() {
+		showClosed = false;
+		AdminDao adminDao = new AdminDaoImpl();
+		String result = null;
+		try {
+			closedQueriesList = adminDao.getClosedQuery();
+			if (closedQueriesList != null && !closedQueriesList.isEmpty()) {
+				showClosed = true;
+			}
+
+			result = "navigateToClosedQuery";
+			
+		} 
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	
+	
+	public String viewInProgressQueries() {
+		showInProgress = false;
+		AdminDao adminDao = new AdminDaoImpl();
+		String result = null;
+		try {
+			inProgressQueriesList = adminDao.getInProgressQuery();
+			if (inProgressQueriesList != null && !inProgressQueriesList.isEmpty()) {
+				showInProgress = true;
+			}
+			result = "navigateToInProgressQuery";
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	
+	
 	/**
 	 * @return the specalizationList
 	 */
@@ -374,6 +428,46 @@ public class AdminBean {
 	 */
 	public void setSelectedDoctorId(String selectedDoctorId) {
 		this.selectedDoctorId = selectedDoctorId;
+	}
+	
+	
+	public List<PatientQuery> getClosedQueriesList() {
+		return closedQueriesList;
+	}
+
+
+	public void setClosedQueriesList(List<PatientQuery> closedQueriesList) {
+		this.closedQueriesList = closedQueriesList;
+	}
+
+
+	public List<PatientQuery> getInProgressQueriesList() {
+		return inProgressQueriesList;
+	}
+
+
+	public void setInProgressQueriesList(List<PatientQuery> inProgressQueriesList) {
+		this.inProgressQueriesList = inProgressQueriesList;
+	}
+
+
+	public boolean isShowClosed() {
+		return showClosed;
+	}
+
+
+	public void setShowClosed(boolean showClosed) {
+		this.showClosed = showClosed;
+	}
+
+
+	public boolean isShowInProgress() {
+		return showInProgress;
+	}
+
+
+	public void setShowInProgress(boolean showInProgress) {
+		this.showInProgress = showInProgress;
 	}
 
 }

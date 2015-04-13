@@ -46,111 +46,76 @@
 				</div>
 			</div>
 		</h:form>
+
 		<div class="jumbotron">
 			<div class="container">
-				<h3>NEW QUERIES</h3>
-				<h:form id="PatientQueries">
-					<h:dataTable id="patientQueryTable"
-						value="#{adminBean.displayQueryList}" var="patque" border="1"
-						styleClass="form-control">
 
-<%-- 
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Query Category" />
-							</f:facet>
-							<h:outputText value="#{patque.queryCategory}"></h:outputText>
-
-						</h:column>
-
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Query Description" />
-							</f:facet>
-							<h:outputText value="#{patque.queryDescription}"></h:outputText>
-
-						</h:column>
-
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Query Status" />
-							</f:facet>
-							<h:outputText value="#{patque.queryStatus}"></h:outputText>
-
-						</h:column>
-
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Query Date" />
-							</f:facet>
-							<h:outputText value="#{patque.queryDate}"></h:outputText>
-
-						</h:column>
-
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Doctors Reply" />
-							</f:facet>
-							<h:outputText value="#{patque.doctorsReply}"></h:outputText>
-
-						</h:column>
-
---%>
+				<h3>CLOSED QUERIES</h3>
+				<h:form id="closed">
+				
+		
+					<h:dataTable id="ClosedQueryTable" value="#{adminBean.closedQueriesList}"
+						var="closed" rendered="#{adminBean.showClosed}" border="1" styleClass="form-control">
+		
+		
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Patient ID" />
 							</f:facet>
-							<h:outputText value="#{patque.patientId}"></h:outputText>
+							<h:outputText value="#{closed.patientId}"></h:outputText>
 						</h:column>
 						
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query ID" />
 							</f:facet>
-							<h:outputText value="#{patque.queryId}"></h:outputText>
+							<h:outputText value="#{closed.queryId}"></h:outputText>
 						</h:column>
 						
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query Category" />
 							</f:facet>
-							<h:outputText value="#{patque.queryCategory}"></h:outputText>
+							<h:outputText value="#{closed.queryCategory}"></h:outputText>
 						</h:column>
 						
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query Description" />
 							</f:facet>
-							<h:outputText value="#{patque.queryDescription}"></h:outputText>
+							<h:outputText value="#{closed.queryDescription}"></h:outputText>
 						</h:column>
 						
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query Date" />
 							</f:facet>
-							<h:outputText value="#{patque.queryDate}"></h:outputText>
+							<h:outputText value="#{closed.queryDate}"></h:outputText>
 						</h:column>
-<%-- 					
+						
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Doctor ID" />
 							</f:facet>
-							<h:outputText value="#{patque.doctorId}"></h:outputText>
+							<h:outputText value="#{closed.doctorId}"></h:outputText>
 						</h:column>
 						
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Doctor Reply" />
 							</f:facet>
-							<h:outputText value="#{patque.doctorsReply}"></h:outputText>
+							<h:outputText value="#{closed.doctorsReply}"></h:outputText>
 						</h:column>
---%>						
+		
 					</h:dataTable>
 					<br>
-				<h:commandButton value="Back" action="#{loginBean.goToMyHome}" styleClass="btn btn-success"></h:commandButton>
+					<h:commandButton value="Back" action="#{loginBean.goToMyHome}" styleClass="btn btn-success"></h:commandButton>
+					
 				</h:form>
 			</div>
-		</div>
+		</div>		
+		
+
 	</f:view>
 
 </body>

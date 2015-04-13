@@ -114,4 +114,69 @@ public class AdminDaoImpl  implements AdminDao{
 
 		return list;	
 	}
+	
+	public List<PatientQuery> getClosedQuery() throws SQLException, ClassNotFoundException {
+		
+		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status = ? ");
+		
+		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
+		
+		ps.setString(1, "Closed");
+		
+		
+		ResultSet result = ps.executeQuery();
+
+		List<PatientQuery> closedList = new ArrayList<PatientQuery>();
+
+		while (result.next()) {
+			PatientQuery patientQuery = new PatientQuery();
+
+			patientQuery.setPatientId(result.getInt("patient_id"));
+			patientQuery.setQueryId(result.getInt("query_id"));
+			patientQuery.setQueryCategory(result.getString("query_category"));
+			patientQuery.setQueryDescription(result.getString("query_description"));
+			patientQuery.setQueryDate(result.getDate("query_date"));
+			patientQuery.setDoctorId(result.getInt("doctor_id"));
+			patientQuery.setDoctorsReply(result.getString("doctors_reply"));
+			closedList.add(patientQuery);
+		}
+
+
+
+		return closedList;
+	}
+
+	
+	
+	public List<PatientQuery> getInProgressQuery() throws SQLException, ClassNotFoundException{
+		
+		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status = ?");
+		
+		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
+		
+		ps.setString(1, "In-Progress");
+		
+		
+		ResultSet result = ps.executeQuery();
+
+		List<PatientQuery> inProgressList = new ArrayList<PatientQuery>();
+
+		while (result.next()) {
+			PatientQuery patientQuery = new PatientQuery();
+
+			patientQuery.setPatientId(result.getInt("patient_id"));
+			patientQuery.setQueryId(result.getInt("query_id"));
+			patientQuery.setQueryCategory(result.getString("query_category"));
+			patientQuery.setQueryDescription(result.getString("query_description"));
+			patientQuery.setQueryDate(result.getDate("query_date"));
+			patientQuery.setDoctorId(result.getInt("doctor_id"));
+			patientQuery.setDoctorsReply(result.getString("doctors_reply"));
+			inProgressList.add(patientQuery);
+				
+		}
+
+
+		return inProgressList;
+	}
+
 }

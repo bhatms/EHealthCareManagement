@@ -46,108 +46,75 @@
 				</div>
 			</div>
 		</h:form>
+
 		<div class="jumbotron">
 			<div class="container">
-				<h3>NEW QUERIES</h3>
-				<h:form id="PatientQueries">
-					<h:dataTable id="patientQueryTable"
-						value="#{adminBean.displayQueryList}" var="patque" border="1"
-						styleClass="form-control">
 
-<%-- 
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Query Category" />
-							</f:facet>
-							<h:outputText value="#{patque.queryCategory}"></h:outputText>
-
-						</h:column>
-
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Query Description" />
-							</f:facet>
-							<h:outputText value="#{patque.queryDescription}"></h:outputText>
-
-						</h:column>
-
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Query Status" />
-							</f:facet>
-							<h:outputText value="#{patque.queryStatus}"></h:outputText>
-
-						</h:column>
-
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Query Date" />
-							</f:facet>
-							<h:outputText value="#{patque.queryDate}"></h:outputText>
-
-						</h:column>
-
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Doctors Reply" />
-							</f:facet>
-							<h:outputText value="#{patque.doctorsReply}"></h:outputText>
-
-						</h:column>
-
---%>
+				<h3>ASSIGNED QUERIES</h3>
+				<h:form id="inprog">
+					
+		
+					<h:dataTable id="InProgressQueryTable" value="#{adminBean.inProgressQueriesList}"
+						var="inprogress" rendered="#{adminBean.showInProgress}" border="1" styleClass="form-control">
+		
+		
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Patient ID" />
 							</f:facet>
-							<h:outputText value="#{patque.patientId}"></h:outputText>
+							<h:outputText value="#{inprogress.patientId}"></h:outputText>
 						</h:column>
 						
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query ID" />
 							</f:facet>
-							<h:outputText value="#{patque.queryId}"></h:outputText>
+							<h:outputText value="#{inprogress.queryId}"></h:outputText>
 						</h:column>
 						
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query Category" />
 							</f:facet>
-							<h:outputText value="#{patque.queryCategory}"></h:outputText>
+							<h:outputText value="#{inprogress.queryCategory}"></h:outputText>
 						</h:column>
 						
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query Description" />
 							</f:facet>
-							<h:outputText value="#{patque.queryDescription}"></h:outputText>
+							<h:outputText value="#{inprogress.queryDescription}"></h:outputText>
 						</h:column>
 						
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query Date" />
 							</f:facet>
-							<h:outputText value="#{patque.queryDate}"></h:outputText>
-						</h:column>
-<%-- 					
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Doctor ID" />
-							</f:facet>
-							<h:outputText value="#{patque.doctorId}"></h:outputText>
+							<h:outputText value="#{inprogress.queryDate}"></h:outputText>
 						</h:column>
 						
 						<h:column>
 							<f:facet name="header">
+								<h:outputText value="Doctor ID" />
+							</f:facet>
+							<h:outputText value="#{inprogress.doctorId}"></h:outputText>
+						</h:column>
+<%-- 						
+						<h:column>
+							<f:facet name="header">
 								<h:outputText value="Doctor Reply" />
 							</f:facet>
-							<h:outputText value="#{patque.doctorsReply}"></h:outputText>
+							<h:outputText value="#{inprogress.doctorsReply}"></h:outputText>
 						</h:column>
---%>						
+--%>		
 					</h:dataTable>
+		
 					<br>
-				<h:commandButton value="Back" action="#{loginBean.goToMyHome}" styleClass="btn btn-success"></h:commandButton>
+					<h:commandButton value="Back" action="#{loginBean.goToMyHome}" styleClass="btn btn-success"></h:commandButton>
+		
+					
+					
+							
 				</h:form>
 			</div>
 		</div>

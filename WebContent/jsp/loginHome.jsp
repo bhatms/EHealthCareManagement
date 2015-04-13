@@ -66,7 +66,6 @@
 					<h:commandLink value="Profile"
 						action="#{patientBean.viewPatientProfile}"
 						styleClass="list-group-item"></h:commandLink>
-					<h:commandLink value="History" styleClass="list-group-item"></h:commandLink>
 
 					<h:commandLink value="Post a query"
 						action="#{patientBean.goToQuery}" styleClass="list-group-item"></h:commandLink>

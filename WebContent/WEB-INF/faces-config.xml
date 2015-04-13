@@ -143,5 +143,21 @@
 			<to-view-id>/jsp/assignQuery.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>navigateToClosedQuery</from-outcome>
+			<to-view-id>/jsp/ClosedQueryPage.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>navigateToInProgressQuery</from-outcome>
+			<to-view-id>/jsp/inProgressQueryPage.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 </faces-config>
