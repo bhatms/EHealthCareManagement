@@ -51,7 +51,6 @@
 				<h3>All queries</h3>
 				<h:form id="PatientQueries">
 					<h:dataTable id="patientQueryTable"
-						styleClass="form-control"
 						value="#{adminBean.displayQueryList}" var="patque" border="1">
 
 						<h:column>
