@@ -41,3 +41,6 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.class
+build/classes/com/ehm/web/managebeans/PatientBean.class
+build/classes/com/ehm/web/managebeans/AdminBean.class

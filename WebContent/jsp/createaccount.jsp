@@ -132,7 +132,8 @@
 						<td><h:outputLabel value="Zip"></h:outputLabel></td>
 						<td><h:inputText value="#{newAccountBean.zip}" id="zip"
 								maxlength="5" required="true" requiredMessage="Please Enter zip"
-								styleClass="form-control">
+								styleClass="form-control" validatorMessage="Please correct the zip.">
+								<f:validateRegex pattern="^\d{5}$"/>
 							</h:inputText></td>
 						<td><h:message for="Zip" style="color:red" /></td>
 					</tr>
@@ -140,7 +141,10 @@
 						<td><h:outputLabel value="Email Id"></h:outputLabel></td>
 						<td><h:inputText value="#{newAccountBean.emailId}"
 								id="email_id" required="true"
-								requiredMessage="Please Enter Email" styleClass="form-control"></h:inputText></td>
+								requiredMessage="Please Enter Email" styleClass="form-control"
+								validatorMessage="Please correct the email address.">
+								<f:validateRegex pattern="[\w-]+@([\w-]+\.)+[\w-]+"/>
+								</h:inputText></td>
 						<td><h:message for="email_id" style="color:red" /></td>
 
 						<td>
@@ -150,7 +154,10 @@
 						<td><h:inputSecret value="#{newAccountBean.password}"
 								id="set_password" required="true"
 								requiredMessage="Please Enter Password"
-								styleClass="form-control"></h:inputSecret></td>
+								validatorMessage="Minimum length of password should be 8."
+								styleClass="form-control" maxlength="20">
+								<f:validateLength maximum="20" minimum="8"/>
+								</h:inputSecret></td>
 						<td><h:message for="set_password" style="color:red" /></td>
 					</tr>
 					<tr>
