@@ -63,6 +63,7 @@ public class EhealthUtilDaoImpl implements EhealthUtilDao{
 		ResultSet result = ps.executeQuery();
 
 		List<SelectItem> list = new ArrayList<SelectItem>();
+		list.add(new SelectItem("0","Select Categoy"));
 		while (result.next()) {
 			SelectItem item = new SelectItem();
 			item.setValue(result.getString("special_id"));

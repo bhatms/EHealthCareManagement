@@ -53,8 +53,8 @@ public class AdminBean {
 	private boolean showClosed;
 	private boolean showInProgress;
 
-	
-	
+
+
 
 
 
@@ -69,7 +69,7 @@ public class AdminBean {
 			}
 
 			result = "navigateToClosedQuery";
-			
+
 		} 
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -80,8 +80,8 @@ public class AdminBean {
 
 		return result;
 	}
-	
-	
+
+
 	public String viewInProgressQueries() {
 		showInProgress = false;
 		AdminDao adminDao = new AdminDaoImpl();
@@ -101,8 +101,8 @@ public class AdminBean {
 
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * @return the specalizationList
 	 */
@@ -242,39 +242,46 @@ public class AdminBean {
 
 	public String getFilterQueries(){
 
-		/*String selectedSpecl = FacesContext.getCurrentInstance()
-				.getExternalContext().getRequestParameterMap()
-				.get("specl");
+		if(!"0".equals(filterSpecalization)){
+			AdminDao adminDao = new AdminDaoImpl();
 
-		 */
+			System.out.println(filterSpecalization);
 
-		AdminDao adminDao = new AdminDaoImpl();
-
-		System.out.println(filterSpecalization);
-
-		try {
-			queryByCategoryList = adminDao.getQyeryByCateg(filterSpecalization);
+			try {
+				queryByCategoryList = adminDao.getQyeryByCateg(filterSpecalization);
 
 
-			if(queryByCategoryList != null && queryByCategoryList.size() > 1){
-				showQueryList = true;
-				doctorByCateg = adminDao.getDoctorByCateg(filterSpecalization);
+				if(queryByCategoryList != null && queryByCategoryList.size() > 1){
+					showQueryList = true;
+					doctorByCateg = adminDao.getDoctorByCateg(filterSpecalization);
 
-			} else{
+				} else{
 
-				FacesContext.getCurrentInstance().addMessage(
-						null,
-						new FacesMessage(FacesMessage.SEVERITY_WARN,
-								"No queries under this category",
-								"Please Try Again!"));
+					showQueryList = false;
+					FacesContext.getCurrentInstance().addMessage(
+							null,
+							new FacesMessage(FacesMessage.SEVERITY_WARN,
+									"No queries under this category",
+									"Please Try Again!"));
 
+				}
+
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
+		} else {
+			showQueryList = false;
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN,
+							"Please select the category",
+							"Please Try Again!"));
 
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
+
+
 		return null;
 	}
 
@@ -283,22 +290,31 @@ public class AdminBean {
 
 		AdminDao adminDao = new AdminDaoImpl();
 
-		try {
-			PatientQuery patientQuery = new PatientQuery();
-			patientQuery.setQueryId(Integer.parseInt(selectedQueryId));
-			patientQuery.setDoctorId(Integer.parseInt(selectedDoctorId));
-			adminDao.assignQueryToDoctor(patientQuery);
+		if(!"0".equals(selectedQueryId) && !"0".equals(selectedDoctorId)){
+			try {
+				PatientQuery patientQuery = new PatientQuery();
+				patientQuery.setQueryId(Integer.parseInt(selectedQueryId));
+				patientQuery.setDoctorId(Integer.parseInt(selectedDoctorId));
+				adminDao.assignQueryToDoctor(patientQuery);
 
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_INFO,
+								"Operation completed successfully.",
+								"Please Try Again!"));
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO,
-							"Operation completed successfully.",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Please select query and doctor to be assigned.",
 							"Please Try Again!"));
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
+
 		return null;
 	}
 
@@ -429,8 +445,8 @@ public class AdminBean {
 	public void setSelectedDoctorId(String selectedDoctorId) {
 		this.selectedDoctorId = selectedDoctorId;
 	}
-	
-	
+
+
 	public List<PatientQuery> getClosedQueriesList() {
 		return closedQueriesList;
 	}

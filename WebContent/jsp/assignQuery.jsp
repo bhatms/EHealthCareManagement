@@ -65,7 +65,7 @@
 				<h3>Assign queries</h3>
 				<h:form id="patientQueryForm">
 				<br>
-				<h:messages infoStyle="color:green;" />
+				<h:messages infoStyle="color:green;" errorStyle="color:red;" warnStyle="color:blue;"/>
 
 					<h:outputLabel for="categ" value="Select Category:" />
 					<h:selectOneMenu value="#{adminBean.filterSpecalization}"

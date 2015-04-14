@@ -16,7 +16,8 @@ public class AdminDaoImpl  implements AdminDao{
 	public List<PatientQuery> getAllQyeries() throws ClassNotFoundException, SQLException {
 
 
-		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status = 'New' ");
+		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status = 'New' "
+				+ " order by query_date ");
 
 		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
 		// get customer data from database

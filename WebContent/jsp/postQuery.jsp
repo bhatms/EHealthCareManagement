@@ -13,12 +13,19 @@
 	rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
-     function Expand(obj){
-      if (!obj.savesize) obj.savesize=obj.size;
-      obj.size=Math.max(obj.savesize,obj.value.length);
-     }
+	function Expand(obj) {
+		if (!obj.savesize)
+			obj.savesize = obj.size;
+		obj.size = Math.max(obj.savesize, obj.value.length);
+	}
+
+	function cancelPage() {
+
+		document.getElementById("postingQuery:cancelLink").click();
+
+	}
 </script>
- </head>
+</head>
 
 
 <body>
@@ -54,47 +61,54 @@
 			</div>
 		</h:form>
 
-			<!-- Main jumbotron for a primary marketing message or call to action -->
-			<div class="jumbotron">
-				<div class="container">
-		<br>
-		<br>
+		<!-- Main jumbotron for a primary marketing message or call to action -->
+		<div class="jumbotron">
+			<div class="container">
+				<br> <br>
 
-		<h3>Post a Query</h3>
-		<br>
-		<h:form id="postingQuery">
+				<h3>Post a Query</h3>
+				<br>
+				<h:form id="postingQuery">
 
 
-				<h:outputLabel value="Category"></h:outputLabel>
+					<h:outputLabel value="Category"></h:outputLabel>
 
-				<h:selectOneMenu value="#{patientBean.patientCategory}" id="patient_category"
-				styleClass="form-control">
-				<f:selectItems value="#{patientBean.patientCategoryList}" />
-				</h:selectOneMenu>
+					<h:selectOneMenu value="#{patientBean.patientCategory}"
+						id="patient_category" styleClass="form-control">
+						<f:selectItems value="#{patientBean.patientCategoryList}" />
+					</h:selectOneMenu>
 				&nbsp;				
 				<br>
-				<br>
+					<br>
 
-				<h:outputLabel value="Problem Description"></h:outputLabel>
-				<br>
-				<h:inputTextarea value="#{patientBean.patientDescription}" id="pblm_desc" onkeyup="Expand(this);"
-				required="true" requiredMessage="Please enter the problem description"
-				styleClass="form-control"></h:inputTextarea>
+					<h:outputLabel value="Problem Description"></h:outputLabel>
+					<br>
+					<h:inputTextarea value="#{patientBean.patientDescription}"
+						id="pblm_desc" onkeyup="Expand(this);" required="true"
+						requiredMessage="Please enter the problem description"
+						styleClass="form-control"></h:inputTextarea>
+						
+						<h:message for="pblm_desc" errorStyle="color:red;"/>
 				
 				&nbsp;
 				<br>
-				<br>
+					<br>
 
+					<input type="button"
+						value="Cancel" class="btn btn-success" onclick="cancelPage();"/>
+					&nbsp;
 
-				<h:commandButton action="#{patientBean.insertPatientQuery}" value="Submit" styleClass="btn btn-success">
+					<h:commandButton action="#{patientBean.insertPatientQuery}"
+						value="Submit Query" styleClass="btn btn-success">
 
-				</h:commandButton>
-	
-	<%-- <f:param name="patientId" value='<%=session.getAttribute(\"patId\")%>'/> --%>
-				
-		</h:form>
+					</h:commandButton>
+
+					<h:commandLink id="cancelLink" immediate="true"
+					action="#{patientBean.backToHome}" value="">
+				</h:commandLink>
+				</h:form>
+			</div>
 		</div>
-		</div>
-	</f:view>	
+	</f:view>
 </body>
 </html>

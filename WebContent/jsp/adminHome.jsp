@@ -51,13 +51,7 @@
 		<h:form>
 			<div class="jumbotron">
 
-				<table>
-					<tr>
-						<td>
 							<h3>Welcome Admin</h3>
-						</td>
-					</tr>
-				</table>
 
 
 			</div>

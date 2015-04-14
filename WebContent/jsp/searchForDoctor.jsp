@@ -76,7 +76,8 @@
 		<br />
 		<h:form id="searchResultForm">
 			<h:dataTable id="doctTable" value="#{doctorBean.doctorSearchList}"
-				var="doct" rendered="#{doctorBean.showSearch}" border="1" styleClass="form-control">
+				var="doct" rendered="#{doctorBean.showSearch}" border="1" 
+				styleClass="table table-striped table-condensed table-bordered table-hover">
 
 				<h:column>
 					<f:facet name="header">

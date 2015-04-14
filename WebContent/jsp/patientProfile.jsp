@@ -13,12 +13,11 @@
 	rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
-function cancelPage(){
-	
-	document.getElementById("profileForm:cmdLnkIdSuppliers").click();
-	
-}
+	function cancelPage() {
 
+		document.getElementById("profileForm:cmdLnkIdSuppliers").click();
+
+	}
 </script>
 </head>
 
@@ -56,98 +55,101 @@ function cancelPage(){
 			</div>
 		</h:form>
 		<div class="jumbotron">
-			<br>
+			<div class="container">
+				<br>
 
-					<h3 class="panel-title">Pofile</h3>
-			<br>		
-			<!-- <div class="panel-body"> -->
-			<h:form id="profileForm">
-				<h:message for="profileForm"></h:message>
-				<table>
-					<tr>
-						<td><h:outputLabel value="First Name"></h:outputLabel></td>
-						<td><h:inputText styleClass="form-control"
-								value="#{patientBean.firstName}" id="new_fname"
-								required="true" requiredMessage="Please Enter first name"></h:inputText></td>
-						<td><h:message for="new_fname" style="color:red" /></td>
-					</tr>
-					<tr>
-						<td><h:outputLabel value="Last Name"></h:outputLabel></td>
-						<td><h:inputText styleClass="form-control"
-								value="#{patientBean.lastName}" id="new_lname"
-								required="true" requiredMessage="Please Enter last name"></h:inputText></td>
-						<td><h:message for="new_lname" style="color:red" /></td>
-					</tr>
-					<tr>
-						<td><h:outputLabel value="Date Of Birth"></h:outputLabel></td>
-						<td><h:inputText value="#{patientBean.dateOfBirth}"
-								id="new_dob" required="true" styleClass="form-control"
-								requiredMessage="Please date of birth">
-							</h:inputText> <h:outputLabel value="mm/dd/yyyy" /></td>
-						<td><h:message for="new_dob" style="color:red" /></td>
-					</tr>
-					<tr>
-						<td><h:outputLabel value="Phone No"></h:outputLabel></td>
-						<td><h:inputText styleClass="form-control"
-								value="#{patientBean.phoneNo}" id="phone_no" required="true"
-								requiredMessage="Please Enter phone no."></h:inputText></td>
+				<h3 class="panel-title">Pofile</h3>
+				<br>
+				<!-- <div class="panel-body"> -->
+				<h:form id="profileForm">
+					<h:message for="profileForm"></h:message>
+					<table>
+						<tr>
+							<td><h:outputLabel value="First Name"></h:outputLabel></td>
+							<td><h:inputText styleClass="form-control"
+									value="#{patientBean.firstName}" id="new_fname" required="true"
+									requiredMessage="Please Enter first name"></h:inputText></td>
+							<td><h:message for="new_fname" style="color:red" /></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="Last Name"></h:outputLabel></td>
+							<td><h:inputText styleClass="form-control"
+									value="#{patientBean.lastName}" id="new_lname" required="true"
+									requiredMessage="Please Enter last name"></h:inputText></td>
+							<td><h:message for="new_lname" style="color:red" /></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="Date Of Birth"></h:outputLabel></td>
+							<td><h:inputText value="#{patientBean.dateOfBirth}"
+									id="new_dob" required="true" styleClass="form-control"
+									requiredMessage="Please date of birth">
+								</h:inputText> <h:outputLabel value="mm/dd/yyyy" /></td>
+							<td><h:message for="new_dob" style="color:red" /></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="Phone No"></h:outputLabel></td>
+							<td><h:inputText styleClass="form-control"
+									value="#{patientBean.phoneNo}" id="phone_no" required="true"
+									requiredMessage="Please Enter phone no."></h:inputText></td>
 
-						<td><h:message for="phone_no" style="color:red" /></td>
-					</tr>
-					<tr>
+							<td><h:message for="phone_no" style="color:red" /></td>
+						</tr>
+						<tr>
 
-						<td><h:outputLabel value="Address Line"></h:outputLabel></td>
-						<td><h:inputText styleClass="form-control"
-								value="#{patientBean.addressLine}" id="addrLine"
-								required="true" requiredMessage="Please Enter address line"></h:inputText></td>
-						<td><h:message for="addrLine" style="color:red" /></td>
-					</tr>
-					<tr>
+							<td><h:outputLabel value="Address Line"></h:outputLabel></td>
+							<td><h:inputText styleClass="form-control"
+									value="#{patientBean.addressLine}" id="addrLine"
+									required="true" requiredMessage="Please Enter address line"></h:inputText></td>
+							<td><h:message for="addrLine" style="color:red" /></td>
+						</tr>
+						<tr>
 
-						<td><h:outputLabel value="State"></h:outputLabel></td>
-						<td>
-							<%-- <h:inputText styleClass="form-control"
+							<td><h:outputLabel value="State"></h:outputLabel></td>
+							<td>
+								<%-- <h:inputText styleClass="form-control"
 							value="#{patientBean.state}" id="state" required="true"
 							requiredMessage="Please Enter state."></h:inputText> --%> <h:selectOneMenu
-								value="#{patientBean.state}" id="state" required="true"
-								requiredMessage="Please Enter state." styleClass="form-control">
-								<f:selectItems value="#{patientBean.stateList}" />
-							</h:selectOneMenu>
-						</td>
-						<td><h:message for="state" style="color:red" /></td>
-					</tr>
-					<tr>
-						<td><h:outputLabel value="City"></h:outputLabel></td>
-						<td><h:inputText value="#{patientBean.city}"
-								styleClass="form-control" id="city" required="true"
-								requiredMessage="Please Enter city"></h:inputText></td>
-						<td><h:message for="City" style="color:red" /></td>
-					</tr>
-					<tr>
-						<td><h:outputLabel value="Zip"></h:outputLabel></td>
-						<td><h:inputText value="#{patientBean.zip}" id="zip"
-								maxlength="5" required="true" requiredMessage="Please Enter zip"
-								styleClass="form-control">
-							</h:inputText></td>
-						<td><h:message for="Zip" style="color:red" /></td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td><h:commandButton value="Update Profile"
-								action="#{patientBean.updateSaveProfile}"
-								styleClass="btn btn-success" /></td>
-						<td>&nbsp;<input type="button" value="Cancel"
-							onclick="cancelPage();" class="btn btn-success" /></td>
-						<td></td>
-					</tr>
-				</table>
-				<h:commandLink id="cmdLnkIdSuppliers" immediate="true"
-					action="#{patientBean.backToHome}" value="">
-					<f:verbatim></f:verbatim>
-				</h:commandLink>
-			</h:form>
+									value="#{patientBean.state}" id="state" required="true"
+									requiredMessage="Please Enter state." styleClass="form-control">
+									<f:selectItems value="#{patientBean.stateList}" />
+								</h:selectOneMenu>
+							</td>
+							<td><h:message for="state" style="color:red" /></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="City"></h:outputLabel></td>
+							<td><h:inputText value="#{patientBean.city}"
+									styleClass="form-control" id="city" required="true"
+									requiredMessage="Please Enter city"></h:inputText></td>
+							<td><h:message for="City" style="color:red" /></td>
+						</tr>
+						<tr>
+							<td><h:outputLabel value="Zip"></h:outputLabel></td>
+							<td><h:inputText value="#{patientBean.zip}" id="zip"
+									maxlength="5" required="true"
+									requiredMessage="Please Enter zip" styleClass="form-control">
+								</h:inputText></td>
+							<td><h:message for="Zip" style="color:red" /></td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td><input type="button" value="Cancel"
+								onclick="cancelPage();" class="btn btn-success" /></td>
+							<td>&nbsp; <h:commandButton value="Update Profile"
+									action="#{patientBean.updateSaveProfile}"
+									styleClass="btn btn-success" />
+							</td>
+							<td></td>
+						</tr>
+					</table>
+					<h:commandLink id="cmdLnkIdSuppliers" immediate="true"
+						action="#{patientBean.backToHome}" value="">
+						<f:verbatim></f:verbatim>
+					</h:commandLink>
+				</h:form>
+			</div>
 		</div>
 
 

@@ -25,7 +25,7 @@ public class PatientQueryDaoImpl implements PatientQueryDao {
 		 */
 
 		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(
-				"Select * from patient_query where patient_id = ?");
+				"Select * from patient_query where patient_id = ? order by query_date desc");
 		
 		ps.setInt(1, patientId);
 		List<PatientQuery> list = new ArrayList<PatientQuery>();

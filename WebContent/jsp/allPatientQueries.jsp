@@ -52,7 +52,7 @@
 				<h:form id="PatientQueries">
 					<h:dataTable id="patientQueryTable"
 						value="#{adminBean.displayQueryList}" var="patque" border="1"
-						styleClass="form-control">
+						styleClass="table table-striped table-condensed table-bordered table-hover">
 
 <%-- 
 						<h:column>
@@ -96,7 +96,7 @@
 						</h:column>
 
 --%>
-						<h:column>
+						<%-- <h:column>
 							<f:facet name="header">
 								<h:outputText value="Patient ID" />
 							</f:facet>
@@ -108,25 +108,25 @@
 								<h:outputText value="Query ID" />
 							</f:facet>
 							<h:outputText value="#{patque.queryId}"></h:outputText>
-						</h:column>
+						</h:column> --%>
 						
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="Query Category" />
+								<h:outputText value="Category" />
 							</f:facet>
 							<h:outputText value="#{patque.queryCategory}"></h:outputText>
 						</h:column>
 						
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="Query Description" />
+								<h:outputText value="Description" />
 							</f:facet>
 							<h:outputText value="#{patque.queryDescription}"></h:outputText>
 						</h:column>
 						
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="Query Date" />
+								<h:outputText value="Date Posted" />
 							</f:facet>
 							<h:outputText value="#{patque.queryDate}"></h:outputText>
 						</h:column>

@@ -95,7 +95,7 @@
 						
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="Doctor ID" />
+								<h:outputText value="Doctor Name" />
 							</f:facet>
 							<h:outputText value="#{inprogress.doctorId}"></h:outputText>
 						</h:column>
