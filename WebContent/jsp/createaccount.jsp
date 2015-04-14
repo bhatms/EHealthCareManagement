@@ -62,7 +62,10 @@
 						<td><h:outputLabel value="First Name"></h:outputLabel></td>
 						<td><h:inputText value="#{newAccountBean.firstName}"
 								id="new_fname" required="true" styleClass="form-control"
-								requiredMessage="Please Enter first name" maxlength="15"></h:inputText></td>
+								requiredMessage="Please Enter first name" maxlength="15"
+								validatorMessage="Correct value of first name.">
+								<f:validateRegex pattern="[a-zA-Z]{3,30}"/>
+								</h:inputText></td>
 						<td><h:message for="new_fname" style="color:red" /></td>
 					</tr>
 					<tr>
@@ -70,7 +73,10 @@
 						<td><h:inputText value="#{newAccountBean.lastName}"
 								id="new_lname" required="true" maxlength="15"
 								requiredMessage="Please Enter last name"
-								styleClass="form-control"></h:inputText></td>
+								styleClass="form-control"
+								validatorMessage="Correct value of last name.">
+								<f:validateRegex pattern="[a-zA-Z]{3,30}"/>
+								</h:inputText></td>
 						<td><h:message for="new_lname" style="color:red" /></td>
 					</tr>
 					<tr>
@@ -95,9 +101,14 @@
 					<tr>
 						<td><h:outputLabel value="Phone No"></h:outputLabel></td>
 						<td><h:inputText value="#{newAccountBean.phoneNo}"
-								id="phone_no" required="true" maxlength="15"
+								id="phone_no" required="true" maxlength="13"
 								requiredMessage="Please Enter phone no."
-								styleClass="form-control"></h:inputText></td>
+								styleClass="form-control" 
+								validatorMessage="Correct the phone no, allowed format is (***)***-*** or ***-***-**** 
+								minimum 10 digit number.">
+								<f:validateRegex pattern="^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$"/>
+								<f:validateLength minimum="10"/>
+								</h:inputText></td>
 
 						<td><h:message for="phone_no" style="color:red" /></td>
 					</tr>
