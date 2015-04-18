@@ -67,7 +67,7 @@
 						</tr>
 						<tr>
 							<td><h:outputLabel value="Password: " for="password"></h:outputLabel></td>
-							<td><h:inputSecret id="password"
+							<td><h:inputSecret id="password" tabindex="2"
 									value="#{loginBean.password}" required="true"
 									requiredMessage="Please Enter Password."
 									styleClass="form-control"
@@ -81,7 +81,7 @@
 						</tr>
 						<tr>
 							<td></td>
-							<td><h:commandButton value="Login"
+							<td><h:commandButton value="Login" tabindex="3"
 									action="#{loginBean.validateLogin}"
 									styleClass="btn btn-success"></h:commandButton> &nbsp;</td>
 							<td></td>

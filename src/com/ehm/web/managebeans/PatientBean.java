@@ -384,7 +384,7 @@ public class PatientBean {
 		city = currentPatient.getCity();
 		state = currentPatient.getState();
 		phoneNo = currentPatient.getPhoneNum();
-		// password = currentPatient.getPassword();
+		password = currentPatient.getPassword();
 		gender = currentPatient.getGender();
 		dateOfBirth = currentPatient.getDob();
 

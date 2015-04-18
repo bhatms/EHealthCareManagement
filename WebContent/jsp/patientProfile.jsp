@@ -18,6 +18,11 @@
 		document.getElementById("profileForm:cmdLnkIdSuppliers").click();
 
 	}
+	
+	function enablePasswordEdit(){
+		document.getElementById("paswdDiv1").style.display = 'block';
+		document.getElementById("paswdDiv2").style.display = 'block';
+	}
 </script>
 </head>
 
@@ -60,6 +65,7 @@
 
 				<h3 class="panel-title">Pofile</h3>
 				<br>
+				<h:messages globalOnly="true" infoStyle="color:green;"></h:messages>
 				<!-- <div class="panel-body"> -->
 				<h:form id="profileForm">
 					<h:message for="profileForm"></h:message>
@@ -87,6 +93,16 @@
 							<td><h:message for="new_dob" style="color:red" /></td>
 						</tr>
 						<tr>
+							<td><h:outputText value="Gender"></h:outputText></td>
+							<td><h:selectOneRadio value="#{newAccountBean.gender}"
+									styleClass="input-group-addon" id="gender" required="true"
+									requiredMessage="Please select Gender">
+									<f:selectItem itemValue="m" itemLabel="Male" />
+									<f:selectItem itemValue="f" itemLabel="Female" />
+								</h:selectOneRadio></td>
+							<td><h:message for="gender" style="color:red" /></td>
+						</tr>
+						<tr>
 							<td><h:outputLabel value="Phone No"></h:outputLabel></td>
 							<td><h:inputText styleClass="form-control"
 									value="#{patientBean.phoneNo}" id="phone_no" required="true"
@@ -105,15 +121,11 @@
 						<tr>
 
 							<td><h:outputLabel value="State"></h:outputLabel></td>
-							<td>
-								<%-- <h:inputText styleClass="form-control"
-							value="#{patientBean.state}" id="state" required="true"
-							requiredMessage="Please Enter state."></h:inputText> --%> <h:selectOneMenu
-									value="#{patientBean.state}" id="state" required="true"
-									requiredMessage="Please Enter state." styleClass="form-control">
+							<td><h:selectOneMenu value="#{patientBean.state}" id="state"
+									required="true" requiredMessage="Please Enter state."
+									styleClass="form-control">
 									<f:selectItems value="#{patientBean.stateList}" />
-								</h:selectOneMenu>
-							</td>
+								</h:selectOneMenu></td>
 							<td><h:message for="state" style="color:red" /></td>
 						</tr>
 						<tr>
@@ -151,10 +163,6 @@
 				</h:form>
 			</div>
 		</div>
-
-
-
-
 
 
 	</f:view>

@@ -65,7 +65,7 @@
 								id="new_fname" required="true" styleClass="form-control"
 								requiredMessage="Please Enter first name" maxlength="15"
 								validatorMessage="Correct value of first name.">
-								<f:validateRegex pattern="[a-zA-Z]{3,30}"/>
+								<f:validateRegex pattern="[a-zA-Z]{2,30}"/>
 								</h:inputText></td>
 						<td><h:message for="new_fname" style="color:red" /></td>
 					</tr>
@@ -76,7 +76,7 @@
 								requiredMessage="Please Enter last name"
 								styleClass="form-control"
 								validatorMessage="Correct value of last name.">
-								<f:validateRegex pattern="[a-zA-Z]{3,30}"/>
+								<f:validateRegex pattern="[a-zA-Z]{2,30}"/>
 								</h:inputText></td>
 						<td><h:message for="new_lname" style="color:red" /></td>
 					</tr>
