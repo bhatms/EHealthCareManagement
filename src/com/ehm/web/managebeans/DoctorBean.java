@@ -3,14 +3,19 @@ package com.ehm.web.managebeans;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
+
 
 import com.ehm.db.impl.DoctorDao;
 import com.ehm.db.impl.DoctorDaoImpl;
 import com.ehm.db.impl.EhealthUtilDao;
 import com.ehm.db.impl.EhealthUtilDaoImpl;
 import com.ehm.db.model.Doctor;
+import com.ehm.db.model.Patient;
+import com.ehm.db.model.PatientQuery;
 
 public class DoctorBean {
 
@@ -30,8 +35,24 @@ public class DoctorBean {
 	private boolean showSearch;
 	private int doctorId;
 	private Doctor doctorProfileList;
+	
+	private List<PatientQuery> newQueriesList;
+	
+	private List<PatientQuery> otherQueriesList;
+	
+	private boolean showNew;
+	
+	private boolean showOther;
+	
+	private String filterFromDate;
 
-	/**
+	private String filterToDate;
+	
+	private int patientId;
+	
+	private Patient currentPatient;
+
+		/**
 	 * @return the firstName
 	 */
 	public String getFirstName() {
@@ -283,6 +304,69 @@ public class DoctorBean {
 			e.printStackTrace();
 		}
 	}
+	
+	public String viewNewQueries() {
+		showNew = false;
+		DoctorDao doctorDao = new DoctorDaoImpl();
+		String result = null;
+		try {
+			FacesContext context = FacesContext.getCurrentInstance();
+			HttpSession session = (HttpSession) context.getExternalContext()
+					.getSession(true);
+			
+			currentPatient = (Patient) session.getAttribute("loggedInPatient");
+
+			int selectedPatientId = currentPatient.getPatientId();
+			
+			newQueriesList = doctorDao.getNewQuery(Integer.valueOf(selectedPatientId));
+			
+			if (newQueriesList != null && !newQueriesList.isEmpty()) {
+				showNew = true;
+			}
+
+			result = "navigateToNewQuery";
+
+		} 
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+
+	public String viewOtherQueries() {
+		showOther = false;
+		DoctorDao doctorDao = new DoctorDaoImpl();
+		String result = null;
+		try {
+			
+			FacesContext context = FacesContext.getCurrentInstance();
+			HttpSession session = (HttpSession) context.getExternalContext()
+					.getSession(true);
+			
+			currentPatient = (Patient) session.getAttribute("loggedInPatient");
+
+			int selectedPatientId = currentPatient.getPatientId();
+			
+			otherQueriesList = doctorDao.getOtherQuery(Integer.valueOf(selectedPatientId));
+			if (otherQueriesList != null && !otherQueriesList.isEmpty()) {
+				showOther = true;
+			}
+			result = "navigateOtherQuery";
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}	
+
 
 	/**
 	 * @return the showSearch
@@ -337,4 +421,73 @@ public class DoctorBean {
 		doctorProfileList = null;
 
 	}
+
+	public List<PatientQuery> getNewQueriesList() {
+		return newQueriesList;
+	}
+
+	public void setNewQueriesList(List<PatientQuery> newQueriesList) {
+		this.newQueriesList = newQueriesList;
+	}
+
+	public List<PatientQuery> getOtherQueriesList() {
+		return otherQueriesList;
+	}
+
+	public void setOtherQueriesList(List<PatientQuery> otherQueriesList) {
+		this.otherQueriesList = otherQueriesList;
+	}
+
+	public boolean isShowNew() {
+		return showNew;
+	}
+
+	public void setShowNew(boolean showNew) {
+		this.showNew = showNew;
+	}
+
+	public boolean isShowOther() {
+		return showOther;
+	}
+
+	public void setShowOther(boolean showOther) {
+		this.showOther = showOther;
+	}
+
+	public String getFilterFromDate() {
+		return filterFromDate;
+	}
+
+	public void setFilterFromDate(String filterFromDate) {
+		this.filterFromDate = filterFromDate;
+	}
+
+	public String getFilterToDate() {
+		return filterToDate;
+	}
+
+	public void setFilterToDate(String filterToDate) {
+		this.filterToDate = filterToDate;
+	}
+
+	public int getPatientId() {
+		return patientId;
+	}
+
+	public void setPatientId(int patientId) {
+		this.patientId = patientId;
+	}
+
+	public Patient getCurrentPatient() {
+		return currentPatient;
+	}
+
+	public void setCurrentPatient(Patient currentPatient) {
+		this.currentPatient = currentPatient;
+	}
+	
+	
+
 }
+
+
