@@ -13,6 +13,7 @@ import javax.faces.model.SelectItem;
 
 import com.ehm.db.config.EHMDataConnect;
 import com.ehm.db.model.Doctor;
+import com.ehm.db.model.PatientQuery;
 
 /**
  * @author MadhaviBhat
@@ -184,5 +185,69 @@ public class DoctorDaoImpl implements DoctorDao {
 		return doct;
 	}
 
+public List<PatientQuery> getNewQuery(int doctorId) throws SQLException, ClassNotFoundException {
+		
+		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status = ? and doctor_ID = ? ");
+		
+		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
+		
+		ps.setString(1, "New");
+		
+		ps.setInt(2, doctorId);
+		
+		
+		ResultSet result = ps.executeQuery();
+
+		List<PatientQuery> newList = new ArrayList<PatientQuery>();
+
+		while (result.next()) {
+			PatientQuery patientQuery = new PatientQuery();
+
+			patientQuery.setPatientId(result.getInt("patient_id"));
+			patientQuery.setQueryId(result.getInt("query_id"));
+			patientQuery.setQueryCategory(result.getString("query_category"));
+			patientQuery.setQueryDescription(result.getString("query_description"));
+			patientQuery.setQueryDate(result.getDate("query_date"));
+			newList.add(patientQuery);
+		}
+
+
+
+		return newList;
+	}
+
+	
+	
+	public List<PatientQuery> getOtherQuery(int doctorId) throws SQLException, ClassNotFoundException{
+		
+		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status <> ? and doctor_ID = ?");
+		
+		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
+		
+		ps.setString(1, "New");
+		
+		ps.setInt(2, doctorId);
+		
+		
+		ResultSet result = ps.executeQuery();
+
+		List<PatientQuery> otherList = new ArrayList<PatientQuery>();
+
+		while (result.next()) {
+			PatientQuery patientQuery = new PatientQuery();
+
+			patientQuery.setPatientId(result.getInt("patient_id"));
+			patientQuery.setQueryId(result.getInt("query_id"));
+			patientQuery.setQueryCategory(result.getString("query_category"));
+			patientQuery.setQueryDescription(result.getString("query_description"));
+			patientQuery.setQueryDate(result.getDate("query_date"));
+			patientQuery.setDoctorsReply(result.getString("doctors_reply"));
+			otherList.add(patientQuery);
+				
+		}
+
+
+		return otherList;
+	}
 
 }
