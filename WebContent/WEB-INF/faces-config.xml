@@ -136,6 +136,13 @@
 			<to-view-id>/jsp/adminHome.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+		<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>navigateDoctorHome</from-outcome>
+			<to-view-id>/jsp/doctorHome.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
@@ -158,6 +165,23 @@
 		<navigation-case>
 			<from-outcome>navigateToInProgressQuery</from-outcome>
 			<to-view-id>/jsp/inProgressQueryPage.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>navigateToNewQuery</from-outcome>
+			<to-view-id>/jsp/newQueryPage.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>navigateToOtherQuery</from-outcome>
+			<to-view-id>/jsp/otherQueryPage.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>
