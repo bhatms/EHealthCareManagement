@@ -51,23 +51,34 @@
 		<h:form>
 			<div class="jumbotron">
 
-							<h3>Welcome Dr. <%=session.getAttribute("userfName")%></h3>
+				<h3>
+					Welcome Dr.
+					<%=session.getAttribute("userfName")%></h3>
 
 
 			</div>
+			<div class="row">
+				<div class="col-md-3">
 
-			<ul class="nav nav-pills nav-stacked col-md-2">
-				<li><h:commandLink value="New Queries"
-						action="#{doctorBean.viewNewQueries}"
-						styleClass="list-group-item"></h:commandLink></li>
+					<ul class="nav nav-pills nav-stacked">
+						<li><h:commandLink value="New Queries"
+								action="#{doctorBean.viewNewQueries}"
+								styleClass="list-group-item"></h:commandLink></li>
 
-				<li><h:commandLink value="Assign New Query"
-						action="#{doctorBean.goToOthernQueries}"
-						styleClass="list-group-item"></h:commandLink></li>
+						<li><h:commandLink value="Assign New Query"
+								action="#{doctorBean.goToOthernQueries}"
+								styleClass="list-group-item"></h:commandLink></li>
+
+
+					</ul>
+				</div>
+				<div class="col-md-5">
+					<h:graphicImage value="/images/doctor-ipad.jpg" 
+					style="max-width: 100%; max-height: 100%;"></h:graphicImage>
+				</div>
+				</div>
+
 				
-					
-			</ul>
-
 		</h:form>
 
 	</f:view>
