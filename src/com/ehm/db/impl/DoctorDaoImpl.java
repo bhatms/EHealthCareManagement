@@ -208,6 +208,7 @@ public List<PatientQuery> getNewQuery(int doctorId) throws SQLException, ClassNo
 			patientQuery.setQueryCategory(result.getString("query_category"));
 			patientQuery.setQueryDescription(result.getString("query_description"));
 			patientQuery.setQueryDate(result.getDate("query_date"));
+			
 			newList.add(patientQuery);
 		}
 

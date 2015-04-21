@@ -11,6 +11,18 @@
 <link
 	href="/EHealthcareManagement/resources/css/bootstrap-theme.min.css"
 	rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="../resources/js/jquery-2.1.3.js"></script>
+<script type="text/javascript" src="../resources/js/bootstrap.js"></script>
+
+
+<script type="text/javascript">
+
+	$(function() {
+		$('[data-toggle="popover"]').popover()	})
+
+</script>		
+
 </head>
 
 
@@ -52,65 +64,67 @@
 
 				<h3>NEW QUERIES</h3>
 				<h:form id="new">
-				
-		
-					<h:dataTable id="NewQueryTable" value="#{doctorBean.newQueriesList}"
-						var="new" rendered="#{doctorBean.showNew}" border="1" styleClass="form-control">
-		
-		
+
+
+					<h:dataTable id="patientQueryTable"
+						value="#{doctorBean.newQueriesList}" var="patque" border="1"
+						styleClass="table table-striped table-condensed table-bordered table-hover">
+
+
+
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="Patient ID" />
+								<h:outputText value="Category" />
 							</f:facet>
-						    <h:outputText value="#{new.patientId}"></h:outputText>
+							<h:outputText value="#{patque.queryCategory}"></h:outputText>
 						</h:column>
-						
+
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="Query ID" />
+								<h:outputText value="Description" />
 							</f:facet>
-							<h:outputText value="#{new.queryId}"></h:outputText> 
+
+
+							<a href="#"
+								data-toggle="popover" title="Description" data-html="true"
+								data-content="<div>
+								<h:outputText value="#{patque.queryDescription}"></h:outputText>
+								</div> ">
+								<h:outputText value="#{patque.queryDescription}"></h:outputText>..
+								</a>
 						</h:column>
-						
+
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="Query Category" />
+								<h:outputText value="Date Posted" />
 							</f:facet>
-				     		<h:outputText value="#{new.queryCategory}"></h:outputText>
+							<h:outputText value="#{patque.queryDate}"></h:outputText>
 						</h:column>
-						
+						<%-- 					
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="Query Description" />
+								<h:outputText value="Doctor ID" />
 							</f:facet>
-		     				<h:outputText value="#{new.queryDescription}"></h:outputText>
-						</h:column>
-						
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Query Date" />
-							</f:facet>
-        					<h:outputText value="#{new.queryDate}"></h:outputText>
+							<h:outputText value="#{patque.doctorId}"></h:outputText>
 						</h:column>
 						
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Doctor Reply" />
 							</f:facet>
-							<td><h:commandButton value="Reply" formation ="Reply.jsp"
-									action="Reply.jsp"
-									styleClass="btn btn-success"></h:commandButton> &nbsp;</td>
-							<td></td>
+							<h:outputText value="#{patque.doctorsReply}"></h:outputText>
 						</h:column>
-		
+--%>
 					</h:dataTable>
+
 					<br>
-					<h:commandButton value="Back" action="#{loginBean.goToMyHome}" styleClass="btn btn-success"></h:commandButton>
-					
+					<h:commandButton value="Back" action="#{loginBean.goToMyHome}"
+						styleClass="btn btn-success"></h:commandButton>
+
 				</h:form>
 			</div>
-		</div>		
-		
+		</div>
+
 
 	</f:view>
 
