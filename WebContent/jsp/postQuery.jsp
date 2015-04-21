@@ -13,11 +13,7 @@
 	rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
-	function Expand(obj) {
-		if (!obj.savesize)
-			obj.savesize = obj.size;
-		obj.size = Math.max(obj.savesize, obj.value.length);
-	}
+	
 
 	function cancelPage() {
 
@@ -64,6 +60,8 @@
 		<!-- Main jumbotron for a primary marketing message or call to action -->
 		<div class="jumbotron">
 			<div class="container">
+								<div class="row">
+						<div class="col-md-6">
 				<br> <br>
 
 				<h3>Post a Query</h3>
@@ -84,9 +82,9 @@
 					<h:outputLabel value="Problem Description"></h:outputLabel>
 					<br>
 					<h:inputTextarea value="#{patientBean.patientDescription}"
-						id="pblm_desc" onkeyup="Expand(this);" required="true"
+						id="pblm_desc" required="true"
 						requiredMessage="Please enter the problem description"
-						styleClass="form-control"></h:inputTextarea>
+						styleClass="form-control" cols="7" rows="6"></h:inputTextarea>
 						
 						<h:message for="pblm_desc" errorStyle="color:red;"/>
 				
@@ -107,6 +105,7 @@
 					action="#{patientBean.backToHome}" value="">
 				</h:commandLink>
 				</h:form>
+			</div></div>
 			</div>
 		</div>
 	</f:view>

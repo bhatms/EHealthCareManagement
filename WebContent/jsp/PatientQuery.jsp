@@ -8,12 +8,35 @@
 <title>Login E-healthCare</title>
 <link href="/EHealthcareManagement/resources/css/bootstrap.min.css"
 	rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../resources/js/jquery-2.1.3.js"></script>
+<script type="text/javascript" src="../resources/js/bootstrap.js"></script>
+
+
 <script type="text/javascript">
 	function cancelPage() {
 
 		document.getElementById("PatientQueries:cancelLink").click();
 
 	}
+
+	$(function() {
+		$('[data-toggle="popover"]').popover()	})
+
+	/* 	$(function() {
+	 $('[data-toggle="popover"]').popover({
+
+	 trigger : 'hover',
+	 placement : 'right',
+	 html : 'true',
+	 content : 'Hiiiii'
+	 }).on('show.bs.modal', function() {
+	 // var html = document.getElementById("replyId").value;
+	 popover.attr('data-content', 'hi there');
+	 }
+
+	 )
+	 })
+	 */
 </script>
 </head>
 <body>
@@ -96,8 +119,15 @@
 							<f:facet name="header">
 								<h:outputText value="Doctors Reply" />
 							</f:facet>
-							<h:outputText value="#{patque.doctorsReply}"></h:outputText>
 
+							<button type="button" class="btn btn-primary btn-lg"
+								data-toggle="popover" title="Doctor Says.." data-html = "true"
+								data-content="<div>
+								<h:outputText value="#{patque.doctorsReply}"></h:outputText>
+								</div>">
+								<h:outputText value="#{patque.doctorsReply}"></h:outputText>
+								...
+							</button>
 						</h:column>
 
 					</h:dataTable>
@@ -111,6 +141,7 @@
 				</h:form>
 			</div>
 		</div>
+
 	</f:view>
 </body>
 </html>

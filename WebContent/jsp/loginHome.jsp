@@ -68,7 +68,7 @@
 						<h:commandLink value="Post a Question"
 							action="#{patientBean.goToQuery}" styleClass="list-group-item"></h:commandLink>
 
-						<h:commandLink value="View All Quetions"
+						<h:commandLink value="View My Quetions"
 							action="#{patientBean.displayQuery}" styleClass="list-group-item"></h:commandLink>
 
 					</ul>
@@ -78,7 +78,10 @@
 					<h:graphicImage value="/images/patient.jpg"></h:graphicImage>
 				</div>
 			
+
+			
 			</div>
+			
 		</h:form>
 
 	</f:view>
