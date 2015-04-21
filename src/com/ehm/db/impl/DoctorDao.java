@@ -19,4 +19,5 @@ public interface DoctorDao {
 	
 	List<PatientQuery> getOtherQuery(int doctorId) throws SQLException, ClassNotFoundException;
 
+	Doctor getDoctorByEmail(String emailId) throws ClassNotFoundException, SQLException;
 }

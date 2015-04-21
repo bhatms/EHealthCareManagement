@@ -249,5 +249,36 @@ public List<PatientQuery> getNewQuery(int doctorId) throws SQLException, ClassNo
 
 		return otherList;
 	}
+	
+	public Doctor getDoctorByEmail(String emailId)
+			throws ClassNotFoundException, SQLException {
+
+		String sqlStr = "select * from doctor where doctor_email = ?";
+
+		Doctor docObj = null;
+		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(
+				sqlStr);
+		ps.setString(1, emailId);
+
+		ResultSet result = ps.executeQuery();
+
+		while(result.next()){
+
+			docObj = new Doctor();
+			docObj.setDoctorId(result.getInt("doctor_ID"));
+			docObj.setFirstName(result.getString("first_name"));
+			docObj.setLastName(result.getString("last_name"));
+			docObj.setQualification(result.getString("doctor_qualification"));
+			docObj.setRegistrationNum(result.getString("doctor_reg_num"));
+			docObj.setSpecialization(result.getString("specialization_id"));
+			docObj.setDesignation(result.getString("doctor_designation"));
+			docObj.setVisitingDays(result.getString("doctor_visiting_days"));
+			docObj.setVisitingHours(result.getString("doctor_visiting_Hours"));
+			docObj.setEmailId(result.getString("doctor_email"));
+			docObj.setPhoneNum(result.getString("doctor_phone_num"));
+		}
+
+		return docObj;
+	}
 
 }

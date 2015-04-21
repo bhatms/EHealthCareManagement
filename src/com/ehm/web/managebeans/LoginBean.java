@@ -6,9 +6,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import com.ehm.db.impl.DoctorDao;
+import com.ehm.db.impl.DoctorDaoImpl;
 import com.ehm.db.impl.LoginDao;
 import com.ehm.db.impl.LoginDaoImpl;
 import com.ehm.db.impl.PatientDaoImpl;
+import com.ehm.db.model.Doctor;
 import com.ehm.db.model.Patient;
 import com.ehm.db.model.User;
 
@@ -111,6 +114,12 @@ public class LoginBean {
 					session.setAttribute("userfName", logedUser.getEmailId());
 					loginResult = "navigateAdminHome";
 				} else {
+					DoctorDao docDao = new DoctorDaoImpl();
+					Doctor loginDoc = docDao.getDoctorByEmail(logedUser.getEmailId());
+					session.setAttribute("loggedInDoctor", loginDoc);
+					session.setAttribute("email", logedUser.getEmailId());
+					session.setAttribute("userfName", loginDoc.getFirstName());
+					loginError = false;
 					loginResult = "navigateDoctorHome";
 				}
 

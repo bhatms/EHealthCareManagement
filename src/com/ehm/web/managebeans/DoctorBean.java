@@ -3,18 +3,15 @@ package com.ehm.web.managebeans;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
-
 
 import com.ehm.db.impl.DoctorDao;
 import com.ehm.db.impl.DoctorDaoImpl;
 import com.ehm.db.impl.EhealthUtilDao;
 import com.ehm.db.impl.EhealthUtilDaoImpl;
 import com.ehm.db.model.Doctor;
-import com.ehm.db.model.Patient;
 import com.ehm.db.model.PatientQuery;
 
 public class DoctorBean {
@@ -50,7 +47,7 @@ public class DoctorBean {
 	
 	private int patientId;
 	
-	private Patient currentPatient;
+	private Doctor currentDoctor;
 
 		/**
 	 * @return the firstName
@@ -314,11 +311,11 @@ public class DoctorBean {
 			HttpSession session = (HttpSession) context.getExternalContext()
 					.getSession(true);
 			
-			currentPatient = (Patient) session.getAttribute("loggedInPatient");
+			currentDoctor = (Doctor) session.getAttribute("loggedInDoctor");
 
-			int selectedPatientId = currentPatient.getPatientId();
+			int docId = currentDoctor.getDoctorId();
 			
-			newQueriesList = doctorDao.getNewQuery(Integer.valueOf(selectedPatientId));
+			newQueriesList = doctorDao.getNewQuery(docId);
 			
 			if (newQueriesList != null && !newQueriesList.isEmpty()) {
 				showNew = true;
@@ -348,11 +345,11 @@ public class DoctorBean {
 			HttpSession session = (HttpSession) context.getExternalContext()
 					.getSession(true);
 			
-			currentPatient = (Patient) session.getAttribute("loggedInPatient");
+			currentDoctor = (Doctor) session.getAttribute("loggedInDoctor");
 
-			int selectedPatientId = currentPatient.getPatientId();
+			int docId = currentDoctor.getDoctorId();
 			
-			otherQueriesList = doctorDao.getOtherQuery(Integer.valueOf(selectedPatientId));
+			otherQueriesList = doctorDao.getOtherQuery(Integer.valueOf(docId));
 			if (otherQueriesList != null && !otherQueriesList.isEmpty()) {
 				showOther = true;
 			}
@@ -478,15 +475,19 @@ public class DoctorBean {
 		this.patientId = patientId;
 	}
 
-	public Patient getCurrentPatient() {
-		return currentPatient;
+	/**
+	 * @return the currentDoctor
+	 */
+	public Doctor getCurrentDoctor() {
+		return currentDoctor;
 	}
 
-	public void setCurrentPatient(Patient currentPatient) {
-		this.currentPatient = currentPatient;
+	/**
+	 * @param currentDoctor the currentDoctor to set
+	 */
+	public void setCurrentDoctor(Doctor currentDoctor) {
+		this.currentDoctor = currentDoctor;
 	}
-	
-	
 
 }
 

@@ -51,7 +51,7 @@
 		<h:form>
 			<div class="jumbotron">
 
-							<h3>Welcome Doctor</h3>
+							<h3>Welcome Dr. <%=session.getAttribute("userfName")%></h3>
 
 
 			</div>
