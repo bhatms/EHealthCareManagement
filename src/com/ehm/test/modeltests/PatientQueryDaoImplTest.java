@@ -20,8 +20,8 @@ public class PatientQueryDaoImplTest implements BaseTest {
 	private PatientQueryDao patqueObj;
 
 	@Before
-	public void beforeSetting() {
-		patqueObj = new PatientQueryDaoImpl();
+	public void beforeSetting() throws ClassNotFoundException, SQLException {
+		patqueObj = new PatientQueryDaoImpl("testing");
 
 	}
 

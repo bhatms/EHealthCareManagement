@@ -31,8 +31,8 @@ public class DoctorDaoImplTest implements BaseTest {
 	
 
 	@Before
-	public void beforeSetting() {
-		docObj = new DoctorDaoImpl();
+	public void beforeSetting() throws ClassNotFoundException, SQLException {
+		docObj = new DoctorDaoImpl("testing");
 	}
 
 	@After
@@ -64,9 +64,9 @@ public class DoctorDaoImplTest implements BaseTest {
 	@Test
 	public void testGetSpecializationList() {
 
-		EhealthUtilDao docObj = new EhealthUtilDaoImpl();
+		
 		try {
-
+			EhealthUtilDao docObj = new EhealthUtilDaoImpl("testing");
 			List<SelectItem> testSpecList = docObj.getSpecializationList();
 
 			if (testSpecList == null || testSpecList.isEmpty()) {

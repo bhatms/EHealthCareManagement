@@ -111,10 +111,8 @@ public class PatientBean {
 
 	public String displayQuery() {
 
-		PatientQueryDao patientqueryDao = new PatientQueryDaoImpl();
-
 		try {
-
+			PatientQueryDao patientqueryDao = new PatientQueryDaoImpl();
 			FacesContext context = FacesContext.getCurrentInstance();
 			HttpSession session = (HttpSession) context.getExternalContext()
 					.getSession(true);
@@ -239,8 +237,9 @@ public class PatientBean {
 	 */
 	public List<SelectItem> getStateList() {
 		if(stateList == null){
-			EhealthUtilDao utilDao = new EhealthUtilDaoImpl();
+			
 			try {
+				EhealthUtilDao utilDao = new EhealthUtilDaoImpl();
 				stateList = utilDao.getStateList();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
@@ -345,10 +344,8 @@ public class PatientBean {
 		newPatient.setEmailId(emailId);
 		newPatient.setPassword(password);
 
-		PatientDaoImpl patientDaoObj = new PatientDaoImpl();
-
 		try {
-
+			PatientDaoImpl patientDaoObj = new PatientDaoImpl();
 			Patient addedPatient = patientDaoObj.ceateNewAccount(newPatient);
 			saveResult = "success";
 
@@ -439,9 +436,10 @@ public class PatientBean {
 		}
 
 		if (isUpdate) {
-			PatientDaoImpl patientDaoObj = new PatientDaoImpl();
+		
 			newPatient.setEmailId(currentPatient.getEmailId());
 			try {
+				PatientDaoImpl patientDaoObj = new PatientDaoImpl();
 				patientDaoObj.updateAndSaveProfile(newPatient);
 				FacesContext.getCurrentInstance().addMessage(
 						null,
@@ -508,11 +506,10 @@ public class PatientBean {
 		insertPatientQuery.setPatientCategory(patientCategory);
 		insertPatientQuery.setPatientDescription(patientDescription);
 
-		PatientQueryDao patientQueryDao = new PatientQueryDaoImpl();
+		
 		try {
 
-			//			patientQueryDao.insertPatientQueryRecords(LoginBean.patient_Id,patientCategory,patientDescription);
-
+			PatientQueryDao patientQueryDao = new PatientQueryDaoImpl();
 			patientQueryDao.insertPatientQueryRecords(insertPatientQuery);
 			result = "navigatePatientHome";
 
@@ -543,8 +540,9 @@ public class PatientBean {
 
 	public List<SelectItem> getPatientCategoryList() {
 		
-		EhealthUtilDao eDao = new EhealthUtilDaoImpl();
+		
 		try {
+			EhealthUtilDao eDao = new EhealthUtilDaoImpl();
 			patientCategoryList = eDao.getCategoryList();
 		} catch (SQLException e) {
 			e.printStackTrace();

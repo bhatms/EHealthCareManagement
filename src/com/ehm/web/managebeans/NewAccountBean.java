@@ -221,10 +221,8 @@ public class NewAccountBean {
 			newPatient.setEmailId(emailId);
 			newPatient.setPassword(password);
 
-			PatientDaoImpl patientDaoObj = new PatientDaoImpl();
-
 			try {
-
+				PatientDaoImpl patientDaoObj = new PatientDaoImpl();
 				Patient addedPatient = patientDaoObj.ceateNewAccount(newPatient);
 				if(addedPatient != null){
 					saveResult = "success";
@@ -323,9 +321,10 @@ public class NewAccountBean {
 		}
 
 		if (isUpdate) {
-			PatientDaoImpl patientDaoObj = new PatientDaoImpl();
+			
 			newPatient.setEmailId(currentPatient.getEmailId());
 			try {
+				PatientDaoImpl patientDaoObj = new PatientDaoImpl();
 				patientDaoObj.updateAndSaveProfile(newPatient);
 				FacesContext.getCurrentInstance().addMessage(
 						null,
@@ -394,8 +393,9 @@ public class NewAccountBean {
 	public List<SelectItem> getStateList() {
 
 		if(stateList == null){
-			EhealthUtilDao utilDao = new EhealthUtilDaoImpl();
+			
 			try {
+				EhealthUtilDao utilDao = new EhealthUtilDaoImpl();
 				stateList = utilDao.getStateList();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();

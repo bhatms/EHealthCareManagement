@@ -1,5 +1,6 @@
 package com.ehm.db.impl;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +12,20 @@ import com.ehm.db.config.EHMDataConnect;
 import com.ehm.db.model.Patient;
 
 public class PatientDaoImpl {
+	
+	private Connection dataConnection;
+
+	public PatientDaoImpl() throws ClassNotFoundException, SQLException {
+		
+		dataConnection = EHMDataConnect.getDataConn();
+
+	}
+
+	public PatientDaoImpl(String forTest) throws ClassNotFoundException, SQLException {
+		
+		dataConnection = EHMDataConnect.getTestDataConn();
+
+	}
 
 
 	public Patient ceateNewAccount(Patient insertPatient) throws SQLException,
@@ -20,7 +35,7 @@ public class PatientDaoImpl {
 		String insertUserSQL = " INSERT INTO user "
 				+ " ( email , password, role ) values ( ?, ?, ? ) ;";
 
-		PreparedStatement preparedStatement1 = EHMDataConnect.getDataConn()
+		PreparedStatement preparedStatement1 = dataConnection
 				.prepareStatement(insertUserSQL, Statement.RETURN_GENERATED_KEYS);
 
 		preparedStatement1.setString(1, insertPatient.getEmailId());
@@ -41,7 +56,7 @@ public class PatientDaoImpl {
 					+ " (first_name, last_name, address_line1, address_city,address_state, address_zip , "
 					+ "phone_no , email , password, dob, gender, user_id ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ;";
 
-			PreparedStatement preparedStatement2 = EHMDataConnect.getDataConn()
+			PreparedStatement preparedStatement2 = dataConnection
 					.prepareStatement(insertTableSQL, Statement.RETURN_GENERATED_KEYS);
 			preparedStatement2.setString(1, insertPatient.getFirstName());
 			preparedStatement2.setString(2, insertPatient.getLastName());
@@ -70,7 +85,7 @@ public class PatientDaoImpl {
 		String sqlStr = "select * from patient where email = ?";
 
 		Patient newPatient = null;
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(
+		PreparedStatement ps = dataConnection.prepareStatement(
 				sqlStr);
 		ps.setString(1, emailId);
 
@@ -180,7 +195,7 @@ public class PatientDaoImpl {
 
 		System.out.println("**update patient query :"+sqlStr.toString());
 
-		PreparedStatement preparedStatement = EHMDataConnect.getDataConn()
+		PreparedStatement preparedStatement = dataConnection
 				.prepareStatement(sqlStr.toString());
 
 		int cnt = 1;

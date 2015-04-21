@@ -49,11 +49,12 @@ public class LoginBean {
 	}
 
 	public String validAndLoginUser() {
-		LoginDao loginDao = new LoginDaoImpl();
+		
 		String loginResult = "failure";
 		loginError = true;
 
 		try {
+			LoginDao loginDao = new LoginDaoImpl();
 			Patient logedPatient = loginDao.validate(email, password);
 
 			if (logedPatient != null) {
@@ -82,7 +83,7 @@ public class LoginBean {
 	}
 
 	public String validateLogin() {
-		LoginDao loginDao = new LoginDaoImpl();
+		
 		String loginResult = "failure";
 		loginError = true;
 		
@@ -90,8 +91,8 @@ public class LoginBean {
 		HttpSession session = (HttpSession) context
 				.getExternalContext().getSession(true);
 		
-
 		try {
+			LoginDao loginDao = new LoginDaoImpl();
 			User logedUser = loginDao.validateLogin(email, password);
 
 			if (logedUser != null) {

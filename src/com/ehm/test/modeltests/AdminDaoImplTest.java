@@ -22,9 +22,9 @@ public class AdminDaoImplTest implements BaseTest {
 	final static Logger logger = Logger.getLogger(AdminDaoImplTest.class);
 	private AdminDao adminDao;
 	@Before
-	public void beforeSetting() {
+	public void beforeSetting() throws ClassNotFoundException, SQLException {
 
-		adminDao = new AdminDaoImpl();
+		adminDao = new AdminDaoImpl("testing");
 
 	}
 

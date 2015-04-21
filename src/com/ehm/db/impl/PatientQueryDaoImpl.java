@@ -1,5 +1,6 @@
 package com.ehm.db.impl;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +16,20 @@ import com.ehm.db.config.EHMDataConnect;
 import com.ehm.db.model.PatientQuery;
 
 public class PatientQueryDaoImpl implements PatientQueryDao {
+	
+	private Connection dataConnection;
+
+	public PatientQueryDaoImpl() throws ClassNotFoundException, SQLException {
+		
+		dataConnection = EHMDataConnect.getDataConn();
+
+	}
+
+	public PatientQueryDaoImpl(String forTest) throws ClassNotFoundException, SQLException {
+		
+		dataConnection = EHMDataConnect.getTestDataConn();
+
+	}
 
 	public List<PatientQuery> patientQuery(int patientId) throws SQLException, ClassNotFoundException {
 
@@ -24,7 +39,7 @@ public class PatientQueryDaoImpl implements PatientQueryDao {
 		 * ("jdbc:mysql://127.0.0.1:3306/ssdi","root","123456");
 		 */
 
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(
+		PreparedStatement ps = dataConnection.prepareStatement(
 				"Select * from patient_query where patient_id = ? order by query_date desc");
 		
 		ps.setInt(1, patientId);
@@ -49,7 +64,7 @@ public class PatientQueryDaoImpl implements PatientQueryDao {
 		StringBuffer sqlBuf = new StringBuffer("select * from specializations ");
 
 
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
+		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
 		// get customer data from database
 		ResultSet result = ps.executeQuery();
 
@@ -81,7 +96,7 @@ public class PatientQueryDaoImpl implements PatientQueryDao {
 	    insertTableSQL.append(" values ( ?, ?, ?, ?, ?); ");
 
 
-		PreparedStatement preparedStatement = EHMDataConnect.getDataConn().prepareStatement(insertTableSQL.toString());
+		PreparedStatement preparedStatement = dataConnection.prepareStatement(insertTableSQL.toString());
 		System.out.println(insertTableSQL.toString());
 		preparedStatement.setInt(1, insertPatientQuery.getPatientId());
 		preparedStatement.setString(2, insertPatientQuery.getPatientCategory());

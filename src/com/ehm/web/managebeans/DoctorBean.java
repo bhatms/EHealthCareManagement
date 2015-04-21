@@ -219,8 +219,9 @@ public class DoctorBean {
 	 */
 	public List<SelectItem> getSpecializationList() {
 
-		EhealthUtilDao doctorDao = new EhealthUtilDaoImpl();
+	
 		try {
+			EhealthUtilDao doctorDao = new EhealthUtilDaoImpl();
 			specializationList = doctorDao.getSpecializationList();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -240,8 +241,10 @@ public class DoctorBean {
 
 	public String searchDoctor() {
 		showSearch = false;
-		DoctorDao doctorDao = new DoctorDaoImpl();
+	
 		try {
+			
+			DoctorDao doctorDao = new DoctorDaoImpl();
 			if ("all".equals(specialization)) {
 				specialization = null;
 			}
@@ -260,9 +263,9 @@ public class DoctorBean {
 
 	public String goToDetailProfile() {
 
-		DoctorDao doctorDao = new DoctorDaoImpl();
 		String result = null;
 		try {
+			DoctorDao doctorDao = new DoctorDaoImpl();
 			String selectedDoctorId = FacesContext.getCurrentInstance()
 					.getExternalContext().getRequestParameterMap()
 					.get("doctorId");
@@ -283,8 +286,9 @@ public class DoctorBean {
 	}
 
 	public static void main(String[] args) {
-		DoctorDao doctorDao = new DoctorDaoImpl();
+
 		try {
+			DoctorDao doctorDao = new DoctorDaoImpl();
 			List<Doctor> doctorList = doctorDao.getSearchDoctorRecords(null,
 					"S", null);
 
@@ -304,9 +308,10 @@ public class DoctorBean {
 	
 	public String viewNewQueries() {
 		showNew = false;
-		DoctorDao doctorDao = new DoctorDaoImpl();
+	
 		String result = null;
 		try {
+			DoctorDao doctorDao = new DoctorDaoImpl();
 			FacesContext context = FacesContext.getCurrentInstance();
 			HttpSession session = (HttpSession) context.getExternalContext()
 					.getSession(true);
@@ -337,10 +342,10 @@ public class DoctorBean {
 
 	public String viewOtherQueries() {
 		showOther = false;
-		DoctorDao doctorDao = new DoctorDaoImpl();
+
 		String result = null;
 		try {
-			
+			DoctorDao doctorDao = new DoctorDaoImpl();
 			FacesContext context = FacesContext.getCurrentInstance();
 			HttpSession session = (HttpSession) context.getExternalContext()
 					.getSession(true);

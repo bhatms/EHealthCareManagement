@@ -19,8 +19,8 @@ public class LoginDaoImplTest implements BaseTest {
 	private LoginDao logObj;
 
 	@Before
-	public void beforeSetting() {
-		logObj = new LoginDaoImpl();
+	public void beforeSetting() throws ClassNotFoundException, SQLException {
+		logObj = new LoginDaoImpl("testing");
 
 	}
 

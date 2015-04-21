@@ -1,5 +1,6 @@
 package com.ehm.db.impl;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,13 +14,30 @@ import com.ehm.db.model.PatientQuery;
 
 public class AdminDaoImpl  implements AdminDao{
 
+
+	private Connection dataConnection;
+
+	public AdminDaoImpl() throws ClassNotFoundException, SQLException {
+		
+		dataConnection = EHMDataConnect.getDataConn();
+
+	}
+
+	public AdminDaoImpl(String forTest) throws ClassNotFoundException, SQLException {
+		
+		dataConnection = EHMDataConnect.getTestDataConn();
+
+	}
+
+
+
 	public List<PatientQuery> getAllQyeries() throws ClassNotFoundException, SQLException {
 
 
 		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status = 'New' "
 				+ " order by query_date ");
 
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
+		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
 		// get customer data from database
 
 		ResultSet result = ps.executeQuery();
@@ -54,7 +72,7 @@ public class AdminDaoImpl  implements AdminDao{
 		StringBuffer insertTableSQL = new StringBuffer(" update patient_query ");
 		insertTableSQL.append(" set doctor_id = ? , query_status = ? where query_id = ? ");
 
-		PreparedStatement preparedStatement = EHMDataConnect.getDataConn().prepareStatement(insertTableSQL.toString());
+		PreparedStatement preparedStatement = dataConnection.prepareStatement(insertTableSQL.toString());
 		System.out.println(insertTableSQL.toString());
 		preparedStatement.setInt(1, insertPatientQuery.getDoctorId());
 		preparedStatement.setString(2,"In-Progress");
@@ -70,13 +88,13 @@ public class AdminDaoImpl  implements AdminDao{
 				+ " from patient_query where query_status = 'New' "
 				+ " and query_category = ?");
 
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
+		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
 		ps.setString(1, category);
 
 		ResultSet result = ps.executeQuery();
 
 		List<SelectItem> list = new ArrayList<SelectItem>();
-		
+
 		list.add(new SelectItem("0", "Select Query"));
 
 		while (result.next()) {
@@ -98,7 +116,7 @@ public class AdminDaoImpl  implements AdminDao{
 		StringBuffer sqlBuf = new StringBuffer("select doctor_id, first_name , last_name "
 				+ " from doctor where  specialization_id = ?");
 
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
+		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
 		ps.setString(1, category);
 
 		ResultSet result = ps.executeQuery();
@@ -115,16 +133,16 @@ public class AdminDaoImpl  implements AdminDao{
 
 		return list;	
 	}
-	
+
 	public List<PatientQuery> getClosedQuery() throws SQLException, ClassNotFoundException {
-		
+
 		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status = ? ");
-		
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
-		
+
+		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
+
 		ps.setString(1, "Closed");
-		
-		
+
+
 		ResultSet result = ps.executeQuery();
 
 		List<PatientQuery> closedList = new ArrayList<PatientQuery>();
@@ -147,17 +165,17 @@ public class AdminDaoImpl  implements AdminDao{
 		return closedList;
 	}
 
-	
-	
+
+
 	public List<PatientQuery> getInProgressQuery() throws SQLException, ClassNotFoundException{
-		
+
 		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status = ?");
-		
+
 		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
-		
+
 		ps.setString(1, "In-Progress");
-		
-		
+
+
 		ResultSet result = ps.executeQuery();
 
 		List<PatientQuery> inProgressList = new ArrayList<PatientQuery>();
@@ -173,7 +191,7 @@ public class AdminDaoImpl  implements AdminDao{
 			patientQuery.setDoctorId(result.getInt("doctor_id"));
 			patientQuery.setDoctorsReply(result.getString("doctors_reply"));
 			inProgressList.add(patientQuery);
-				
+
 		}
 
 

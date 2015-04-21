@@ -1,5 +1,6 @@
 package com.ehm.db.impl;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +10,20 @@ import com.ehm.db.model.Patient;
 import com.ehm.db.model.User;
 
 public class LoginDaoImpl implements LoginDao {
+	
+	private Connection dataConnection;
+
+	public LoginDaoImpl() throws ClassNotFoundException, SQLException {
+		
+		dataConnection = EHMDataConnect.getDataConn();
+
+	}
+
+	public LoginDaoImpl(String forTest) throws ClassNotFoundException, SQLException {
+		
+		dataConnection = EHMDataConnect.getTestDataConn();
+
+	}
 
 	public Patient validate(String userEmail, String password) throws ClassNotFoundException, SQLException {
 
@@ -19,7 +34,7 @@ public class LoginDaoImpl implements LoginDao {
 		 */
 		Patient logedinPatient = null;
 
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(
+		PreparedStatement ps = dataConnection.prepareStatement(
 				"Select * from patient where email = ? and password = ?");
 		
 		ps.setString(1, userEmail);
@@ -56,7 +71,7 @@ public class LoginDaoImpl implements LoginDao {
 		 */
 		User logedinUser = null;
 
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(
+		PreparedStatement ps = dataConnection.prepareStatement(
 				"Select * from user where email = ? and password = ?");
 		
 		ps.setString(1, userEmail);

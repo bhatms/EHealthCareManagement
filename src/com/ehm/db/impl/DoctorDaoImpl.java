@@ -3,6 +3,7 @@
  */
 package com.ehm.db.impl;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +21,20 @@ import com.ehm.db.model.PatientQuery;
  *
  */
 public class DoctorDaoImpl implements DoctorDao {
+	
+	private Connection dataConnection;
+
+	public DoctorDaoImpl() throws ClassNotFoundException, SQLException {
+		
+		dataConnection = EHMDataConnect.getDataConn();
+
+	}
+
+	public DoctorDaoImpl(String forTest) throws ClassNotFoundException, SQLException {
+		
+		dataConnection = EHMDataConnect.getTestDataConn();
+
+	}
 
 	public List<Doctor> getSearchDoctorRecords(String specialization,
 			String fName, String lName) throws SQLException, ClassNotFoundException {
@@ -52,7 +67,7 @@ public class DoctorDaoImpl implements DoctorDao {
 		}
 
 
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
+		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
 		// get customer data from database
 		int cnt = 1;
 		for (String param : paramList) {
@@ -95,7 +110,7 @@ public class DoctorDaoImpl implements DoctorDao {
 		StringBuffer sqlBuf = new StringBuffer("select * from specializations ");
 
 
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
+		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
 		// get customer data from database
 		ResultSet result = ps.executeQuery();
 
@@ -123,7 +138,7 @@ public class DoctorDaoImpl implements DoctorDao {
 		}
 
 
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
+		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
 		// get customer data from database
 		//		int cnt = 1;
 		//		for (String param : parameterList) {
@@ -163,7 +178,7 @@ public class DoctorDaoImpl implements DoctorDao {
 		StringBuffer sqlBuf = new StringBuffer("select * from doctor ");
 		sqlBuf.append(" where doctor_ID = ? ");
 
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
+		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
 		ps.setInt(1, doctorId);
 
 		ResultSet result = ps.executeQuery();
@@ -189,7 +204,7 @@ public List<PatientQuery> getNewQuery(int doctorId) throws SQLException, ClassNo
 		
 		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status = ? and doctor_ID = ? ");
 		
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
+		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
 		
 		ps.setString(1, "New");
 		
@@ -223,7 +238,7 @@ public List<PatientQuery> getNewQuery(int doctorId) throws SQLException, ClassNo
 		
 		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status <> ? and doctor_ID = ?");
 		
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
+		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
 		
 		ps.setString(1, "New");
 		
@@ -257,7 +272,7 @@ public List<PatientQuery> getNewQuery(int doctorId) throws SQLException, ClassNo
 		String sqlStr = "select * from doctor where doctor_email = ?";
 
 		Doctor docObj = null;
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(
+		PreparedStatement ps = dataConnection.prepareStatement(
 				sqlStr);
 		ps.setString(1, emailId);
 

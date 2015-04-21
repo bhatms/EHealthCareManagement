@@ -1,5 +1,6 @@
 package com.ehm.db.impl;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,13 +12,27 @@ import javax.faces.model.SelectItem;
 import com.ehm.db.config.EHMDataConnect;
 
 public class EhealthUtilDaoImpl implements EhealthUtilDao{
+	
+	private Connection dataConnection;
+
+	public EhealthUtilDaoImpl() throws ClassNotFoundException, SQLException {
+		
+		dataConnection = EHMDataConnect.getDataConn();
+
+	}
+
+	public EhealthUtilDaoImpl(String forTest) throws ClassNotFoundException, SQLException {
+		
+		dataConnection = EHMDataConnect.getTestDataConn();
+
+	}
 
 	public List<SelectItem> getStateList() throws ClassNotFoundException,
 			SQLException {
 		StringBuffer sqlBuf = new StringBuffer("select code, name from state ");
 
 
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
+		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
 		// get customer data from database
 		ResultSet result = ps.executeQuery();
 
@@ -58,7 +73,7 @@ public class EhealthUtilDaoImpl implements EhealthUtilDao{
 		StringBuffer sqlBuf = new StringBuffer("select * from specializations ");
 
 
-		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
+		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
 		// get customer data from database
 		ResultSet result = ps.executeQuery();
 

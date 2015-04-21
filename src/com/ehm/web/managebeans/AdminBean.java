@@ -60,9 +60,10 @@ public class AdminBean {
 
 	public String viewClosedQueries() {
 		showClosed = false;
-		AdminDao adminDao = new AdminDaoImpl();
+
 		String result = null;
 		try {
+			AdminDao adminDao = new AdminDaoImpl();
 			closedQueriesList = adminDao.getClosedQuery();
 			if (closedQueriesList != null && !closedQueriesList.isEmpty()) {
 				showClosed = true;
@@ -84,9 +85,10 @@ public class AdminBean {
 
 	public String viewInProgressQueries() {
 		showInProgress = false;
-		AdminDao adminDao = new AdminDaoImpl();
+
 		String result = null;
 		try {
+			AdminDao adminDao = new AdminDaoImpl();
 			inProgressQueriesList = adminDao.getInProgressQuery();
 			if (inProgressQueriesList != null && !inProgressQueriesList.isEmpty()) {
 				showInProgress = true;
@@ -108,9 +110,8 @@ public class AdminBean {
 	 */
 	public List<SelectItem> getSpecalizationList() {
 
-
-		EhealthUtilDao eDao = new EhealthUtilDaoImpl();
 		try {
+			EhealthUtilDao eDao = new EhealthUtilDaoImpl();
 			specalizationList = eDao.getCategoryList();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -213,10 +214,8 @@ public class AdminBean {
 
 	public String viewPatientQueries(){
 
-
-		AdminDao adminDao = new AdminDaoImpl();
-
 		try {
+			AdminDao adminDao = new AdminDaoImpl();
 			displayQueryList = adminDao.getAllQyeries();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -243,11 +242,9 @@ public class AdminBean {
 	public String getFilterQueries(){
 
 		if(!"0".equals(filterSpecalization)){
-			AdminDao adminDao = new AdminDaoImpl();
-
-			System.out.println(filterSpecalization);
-
+			
 			try {
+				AdminDao adminDao = new AdminDaoImpl();
 				queryByCategoryList = adminDao.getQyeryByCateg(filterSpecalization);
 
 
@@ -287,11 +284,9 @@ public class AdminBean {
 
 	public String assignQueries(){
 
-
-		AdminDao adminDao = new AdminDaoImpl();
-
 		if(!"0".equals(selectedQueryId) && !"0".equals(selectedDoctorId)){
 			try {
+				AdminDao adminDao = new AdminDaoImpl();
 				PatientQuery patientQuery = new PatientQuery();
 				patientQuery.setQueryId(Integer.parseInt(selectedQueryId));
 				patientQuery.setDoctorId(Integer.parseInt(selectedDoctorId));
