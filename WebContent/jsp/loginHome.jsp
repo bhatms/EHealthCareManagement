@@ -46,34 +46,39 @@
 				</div>
 			</div>
 		</h:form>
-		<div class="jumbotron">
-
-			<h:form>
-				<table>
-					<tr>
-						<td>
-							<h3>
-								Welcome&nbsp;
-								<%=session.getAttribute("userfName")%></h3>
-						</td>
-					</tr>
-				</table>
-		</div>
+		<h:form>
+			<div class="jumbotron" style="height: 10%;">
 
 
-		<ul class="nav nav-pills nav-stacked col-md-2">
-			<h:commandLink value="Profile"
-				action="#{patientBean.viewPatientProfile}"
-				styleClass="list-group-item"></h:commandLink>
 
-			<h:commandLink value="Post a query" action="#{patientBean.goToQuery}"
-				styleClass="list-group-item"></h:commandLink>
+				<h3>
+					Welcome&nbsp;
+					<%=session.getAttribute("userfName")%></h3>
 
-			<h:commandLink value="View Past Queries"
-				action="#{patientBean.displayQuery}" styleClass="list-group-item"></h:commandLink>
+			</div>
 
-		</ul>
 
+			<div class="row">
+				<div class="col-md-3">
+					<ul class="nav nav-pills nav-stacked">
+						<h:commandLink value="My Profile"
+							action="#{patientBean.viewPatientProfile}"
+							styleClass="list-group-item"></h:commandLink>
+
+						<h:commandLink value="Post a Question"
+							action="#{patientBean.goToQuery}" styleClass="list-group-item"></h:commandLink>
+
+						<h:commandLink value="View All Quetions"
+							action="#{patientBean.displayQuery}" styleClass="list-group-item"></h:commandLink>
+
+					</ul>
+				</div>
+
+				<div class="col-md-4">
+					<h:graphicImage value="/images/patient.jpg"></h:graphicImage>
+				</div>
+			
+			</div>
 		</h:form>
 
 	</f:view>
