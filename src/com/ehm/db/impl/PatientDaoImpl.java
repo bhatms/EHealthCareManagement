@@ -54,7 +54,7 @@ public class PatientDaoImpl {
 			
 			String insertTableSQL = " INSERT INTO patient "
 					+ " (first_name, last_name, address_line1, address_city,address_state, address_zip , "
-					+ "phone_no , email , password, dob, gender, user_id ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ;";
+					+ "phone_no , email , dob, gender, user_id ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ;";
 
 			PreparedStatement preparedStatement2 = dataConnection
 					.prepareStatement(insertTableSQL, Statement.RETURN_GENERATED_KEYS);
@@ -66,7 +66,6 @@ public class PatientDaoImpl {
 			preparedStatement2.setString(6, insertPatient.getZip());
 			preparedStatement2.setString(7, insertPatient.getPhoneNum());
 			preparedStatement2.setString(8, insertPatient.getEmailId());
-			preparedStatement2.setString(9, insertPatient.getPassword());
 			preparedStatement2.setString(10, insertPatient.getDob());
 			preparedStatement2.setString(11, insertPatient.getGender());
 			preparedStatement2.setInt(12, newUserId);
@@ -105,7 +104,7 @@ public class PatientDaoImpl {
 			newPatient.setEmailId(result.getString("email"));
 			newPatient.setDob(result.getString("dob"));
 			newPatient.setGender(result.getString("gender"));
-			newPatient.setPassword(result.getString("password"));
+			//newPatient.setPassword(result.getString("password"));
 		}
 
 		return newPatient;
@@ -188,6 +187,16 @@ public class PatientDaoImpl {
 			}
 			sqlStr.append(" address_zip = ?");
 			paramList.add(newPatient.getZip());
+		}
+		
+		if(newPatient.getGender() != null && !newPatient.getGender().isEmpty()){
+
+			if(sqlStr.toString().contains("?")){
+				sqlStr.append(" , ");
+			}
+
+			sqlStr.append("  gender = ? ");
+			paramList.add(newPatient.getGender());
 		}
 
 		sqlStr.append(" where email = ?");

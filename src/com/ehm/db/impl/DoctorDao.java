@@ -8,16 +8,18 @@ import com.ehm.db.model.PatientQuery;
 
 public interface DoctorDao {
 	
-	List<Doctor> getSearchDoctorRecords(String specialization, String fName, String lName) throws SQLException, ClassNotFoundException;
+	List<Doctor> getSearchDoctorRecords(String specialization, String fName, String lName) throws SQLException;
 	
 	List<Doctor> getSearchDoctorRecords(String specialization);
 
-	Doctor getDoctorProfile(int doctoId) throws ClassNotFoundException, SQLException;
+	Doctor getDoctorProfile(int doctoId) throws SQLException;
 	
 
-	List<PatientQuery> getNewQuery(int doctorId) throws SQLException, ClassNotFoundException;
+	List<PatientQuery> getNewQuery(int doctorId) throws SQLException;
 	
-	List<PatientQuery> getOtherQuery(int doctorId) throws SQLException, ClassNotFoundException;
+	List<PatientQuery> getOtherQuery(int doctorId) throws SQLException;
 
-	Doctor getDoctorByEmail(String emailId) throws ClassNotFoundException, SQLException;
+	Doctor getDoctorByEmail(String emailId) throws  SQLException;
+	
+	void saveQueryAnswer(int queryId, String queryAnswer) throws SQLException;
 }

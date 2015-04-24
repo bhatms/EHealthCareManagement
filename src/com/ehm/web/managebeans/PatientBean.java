@@ -371,19 +371,28 @@ public class PatientBean {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) context.getExternalContext()
 				.getSession(true);
-		currentPatient = (Patient) session.getAttribute("loggedInPatient");
-
-		firstName = currentPatient.getFirstName();
-		lastName = currentPatient.getLastName();
-		addressLine = currentPatient.getAddrLine1();
-		zip = currentPatient.getZip();
-		// emailId = currentPatient.getEmailId();
-		city = currentPatient.getCity();
-		state = currentPatient.getState();
-		phoneNo = currentPatient.getPhoneNum();
-		password = currentPatient.getPassword();
-		gender = currentPatient.getGender();
-		dateOfBirth = currentPatient.getDob();
+		
+		try {
+			PatientDaoImpl patientDaoImpl = new PatientDaoImpl();
+			currentPatient = patientDaoImpl.getPatientByEmail(((Patient) session.getAttribute("loggedInPatient")).getEmailId());
+			
+			firstName = currentPatient.getFirstName();
+			lastName = currentPatient.getLastName();
+			addressLine = currentPatient.getAddrLine1();
+			zip = currentPatient.getZip();
+			// emailId = currentPatient.getEmailId();
+			city = currentPatient.getCity();
+			state = currentPatient.getState();
+			phoneNo = currentPatient.getPhoneNum();
+			//password = currentPatient.getPassword();
+			gender = currentPatient.getGender();
+			dateOfBirth = currentPatient.getDob();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		return "navigatePatientProfile";
 	}
@@ -434,6 +443,11 @@ public class PatientBean {
 			isUpdate = true;
 			newPatient.setState(state);
 		}
+		if (!gender.equals(currentPatient.getGender())) {
+			isUpdate = true;
+			newPatient.setGender(gender);
+		}
+		
 
 		if (isUpdate) {
 		

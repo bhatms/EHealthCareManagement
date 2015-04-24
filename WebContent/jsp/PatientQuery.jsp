@@ -121,12 +121,12 @@
 							</f:facet>
 
 							<button type="button" class="btn btn-primary btn-lg"
-								data-toggle="popover" title="Doctor Says.." data-html = "true"
+								data-toggle="popover" title="Doctor Says" data-html = "true"
 								data-content="<div>
 								<h:outputText value="#{patque.doctorsReply}"></h:outputText>
 								</div>">
 								<h:outputText value="#{patque.doctorsReply}"></h:outputText>
-								...
+								..
 							</button>
 						</h:column>
 

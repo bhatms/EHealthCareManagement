@@ -10,8 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.model.SelectItem;
-
 import com.ehm.db.config.EHMDataConnect;
 import com.ehm.db.model.Doctor;
 import com.ehm.db.model.PatientQuery;
@@ -21,23 +19,23 @@ import com.ehm.db.model.PatientQuery;
  *
  */
 public class DoctorDaoImpl implements DoctorDao {
-	
+
 	private Connection dataConnection;
 
 	public DoctorDaoImpl() throws ClassNotFoundException, SQLException {
-		
+
 		dataConnection = EHMDataConnect.getDataConn();
 
 	}
 
 	public DoctorDaoImpl(String forTest) throws ClassNotFoundException, SQLException {
-		
+
 		dataConnection = EHMDataConnect.getTestDataConn();
 
 	}
 
 	public List<Doctor> getSearchDoctorRecords(String specialization,
-			String fName, String lName) throws SQLException, ClassNotFoundException {
+			String fName, String lName) throws SQLException {
 
 		List<String> paramList = new ArrayList<String>();
 
@@ -103,76 +101,7 @@ public class DoctorDaoImpl implements DoctorDao {
 	}
 
 
-
-
-	public List<SelectItem> getSpecializationList() throws ClassNotFoundException, SQLException {
-
-		StringBuffer sqlBuf = new StringBuffer("select * from specializations ");
-
-
-		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
-		// get customer data from database
-		ResultSet result = ps.executeQuery();
-
-		List<SelectItem> list = new ArrayList<SelectItem>();
-		list.add(new SelectItem("all","All"));
-		while (result.next()) {
-			SelectItem item = new SelectItem();
-			item.setValue(result.getString("special_id"));
-			item.setLabel(result.getString("special_title"));
-			list.add(item);
-		}
-
-		return list;
-
-	}
-
-	/*	public List<Doctor> getDoctorProfile(int doctorId) throws SQLException, ClassNotFoundException{
-
-		//		List<String> parameterList = new ArrayList<String>();
-
-		StringBuffer sqlBuf = new StringBuffer("select * from doctor ");
-		if (doctorId != 0) {
-			sqlBuf.append(" where doctor_ID = ?1 ");
-			//			parameterList.add(doctorId);
-		}
-
-
-		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
-		// get customer data from database
-		//		int cnt = 1;
-		//		for (String param : parameterList) {
-		//			ps.setString(cnt, param);
-		//			cnt++;
-		//		}
-		ps.setInt(1, doctorId);
-
-		ResultSet result = ps.executeQuery();
-
-		List<Doctor> list = new ArrayList<Doctor>();
-
-		//		while (result.next()) {
-		Doctor doct = new Doctor();
-		doct.setDoctorId(result.getInt("doctor_ID"));
-		doct.setFirstName(result.getString("first_name"));
-		doct.setLastName(result.getString("last_name"));
-
-		doct.setQualification(result.getString("doctor_qualification"));
-		doct.setRegistrationNum(result.getString("doctor_reg_num"));
-		doct.setSpecialization(result.getString("specialization_id"));
-		doct.setDesignation(result.getString("doctor_designation"));
-		doct.setVisitingDays(result.getString("doctor_visiting_days"));
-		doct.setVisitingHours(result.getString("doctor_visiting_Hours"));
-		doct.setEmailId(result.getString("doctor_email"));
-		doct.setPhoneNum(result.getString("doctor_phone_num"));
-
-		list.add(doct);
-		//		}
-
-		return list;
-	}*/
-
-	public Doctor getDoctorProfile(int doctorId) throws ClassNotFoundException, SQLException {
+	public Doctor getDoctorProfile(int doctorId) throws SQLException {
 
 		Doctor doct = null;
 		StringBuffer sqlBuf = new StringBuffer("select * from doctor ");
@@ -200,17 +129,17 @@ public class DoctorDaoImpl implements DoctorDao {
 		return doct;
 	}
 
-public List<PatientQuery> getNewQuery(int doctorId) throws SQLException, ClassNotFoundException {
-		
+	public List<PatientQuery> getNewQuery(int doctorId) throws SQLException {
+
 		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status = ? and doctor_ID = ? ");
-		
+
 		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
-		
-		ps.setString(1, "New");
-		
+
+		ps.setString(1, "In-Progress");
+
 		ps.setInt(2, doctorId);
-		
-		
+
+
 		ResultSet result = ps.executeQuery();
 
 		List<PatientQuery> newList = new ArrayList<PatientQuery>();
@@ -223,7 +152,7 @@ public List<PatientQuery> getNewQuery(int doctorId) throws SQLException, ClassNo
 			patientQuery.setQueryCategory(result.getString("query_category"));
 			patientQuery.setQueryDescription(result.getString("query_description"));
 			patientQuery.setQueryDate(result.getDate("query_date"));
-			
+
 			newList.add(patientQuery);
 		}
 
@@ -232,19 +161,19 @@ public List<PatientQuery> getNewQuery(int doctorId) throws SQLException, ClassNo
 		return newList;
 	}
 
-	
-	
-	public List<PatientQuery> getOtherQuery(int doctorId) throws SQLException, ClassNotFoundException{
-		
+
+
+	public List<PatientQuery> getOtherQuery(int doctorId) throws SQLException{
+
 		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status <> ? and doctor_ID = ?");
-		
+
 		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
-		
+
 		ps.setString(1, "New");
-		
+
 		ps.setInt(2, doctorId);
-		
-		
+
+
 		ResultSet result = ps.executeQuery();
 
 		List<PatientQuery> otherList = new ArrayList<PatientQuery>();
@@ -259,15 +188,15 @@ public List<PatientQuery> getNewQuery(int doctorId) throws SQLException, ClassNo
 			patientQuery.setQueryDate(result.getDate("query_date"));
 			patientQuery.setDoctorsReply(result.getString("doctors_reply"));
 			otherList.add(patientQuery);
-				
+
 		}
 
 
 		return otherList;
 	}
-	
+
 	public Doctor getDoctorByEmail(String emailId)
-			throws ClassNotFoundException, SQLException {
+			throws SQLException {
 
 		String sqlStr = "select * from doctor where doctor_email = ?";
 
@@ -297,4 +226,18 @@ public List<PatientQuery> getNewQuery(int doctorId) throws SQLException, ClassNo
 		return docObj;
 	}
 
+	
+	public void saveQueryAnswer(int queryId, String queryAnswer ) throws SQLException{
+		
+		StringBuffer sqlBuf = new StringBuffer("update patient_query set doctors_reply = ?,"
+				+ " query_status = ? where query_id = ?");
+
+		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
+
+		ps.setString(1, queryAnswer);
+		ps.setString(2, "Closed");
+		ps.setInt(3, queryId);
+
+		ps.executeUpdate();
+	}
 }

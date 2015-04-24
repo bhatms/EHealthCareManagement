@@ -44,10 +44,12 @@ public class DoctorBean {
 	private String filterFromDate;
 
 	private String filterToDate;
-	
-	private int patientId;
-	
+		
 	private Doctor currentDoctor;
+	
+	private String queryAnswer;
+	
+	private String selectedQuery;
 
 		/**
 	 * @return the firstName
@@ -338,6 +340,34 @@ public class DoctorBean {
 
 		return result;
 	}
+	
+	
+	public String submitQueryAnswer() {
+	
+		try {
+
+			DoctorDao doctorDao = new DoctorDaoImpl();
+/*			FacesContext context = FacesContext.getCurrentInstance();
+			HttpSession session = (HttpSession) context.getExternalContext()
+					.getSession(true);
+			
+			currentDoctor = (Doctor) session.getAttribute("loggedInDoctor");
+
+			int docId = currentDoctor.getDoctorId();*/
+			
+			doctorDao.saveQueryAnswer(Integer.parseInt(selectedQuery), queryAnswer);
+
+
+		} 
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return viewNewQueries();
+	}
 
 
 	public String viewOtherQueries() {
@@ -472,13 +502,20 @@ public class DoctorBean {
 		this.filterToDate = filterToDate;
 	}
 
-	public int getPatientId() {
-		return patientId;
+	/**
+	 * @return the queryAnswer
+	 */
+	public String getQueryAnswer() {
+		return queryAnswer;
 	}
 
-	public void setPatientId(int patientId) {
-		this.patientId = patientId;
+	/**
+	 * @param queryAnswer the queryAnswer to set
+	 */
+	public void setQueryAnswer(String queryAnswer) {
+		this.queryAnswer = queryAnswer;
 	}
+
 
 	/**
 	 * @return the currentDoctor
@@ -492,6 +529,20 @@ public class DoctorBean {
 	 */
 	public void setCurrentDoctor(Doctor currentDoctor) {
 		this.currentDoctor = currentDoctor;
+	}
+
+	/**
+	 * @return the selectedQuery
+	 */
+	public String getSelectedQuery() {
+		return selectedQuery;
+	}
+
+	/**
+	 * @param selectedQuery the selectedQuery to set
+	 */
+	public void setSelectedQuery(String selectedQuery) {
+		this.selectedQuery = selectedQuery;
 	}
 
 }

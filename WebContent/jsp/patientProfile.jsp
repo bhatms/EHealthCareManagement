@@ -93,8 +93,8 @@
 							<td><h:message for="new_dob" style="color:red" /></td>
 						</tr>
 						<tr>
-							<td><h:outputText value="Gender"></h:outputText></td>
-							<td><h:selectOneRadio value="#{newAccountBean.gender}"
+							<td><h:outputLabel value="Gender"></h:outputLabel></td>
+							<td><h:selectOneRadio value="#{patientBean.gender}"
 									styleClass="input-group-addon" id="gender" required="true"
 									requiredMessage="Please select Gender">
 									<f:selectItem itemValue="m" itemLabel="Male" />
@@ -138,8 +138,9 @@
 						<tr>
 							<td><h:outputLabel value="Zip"></h:outputLabel></td>
 							<td><h:inputText value="#{patientBean.zip}" id="zip"
-									maxlength="5" required="true"
+									maxlength="5" required="true" validatorMessage="Enter correct zip."
 									requiredMessage="Please Enter zip" styleClass="form-control">
+								<f:validateRegex pattern="^\d{5}$"/>
 								</h:inputText></td>
 							<td><h:message for="Zip" style="color:red" /></td>
 						</tr>

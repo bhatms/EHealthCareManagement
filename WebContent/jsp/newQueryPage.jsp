@@ -17,11 +17,109 @@
 
 
 <script type="text/javascript">
+	function cancelPage() {
+
+		document.getElementById("new:cmdLnkIdSuppliers").click();
+
+	}
 
 	$(function() {
-		$('[data-toggle="popover"]').popover()	})
+		$('[data-toggle="popover"]').popover()
+	})
 
-</script>		
+	$(window).on('shown.bs.modal', function(event) {
+
+		document.getElementById("problemPar").innerHTML = "";
+		//alert(document.getElementById("new:message-text"));
+		document.getElementById("new:message-text").value = "";
+		document.getElementById("new:thisQueryId").value = "";
+
+		var button = $(event.relatedTarget) // Button that triggered the modal
+		var recipient = button.data('whatever') // Extract info from data-* attributes
+		document.getElementById("problemPar").innerHTML = recipient;
+		document.getElementById("new:thisQueryId").value = button.data('qid');
+
+	})
+
+	function showModal(thisBtn) {
+
+		var button = $(thisBtn.relatedTarget);
+		document.getElementById("problemPar").innerHTML = "test";
+		$('#exampleModal').modal() // initialized with defaults
+		$('#exampleModal').modal('show')
+
+	}
+
+	var ajaxRequest; // The variable that makes Ajax possible!
+	function ajaxFunction() {
+		try {
+
+			// Opera 8.0+, Firefox, Safari
+			ajaxRequest = new XMLHttpRequest();
+		} catch (e) {
+
+			// Internet Explorer Browsers
+			try {
+				ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+
+				try {
+					ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (e) {
+
+					// Something went wrong
+					alert("Your browser broke!");
+					return false;
+				}
+			}
+		}
+	}
+
+	function submitReply() {
+
+		ajaxFunction();
+
+		// Here processRequest() is the callback function.
+		ajaxRequest.onreadystatechange = processRequest;
+
+		var url = "CabController?addrLine="
+				+ escape(document.getElementById("addrLine").value)
+				+ "&addrLine_end="
+				+ escape(document.getElementById("addrLine_end").value);
+
+		ajaxRequest.open("GET", url, true);
+		ajaxRequest.send(null);
+	}
+
+	function processRequest(response) {
+		if (ajaxRequest.readyState == 4) {
+			if (ajaxRequest.status == 200) {
+
+				var parseText = eval("(" + ajaxRequest.response + ")")
+				var msg = "Cab not found please try again";
+				if (parseText.success == "true") {
+					msg = "Cab :"
+							+ parseText.vehicle_model
+							+ " , "
+							+ parseText.cab_no
+							+ "<br>"
+							+ "Driver : "
+							+ parseText.Driver_Name
+							+ "<br>"
+							+ "Phone : "
+							+ parseText.Phone_No
+							+ "<br>"
+							+ "Cab wiil reach to you within 6 minutes. Do you want to book the cab?"
+					document.getElementById("bookBtn").style.display = 'block';
+				}
+
+				document.getElementById("cabInfo").innerHTML = msg;
+				document.getElementById("showCab").style.display = 'block';
+
+			}
+		}
+	}
+</script>
 
 </head>
 
@@ -85,13 +183,13 @@
 							</f:facet>
 
 
-							<a href="#"
-								data-toggle="popover" title="Description" data-html="true"
+							<a href="#" data-toggle="popover" title="Description"
+								data-html="true"
 								data-content="<div>
 								<h:outputText value="#{patque.queryDescription}"></h:outputText>
 								</div> ">
 								<h:outputText value="#{patque.queryDescription}"></h:outputText>..
-								</a>
+							</a>
 						</h:column>
 
 						<h:column>
@@ -100,14 +198,22 @@
 							</f:facet>
 							<h:outputText value="#{patque.queryDate}"></h:outputText>
 						</h:column>
-						<%-- 					
+
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="Doctor ID" />
+								<h:outputText value="Reply" />
 							</f:facet>
-							<h:outputText value="#{patque.doctorId}"></h:outputText>
+
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+								data-target="#exampleModal"
+								data-whatever="<div>
+								<h:outputText value="#{patque.queryDescription}"></h:outputText>
+								</div> "   data-qid="<h:outputText value="#{patque.queryId}"></h:outputText>">
+
+								Post reply</button>
 						</h:column>
-						
+
+						<%-- 					
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Doctor Reply" />
@@ -118,10 +224,58 @@
 					</h:dataTable>
 
 					<br>
-					<h:commandButton value="Back" action="#{loginBean.goToMyHome}"
-						styleClass="btn btn-success"></h:commandButton>
+					<input type="button" value="Back" onclick="cancelPage();"
+						class="btn btn-success" />
 
+
+
+					<h:commandLink id="cmdLnkIdSuppliers" immediate="true"
+						action="#{loginBean.goToMyHome}" value="">
+						<f:verbatim></f:verbatim>
+					</h:commandLink>
+
+					<div class="modal fade" id="exampleModal" tabindex="-1"
+						role="dialog" aria-labelledby="exampleModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title" id="exampleModalLabel">Send a
+										reply.</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-group">
+										<label for="recipient-name" class="control-label"
+											style="color: #265a88;">Problem Description:</label><br>
+										<label id="problemPar"></label>
+									</div>
+									<div class="form-group">
+										<label for="message-text" class="control-label"
+											style="color: #265a88;">Reply:</label>
+										<h:inputTextarea styleClass="form-control" id="message-text" cols="6"
+											rows="6" value="#{doctorBean.queryAnswer}"></h:inputTextarea>
+											<h:inputHidden value="#{doctorBean.selectedQuery}" id="thisQueryId"/>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+									<h:commandButton action="#{doctorBean.submitQueryAnswer}"
+										value="Submit Answer" styleClass="btn btn-success">
+
+									</h:commandButton>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
 				</h:form>
+
 			</div>
 		</div>
 
