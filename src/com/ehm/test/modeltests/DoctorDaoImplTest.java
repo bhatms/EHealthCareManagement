@@ -17,6 +17,7 @@ import com.ehm.db.impl.DoctorDaoImpl;
 import com.ehm.db.impl.EhealthUtilDao;
 import com.ehm.db.impl.EhealthUtilDaoImpl;
 import com.ehm.db.model.Doctor;
+import com.ehm.db.model.PatientQuery;
 
 public class DoctorDaoImplTest implements BaseTest {
 
@@ -91,4 +92,81 @@ public class DoctorDaoImplTest implements BaseTest {
 		specialization = special;
 		
 	}
+
+@Test
+public void testGetNewQueryInvalidId() {
+	try {
+		List<PatientQuery> testGetNewQueryList = docObj.getNewQuery(Integer.valueOf("-9999"));
+		if (testGetNewQueryList == null) {
+			Assert.assertNull(testGetNewQueryList);
+		} else{
+			Assert.assertTrue("No result found for invalid doctor id - New Query ", testGetNewQueryList.isEmpty());
+		}
+
+	} catch (ClassNotFoundException e) {
+		Assert.fail(logger.getClass()
+				+ ":method testGetNewQuery() failed due to" + e);
+	} catch (SQLException e) {
+		Assert.fail(logger.getClass()
+				+ ":method testGetNewQuery() failed due to" + e);
+	}
+}
+
+
+@Test
+public void testGetNewQueryValidId() {
+	try {
+		List<PatientQuery> testGetNewQueryList = docObj.getNewQuery(Integer.valueOf("2"));
+		if (testGetNewQueryList != null && testGetNewQueryList.isEmpty()) {
+			Assert.assertNull("No datafound",testGetNewQueryList);
+		} else {
+			Assert.assertNotNull("Patients and their corresponding Query's found for this doctor", testGetNewQueryList.get(0).getQueryDescription());
+		}
+
+	} catch (ClassNotFoundException e) {
+		Assert.fail(logger.getClass()
+				+ ":method testGetNewQuery() failed due to" + e);
+	} catch (SQLException e) {
+		Assert.fail(logger.getClass()
+				+ ":method testGetNewQuery() failed due to" + e);
+	}
+}
+
+@Test
+public void testGetOtherQueryInvalidId() {
+	try {
+		List<PatientQuery> testGetOtherQueryList = docObj.getOtherQuery(Integer.valueOf("-9999"));
+		if (testGetOtherQueryList == null) {
+			Assert.assertNull(testGetOtherQueryList);
+		} else{
+			Assert.assertTrue("No result found for invalid doctor id - Other Query ", testGetOtherQueryList.isEmpty());
+		}
+
+	} catch (ClassNotFoundException e) {
+		Assert.fail(logger.getClass()
+				+ ":method testGetOtherQuery() failed due to" + e);
+	} catch (SQLException e) {
+		Assert.fail(logger.getClass()
+				+ ":method testGetOtherQuery() failed due to" + e);
+	}
+}
+
+@Test
+public void testGetOtherQueryValidId() {
+	try {
+		List<PatientQuery> testGetOtherQueryList = docObj.getOtherQuery(Integer.valueOf("2"));
+		if (testGetOtherQueryList != null && testGetOtherQueryList.isEmpty()) {
+			Assert.assertNull("No datafound",testGetOtherQueryList);
+		} else {
+			Assert.assertNotNull("Patients and their corresponding Query's found for this doctor", testGetOtherQueryList.get(0).getQueryDescription());
+		}
+
+	} catch (ClassNotFoundException e) {
+		Assert.fail(logger.getClass()
+				+ ":method testGetNewQuery() failed due to" + e);
+	} catch (SQLException e) {
+		Assert.fail(logger.getClass()
+				+ ":method testGetNewQuery() failed due to" + e);
+	}
+}
 }
