@@ -66,7 +66,7 @@
 								styleClass="list-group-item"></h:commandLink></li>
 
 						<li><h:commandLink value="Assign New Query"
-								action="#{doctorBean.goToOthernQueries}"
+								action="#{doctorBean.viewOtherQueries}"
 								styleClass="list-group-item"></h:commandLink></li>
 
 
