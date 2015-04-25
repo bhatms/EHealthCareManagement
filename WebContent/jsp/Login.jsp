@@ -49,7 +49,7 @@
 					<!-- 		<div class="row">
 						<div class="col-md-6"> -->
 					<h2>Log in</h2>
-					<h:messages style="color:red;" globalOnly="true"></h:messages>
+					<h:messages errorStyle="color:red;" infoStyle="color:green;"  globalOnly="true"></h:messages>
 					<br>
 					<table>
 						<tr>

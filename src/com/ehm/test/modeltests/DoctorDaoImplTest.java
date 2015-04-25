@@ -110,7 +110,7 @@ public class DoctorDaoImplTest implements BaseTest {
 	@Test
 	public void testGetNewQueryValidId() {
 		try {
-			List<PatientQuery> testGetNewQueryList = docObj.getNewQuery(Integer.valueOf("2"));
+			List<PatientQuery> testGetNewQueryList = docObj.getNewQuery(Integer.valueOf("3"));
 			if (testGetNewQueryList != null && testGetNewQueryList.isEmpty()) {
 				Assert.assertNull("No datafound",testGetNewQueryList);
 			} else {

@@ -66,9 +66,9 @@ public class PatientDaoImpl {
 			preparedStatement2.setString(6, insertPatient.getZip());
 			preparedStatement2.setString(7, insertPatient.getPhoneNum());
 			preparedStatement2.setString(8, insertPatient.getEmailId());
-			preparedStatement2.setString(10, insertPatient.getDob());
-			preparedStatement2.setString(11, insertPatient.getGender());
-			preparedStatement2.setInt(12, newUserId);
+			preparedStatement2.setString(9, insertPatient.getDob());
+			preparedStatement2.setString(10, insertPatient.getGender());
+			preparedStatement2.setInt(11, newUserId);
 
 			preparedStatement2.executeUpdate();
 

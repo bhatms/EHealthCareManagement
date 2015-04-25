@@ -48,7 +48,7 @@ public class LoginBean {
 		this.password = password;
 	}
 
-	public String validAndLoginUser() {
+/*	public String validAndLoginUser() {
 		
 		String loginResult = "failure";
 		loginError = true;
@@ -80,7 +80,7 @@ public class LoginBean {
 			e.printStackTrace();
 		}
 		return loginResult;
-	}
+	}*/
 
 	public String validateLogin() {
 		

@@ -65,7 +65,7 @@
 								action="#{doctorBean.viewNewQueries}"
 								styleClass="list-group-item"></h:commandLink></li>
 
-						<li><h:commandLink value="Assign New Query"
+						<li><h:commandLink value="Answered Queries"
 								action="#{doctorBean.viewOtherQueries}"
 								styleClass="list-group-item"></h:commandLink></li>
 

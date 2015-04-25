@@ -388,7 +388,7 @@ public class DoctorBean {
 			if (otherQueriesList != null && !otherQueriesList.isEmpty()) {
 				showOther = true;
 			}
-			result = "navigateOtherQuery";
+			result = "navigateToOtherQuery";
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

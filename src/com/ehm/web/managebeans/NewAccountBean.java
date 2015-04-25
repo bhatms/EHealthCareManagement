@@ -225,7 +225,12 @@ public class NewAccountBean {
 				PatientDaoImpl patientDaoObj = new PatientDaoImpl();
 				Patient addedPatient = patientDaoObj.ceateNewAccount(newPatient);
 				if(addedPatient != null){
-					saveResult = "success";
+					saveResult = "navigateToLogin";
+					
+					FacesContext.getCurrentInstance().addMessage(null,
+							new FacesMessage(FacesMessage.SEVERITY_INFO,
+									"Account created successfully. Please login to continue.",
+									"Please Try Again!"));
 
 					FacesContext context = FacesContext.getCurrentInstance();
 					HttpSession session = (HttpSession) context.getExternalContext()
@@ -238,10 +243,25 @@ public class NewAccountBean {
 
 
 			} catch (ClassNotFoundException e) {
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR,
+								"Some error occured try again.",
+								"Please Try Again!"));
 				e.printStackTrace();
 			} catch (SQLException e) {
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR,
+								"Some error occured try again.",
+								"Please Try Again!"));
 				e.printStackTrace();
 			} catch (Exception e) {
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR,
+								"Some error occured try again.",
+								"Please Try Again!"));
 				e.printStackTrace();
 			}
 

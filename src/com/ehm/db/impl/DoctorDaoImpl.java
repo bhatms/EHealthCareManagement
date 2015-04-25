@@ -165,11 +165,11 @@ public class DoctorDaoImpl implements DoctorDao {
 
 	public List<PatientQuery> getOtherQuery(int doctorId) throws SQLException{
 
-		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status <> ? and doctor_ID = ?");
+		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status = ? and doctor_ID = ?");
 
 		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
 
-		ps.setString(1, "New");
+		ps.setString(1, "Closed");
 
 		ps.setInt(2, doctorId);
 

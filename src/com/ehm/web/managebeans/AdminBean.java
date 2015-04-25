@@ -291,6 +291,8 @@ public class AdminBean {
 				patientQuery.setQueryId(Integer.parseInt(selectedQueryId));
 				patientQuery.setDoctorId(Integer.parseInt(selectedDoctorId));
 				adminDao.assignQueryToDoctor(patientQuery);
+				
+				getFilterQueries();
 
 				FacesContext.getCurrentInstance().addMessage(
 						null,

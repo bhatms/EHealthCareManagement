@@ -55,7 +55,8 @@
 				
 		
 					<h:dataTable id="NewQueryTable" value="#{doctorBean.otherQueriesList}"
-						var="other" rendered="#{doctorBean.showOther}" border="1" styleClass="form-control">
+						var="other" rendered="#{doctorBean.showOther}" border="1" 
+						styleClass="table table-striped table-condensed table-bordered table-hover">
 		
 		
 						<h:column>

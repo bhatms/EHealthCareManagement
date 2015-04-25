@@ -1,7 +1,5 @@
 package com.ehm.test.modeltests;
 
-import static org.junit.Assert.*;
-
 import java.sql.SQLException;
 
 import javax.faces.context.ExternalContext;
@@ -14,14 +12,14 @@ import org.mockito.Mockito;
 
 import com.ehm.db.impl.LoginDao;
 import com.ehm.db.impl.LoginDaoImpl;
-import com.ehm.db.model.Patient;
+import com.ehm.db.model.User;
 
 public class LoginBeanTest extends Mockito{
 	LoginDao loginDao = null;
 
 	@Before
 	public void setUp() throws Exception {
-		loginDao = new LoginDaoImpl();
+		loginDao = new LoginDaoImpl("testing");
 	}
 
 	@Test
@@ -34,7 +32,9 @@ public class LoginBeanTest extends Mockito{
 		when(context.getExternalContext()).thenReturn(externalContext);
 		when(externalContext.getSession(true)).thenReturn(session);
 		
-		Patient logedPatient = loginDao.validate("john.smith@uncc.edu", "123456");		
+		User logedPatient = loginDao.validateLogin("jwatson@ssdi.com", "password11");		
+		
+		System.out.println("test patient: "+logedPatient);
 		
 	}
 

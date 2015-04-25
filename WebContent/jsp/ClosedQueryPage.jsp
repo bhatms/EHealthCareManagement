@@ -55,7 +55,8 @@
 				
 		
 					<h:dataTable id="ClosedQueryTable" value="#{adminBean.closedQueriesList}"
-						var="closed" rendered="#{adminBean.showClosed}" border="1" styleClass="form-control">
+						var="closed" rendered="#{adminBean.showClosed}" border="1" 
+						styleClass="table table-striped table-condensed table-bordered table-hover">
 		
 		
 						<h:column>

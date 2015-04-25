@@ -55,7 +55,8 @@
 					
 		
 					<h:dataTable id="InProgressQueryTable" value="#{adminBean.inProgressQueriesList}"
-						var="inprogress" rendered="#{adminBean.showInProgress}" border="1" styleClass="form-control">
+						var="inprogress" rendered="#{adminBean.showInProgress}" border="1"
+						styleClass="table table-striped table-condensed table-bordered table-hover">
 		
 		
 						<h:column>

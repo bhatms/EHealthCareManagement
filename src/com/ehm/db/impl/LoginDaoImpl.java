@@ -25,13 +25,13 @@ public class LoginDaoImpl implements LoginDao {
 
 	}
 
-	public Patient validate(String userEmail, String password) throws ClassNotFoundException, SQLException {
+	/*public Patient validate(String userEmail, String password) throws ClassNotFoundException, SQLException {
 
-		/*
+		
 		 * Class.forName("com.mysql.jdbc.Driver"); connection =
 		 * DriverManager.getConnection
 		 * ("jdbc:mysql://127.0.0.1:3306/ssdi","root","123456");
-		 */
+		 
 		Patient logedinPatient = null;
 
 		PreparedStatement ps = dataConnection.prepareStatement(
@@ -59,7 +59,7 @@ public class LoginDaoImpl implements LoginDao {
 		
 		return logedinPatient;
 	}
-	
+	*/
 	
 	public User validateLogin(String userEmail, String password) throws ClassNotFoundException, SQLException {
 
