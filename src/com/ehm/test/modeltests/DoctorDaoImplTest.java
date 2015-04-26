@@ -55,7 +55,40 @@ public class DoctorDaoImplTest implements BaseTest {
 
 		} catch (SQLException e) {
 			Assert.fail(logger.getClass()
-					+ ":method testGetSpecializationList() failed due to" + e);
+					+ ":method testGetSearchDoctorRecords() failed due to" + e);
+		}
+	}
+	
+	@Test
+	public void testGetDoctorProfile1() {
+		try {
+
+			Doctor testDoc = docObj.getDoctorProfile(Integer.valueOf("1"));
+
+			if (testDoc == null) {
+				Assert.assertNull("No record found");
+			}
+
+		} catch (SQLException e) {
+			Assert.fail(logger.getClass()
+					+ ":method testGetDoctorProfile1() failed due to" + e);
+		}
+	}
+	
+	
+	@Test
+	public void testGetDoctorProfile2() {
+		try {
+
+			Doctor testDoc = docObj.getDoctorProfile(Integer.valueOf("-999"));
+
+			if (testDoc == null) {
+				Assert.assertNull("No record found");
+			}
+
+		} catch (SQLException e) {
+			Assert.fail(logger.getClass()
+					+ ":method testGetDoctorProfile2() failed due to" + e);
 		}
 	}
 
@@ -110,7 +143,7 @@ public class DoctorDaoImplTest implements BaseTest {
 	@Test
 	public void testGetNewQueryValidId() {
 		try {
-			List<PatientQuery> testGetNewQueryList = docObj.getNewQuery(Integer.valueOf("3"));
+			List<PatientQuery> testGetNewQueryList = docObj.getNewQuery(Integer.valueOf("2"));
 			if (testGetNewQueryList != null && testGetNewQueryList.isEmpty()) {
 				Assert.assertNull("No datafound",testGetNewQueryList);
 			} else {
@@ -154,4 +187,39 @@ public class DoctorDaoImplTest implements BaseTest {
 					+ ":method testGetNewQuery() failed due to" + e);
 		}
 	}
+	
+	
+	@Test
+	public void testGetDoctorByEmail1() {
+		try {
+
+			Doctor testDoc = docObj.getDoctorByEmail("dsajja@uncc.edu");
+
+			if (testDoc == null) {
+				Assert.assertNull("No record found");
+			}
+
+		} catch (SQLException e) {
+			Assert.fail(logger.getClass()
+					+ ":method testGetDoctorByEmail1() failed due to" + e);
+		}
+	}
+	
+	
+	@Test
+	public void testGetDoctorByEmail2() {
+		try {
+
+			Doctor testDoc = docObj.getDoctorByEmail("rdusari@uncc.edu");
+
+			if (testDoc == null) {
+				Assert.assertNull("No record found");
+			}
+
+		} catch (SQLException e) {
+			Assert.fail(logger.getClass()
+					+ ":method testGetDoctorByEmail2() failed due to" + e);
+		}
+	}
+	
 }
