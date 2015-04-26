@@ -138,4 +138,46 @@ public class AdminDaoImplTest implements BaseTest {
 					+ ":method testGetDoctorByCateg2() failed due to" + e);
 		}
 	}
+	
+	
+	@Test
+	public void testGetInProgressQueries() {
+		try {
+			List<PatientQuery> testPatientQueryList = adminDao.getInProgressQuery();
+			if (testPatientQueryList == null || testPatientQueryList.isEmpty()) {
+				Assert.assertNull("No In Progress queries open",testPatientQueryList);
+			} else{
+				Assert.assertTrue("In Progress queries found  ", !testPatientQueryList.isEmpty());
+
+			}
+		} catch (ClassNotFoundException e) {
+			Assert.fail(logger.getClass()
+					+ ":method testGetInProgressQueries() failed due to" + e);
+		} catch (SQLException e) {
+			Assert.fail(logger.getClass()
+					+ ":method testGetInProgressQueries() failed due to" + e);
+		}
+	}
+	
+	
+	@Test
+	public void testGetClosedQueries() {
+		try {
+			List<PatientQuery> testPatientQueryList = adminDao.getClosedQuery();
+			if (testPatientQueryList == null || testPatientQueryList.isEmpty()) {
+				Assert.assertNull("No closed queries open",testPatientQueryList);
+			} else{
+				Assert.assertTrue("closed queries found  ", !testPatientQueryList.isEmpty());
+
+			}
+		} catch (ClassNotFoundException e) {
+			Assert.fail(logger.getClass()
+					+ ":method testGetClosedQueries() failed due to" + e);
+		} catch (SQLException e) {
+			Assert.fail(logger.getClass()
+					+ ":method testGetClosedQueries() failed due to" + e);
+		}
+	}
+
+
 }
