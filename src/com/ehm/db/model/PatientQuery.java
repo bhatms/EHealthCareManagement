@@ -17,6 +17,23 @@ public class PatientQuery {
 	private Date queryDate;
 	private int doctorId;
 	private String doctorsReply;
+	
+	private String problemDescription;
+	private Date problemDate;
+	
+	
+	public String getProblemDescription() {
+		return problemDescription;  
+	}
+	public void setProblemDescription(String problemDescription) {
+		this.problemDescription = problemDescription;
+	}
+	public Date getProblemDate() {
+		return problemDate;
+	}
+	public void setProblemDate(Date problemDate) {
+		this.problemDate = problemDate;
+	}
 	public int getPatientId() {
 		return patientId;
 	}

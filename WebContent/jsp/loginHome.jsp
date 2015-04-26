@@ -68,9 +68,15 @@
 						<h:commandLink value="Post a Question"
 							action="#{patientBean.goToQuery}" styleClass="list-group-item"></h:commandLink>
 
-						<h:commandLink value="View My Quetions"
+						<h:commandLink value="View My Questions"
 							action="#{patientBean.displayQuery}" styleClass="list-group-item"></h:commandLink>
-
+							
+						<h:commandLink value="Add History"
+							action="#{patientBean.displayQuery}" styleClass="list-group-item"></h:commandLink>
+				
+						<h:commandLink value="View History"
+							action="#{patientBean.displayQuery}" styleClass="list-group-item"></h:commandLink>
+							
 					</ul>
 				</div>
 

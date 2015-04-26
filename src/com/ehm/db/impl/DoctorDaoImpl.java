@@ -131,8 +131,11 @@ public class DoctorDaoImpl implements DoctorDao {
 
 	public List<PatientQuery> getNewQuery(int doctorId) throws SQLException {
 
-		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status = ? and doctor_ID = ? ");
+//		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status = ? and doctor_ID = ? ");
 
+		StringBuffer sqlBuf = new StringBuffer("SELECT PQ.patient_id, PQ.query_id, PQ.query_category, PQ.query_description, PQ.query_date, PH.problem_description, PH.problem_date FROM patient_query AS PQ JOIN patient_history AS PH ON PQ.patient_id = PH.patient_id where query_status = ? and doctor_ID = ? ");
+		
+		
 		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
 
 		ps.setString(1, "In-Progress");
@@ -144,15 +147,18 @@ public class DoctorDaoImpl implements DoctorDao {
 
 		List<PatientQuery> newList = new ArrayList<PatientQuery>();
 
+
+		
 		while (result.next()) {
 			PatientQuery patientQuery = new PatientQuery();
 
-			patientQuery.setPatientId(result.getInt("patient_id"));
-			patientQuery.setQueryId(result.getInt("query_id"));
-			patientQuery.setQueryCategory(result.getString("query_category"));
-			patientQuery.setQueryDescription(result.getString("query_description"));
-			patientQuery.setQueryDate(result.getDate("query_date"));
-
+			patientQuery.setPatientId(result.getInt("PQ.patient_id"));
+			patientQuery.setQueryId(result.getInt("PQ.query_id"));
+			patientQuery.setQueryCategory(result.getString("PQ.query_category"));
+			patientQuery.setQueryDescription(result.getString("PQ.query_description"));
+			patientQuery.setQueryDate(result.getDate("PQ.query_date"));
+			patientQuery.setProblemDescription(result.getString("PH.problem_description"));
+			patientQuery.setProblemDate(result.getDate("PH.problem_date"));
 			newList.add(patientQuery);
 		}
 

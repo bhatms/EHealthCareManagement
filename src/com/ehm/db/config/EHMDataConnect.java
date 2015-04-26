@@ -20,7 +20,7 @@ public class EHMDataConnect {
 		Class.forName("com.mysql.jdbc.Driver");
 		String URL = "jdbc:mysql://127.0.0.1:3306/EHealthDBTest";
 		String User = "root";
-		String Password = "test";
+		String Password = "April@2015";
 		dataConn = DriverManager.getConnection(URL, User, Password);
 
 
@@ -38,7 +38,7 @@ public class EHMDataConnect {
 		Class.forName("com.mysql.jdbc.Driver");
 		String URL = "jdbc:mysql://127.0.0.1:3306/EHealthDB";
 		String User = "root";
-		String Password = "test";
+		String Password = "April@2015";
 		Connection dataConn = DriverManager.getConnection(URL, User, Password);
 
 		return dataConn;
