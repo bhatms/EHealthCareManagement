@@ -1,7 +1,7 @@
 package com.ehm.db.model;
 
 import java.util.Date;
-
+import java.sql.*;
 
 public class PatientQuery {
 
@@ -19,19 +19,22 @@ public class PatientQuery {
 	private String doctorsReply;
 	
 	private String problemDescription;
-	private Date problemDate;
+	private String problemDate;
 	
 	
 	public String getProblemDescription() {
 		return problemDescription;  
 	}
+	
 	public void setProblemDescription(String problemDescription) {
 		this.problemDescription = problemDescription;
 	}
-	public Date getProblemDate() {
+	
+	
+	public String getProblemDate() {
 		return problemDate;
 	}
-	public void setProblemDate(Date problemDate) {
+	public void setProblemDate(String problemDate) {
 		this.problemDate = problemDate;
 	}
 	public int getPatientId() {

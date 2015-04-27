@@ -160,7 +160,7 @@ public class DoctorDaoImpl implements DoctorDao {
 			patientQuery.setQueryDescription(result.getString("PQ.query_description"));
 			patientQuery.setQueryDate(result.getDate("PQ.query_date"));
 			patientQuery.setProblemDescription(result.getString("PH.problem_description"));
-			patientQuery.setProblemDate(result.getDate("PH.problem_date"));
+			patientQuery.setProblemDate(result.getString("PH.problem_date"));
 			newList.add(patientQuery);
 		}
 

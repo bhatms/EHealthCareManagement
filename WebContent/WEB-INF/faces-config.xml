@@ -118,8 +118,29 @@
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
+			<from-outcome>navigateToAddMyHistory</from-outcome>
+			<to-view-id>/jsp/addMedicalHistory.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
 			<from-outcome>navigateToQueryPage</from-outcome>
 			<to-view-id>/jsp/PatientQuery.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+		<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>navigateToOpenQueryPage</from-outcome>
+			<to-view-id>/jsp/PatientOpenQuery.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+		<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>navigateToViewHistoryPage</from-outcome>
+			<to-view-id>/jsp/viewPatientHistory.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -176,6 +197,13 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>navigateEditQueryPatient</from-outcome>
+			<to-view-id>/jsp/editProfile.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>

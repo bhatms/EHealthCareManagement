@@ -69,16 +69,22 @@
 							action="#{patientBean.goToQuery}" 
 							styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink>
 						<br>
+						
+						<h:commandLink value="Edit Question"
+							action="#{patientBean.editQuery}" 
+							styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink>
+						<br>
+						
 						<h:commandLink value="View My Questions"
 							action="#{patientBean.displayQuery}" 
 							styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink>
 						<br>
 						<h:commandLink value="Add History"
-							action="#{patientBean.displayQuery}" 
+							action="#{patientBean.addMyHistory}" 
 							styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink>
 						<br>
 						<h:commandLink value="View History"
-							action="#{patientBean.displayQuery}" 
+							action="#{patientBean.viewMyHistory}" 
 							styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink>
 						<br>
 					</ul>

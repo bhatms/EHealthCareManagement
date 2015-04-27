@@ -5,11 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.sql.*;
 
 import com.ehm.db.config.EHMDataConnect;
 import com.ehm.db.model.Patient;
+import com.ehm.db.model.PatientQuery;
 
 public class PatientDaoImpl {
 	
@@ -217,4 +223,53 @@ public class PatientDaoImpl {
 
 		return newPatient;
 	}
+	
+	
+	
+	public void insertPatientHistoryRecords(PatientQuery insertPatientHistory) 
+			throws SQLException, ClassNotFoundException, ParseException {
+		
+		SimpleDateFormat simpleDateFormatUser = new SimpleDateFormat("mm/dd/yyyy");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+
+	    StringBuffer insertTableSQL = new StringBuffer(" INSERT INTO patient_history ");
+	    insertTableSQL.append(" (patient_id, problem_description, problem_date) ");
+	    insertTableSQL.append(" values ( ?, ?, ?); ");
+
+
+		PreparedStatement preparedStatement = dataConnection.prepareStatement(insertTableSQL.toString());
+
+		preparedStatement.setInt(1, insertPatientHistory.getPatientId());
+		preparedStatement.setString(2, insertPatientHistory.getProblemDescription());
+		preparedStatement.setString(3, simpleDateFormat.format(simpleDateFormatUser.parse(insertPatientHistory.getProblemDate())));
+		preparedStatement.executeUpdate();
+	
+	}
+	
+	
+	
+	public List<PatientQuery> viewPatHistory(int patientId) throws SQLException, ClassNotFoundException {
+
+		StringBuffer sqlBuf = new StringBuffer("Select problem_description, problem_date from patient_history where patient_id = ? order by problem_date desc");
+		
+		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
+		
+		ps.setInt(1, patientId);
+		ResultSet resultSet = ps.executeQuery();
+		List<PatientQuery> hislist = new ArrayList<PatientQuery>();
+		
+		
+		
+		while(resultSet.next()){ 
+			PatientQuery patHis = new PatientQuery();
+			patHis.setProblemDescription(resultSet.getString("problem_description"));
+			patHis.setProblemDate(resultSet.getString("problem_date"));
+			hislist.add(patHis);
+		}
+		return hislist;
+	}
+
 }
+
+

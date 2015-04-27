@@ -1,5 +1,6 @@
 package com.ehm.web.managebeans;
-
+import java.text.ParseException;
+import java.util.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -20,13 +21,22 @@ public class PatientBean {
 
 	private int patientId;
 	private boolean showQuery;
+	private boolean showOpenQuery;
+	private boolean showHistory;
 	private String queryCategory;
 	private String queryDescription;
 	private String queryStatus;
 	private String queryDate;
 	private String doctorsReply;
 	private List<PatientQuery> patientQueryList;
-
+	private List<PatientQuery> patientQueryOpenList;
+	private List<PatientQuery> patientHistoryList;
+	
+	private String queryPatientCategory;
+	private String queryPatientDescription;
+	private Date queryPatientDate;
+	private int queryPatientId;
+	
 	private String firstName;
 	private String lastName;
 	private String addressLine;
@@ -40,17 +50,39 @@ public class PatientBean {
 	private String gender;
 	private String dateOfBirth;
 	private Patient currentPatient;
+	private PatientQuery currentPatientOpenQuery;
 	
 	private List<SelectItem> patientCategoryList;
 	private String patientCategory;
 	private String patientDescription;
 
+
+	
+	private String patientHistoryDescription;	
+	private String patientHistoryDate;
 	/**
 	 * @return the patientId
 	 */
 	public int getPatientId() {
 		return patientId;
 	}
+
+	public String getPatientHistoryDate() {
+		return patientHistoryDate;
+	}
+
+	public void setPatientHistoryDate(String patientHistoryDate) {
+		this.patientHistoryDate = patientHistoryDate;
+	}
+
+	public String getPatientHistoryDescription() {
+		return patientHistoryDescription;
+	}
+
+	public void setPatientHistoryDescription(String patientHistoryDescription) {
+		this.patientHistoryDescription = patientHistoryDescription;
+	}
+
 
 	/**
 	 * @param patientId
@@ -109,6 +141,14 @@ public class PatientBean {
 		this.patientQueryList = patientQueryList;
 	}
 
+	public List<PatientQuery> getPatientHistoryList() {
+		return patientHistoryList;
+	}
+
+	public void setPatientHistoryList(List<PatientQuery> patientHistoryList) {
+		this.patientHistoryList = patientHistoryList;
+	}
+	
 	public String displayQuery() {
 
 		try {
@@ -130,6 +170,86 @@ public class PatientBean {
 			e.printStackTrace();
 		}
 		return "navigateToQueryPage";
+	}
+	
+
+	public String editQuery() {
+
+		try {
+			showOpenQuery=false;
+			PatientQueryDao patientqueryDao = new PatientQueryDaoImpl();
+			FacesContext context = FacesContext.getCurrentInstance();
+			HttpSession session = (HttpSession) context.getExternalContext()
+					.getSession(true);
+			currentPatient = (Patient) session.getAttribute("loggedInPatient");
+
+			int selectedPatientId = currentPatient.getPatientId();
+			patientQueryOpenList = patientqueryDao.patientOpenQuery(Integer.valueOf(selectedPatientId));
+
+			if (patientQueryOpenList != null && !patientQueryOpenList.isEmpty()) {
+				showOpenQuery = true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return "navigateToOpenQueryPage";
+	}
+	
+	
+	public boolean isShowOpenQuery() {
+		return showOpenQuery;
+	}
+
+	public void setShowOpenQuery(boolean showOpenQuery) {
+		this.showOpenQuery = showOpenQuery;
+	}
+
+	public boolean isShowHistory() {
+		return showHistory;
+	}
+
+	public void setShowHistory(boolean showHistory) {
+		this.showHistory = showHistory;
+	}
+
+	public List<PatientQuery> getPatientQueryOpenList() {
+		return patientQueryOpenList;
+	}
+
+	public void setPatientQueryOpenList(List<PatientQuery> patientQueryOpenList) {
+		this.patientQueryOpenList = patientQueryOpenList;
+	}
+
+	public String viewMyHistory() {
+
+		try {
+			showHistory = false;
+
+			PatientDaoImpl patientDaoImpl = new PatientDaoImpl();
+			FacesContext context = FacesContext.getCurrentInstance();
+			HttpSession session = (HttpSession) context.getExternalContext()
+					.getSession(true);
+			currentPatient = (Patient) session.getAttribute("loggedInPatient");
+
+			int selectedPatientId = currentPatient.getPatientId();
+			patientHistoryList = patientDaoImpl.viewPatHistory(Integer.valueOf(selectedPatientId));
+
+			if (patientHistoryList != null && !patientHistoryList.isEmpty()) {
+				showHistory = true;
+			}
+
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return "navigateToViewHistoryPage";
 	}
 
 	
@@ -397,6 +517,95 @@ public class PatientBean {
 		return "navigatePatientProfile";
 	}
 
+	
+	public String viewToEditPatientQuery() {
+//		reset();
+//		FacesContext context = FacesContext.getCurrentInstance();
+//		HttpSession session = (HttpSession) context.getExternalContext()
+//				.getSession(true);
+		
+
+		try 
+		{
+			String selectedQueryId = FacesContext.getCurrentInstance()
+				.getExternalContext().getRequestParameterMap()
+				.get("queryId");
+			
+			int querySelectedId = Integer.valueOf(selectedQueryId);
+		
+			PatientQueryDaoImpl patientQueryDaoImpl = new PatientQueryDaoImpl();
+			currentPatientOpenQuery = patientQueryDaoImpl.getPatientQueryByQueryId(querySelectedId);
+			
+			queryPatientId = currentPatientOpenQuery.getQueryId();
+			queryPatientCategory = currentPatientOpenQuery.getQueryCategory();
+			queryPatientDescription = currentPatientOpenQuery.getQueryDescription();
+			queryPatientDate = currentPatientOpenQuery.getQueryDate();
+		
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return "navigateEditQueryPatient";
+	}
+
+	
+	public String updateSaveQuery() {
+
+		PatientQuery newPatientOpenQuery = new PatientQuery();
+
+//		FacesContext context = FacesContext.getCurrentInstance();
+//		HttpSession session = (HttpSession) context.getExternalContext()
+//				.getSession(true);
+//		currentPatient = (Patient) session.getAttribute("loggedInPatient");
+		
+		boolean isUpdate = false;
+
+		if (!queryPatientDescription.equals(currentPatientOpenQuery.getQueryDescription())) {
+			isUpdate = true;
+			newPatientOpenQuery.setQueryDescription(queryPatientDescription);
+			
+		}
+
+
+		if (isUpdate) {
+		
+			newPatientOpenQuery.setQueryId(currentPatientOpenQuery.getQueryId());
+			try 
+			{
+				PatientQueryDaoImpl patientQueryDaoImpl = new PatientQueryDaoImpl();
+				patientQueryDaoImpl.updateAndSaveQuery(newPatientOpenQuery);
+//				FacesContext.getCurrentInstance().addMessage(
+//						null,
+//						new FacesMessage(FacesMessage.SEVERITY_INFO,
+//								"Data updated successfully.", "Success"));
+			} 
+			catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, e
+								.getMessage(), "error"));
+			} catch (SQLException e) {
+				e.printStackTrace();
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, e
+								.getMessage(), "error"));
+			} catch (Exception e) {
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, e
+								.getMessage(), "error"));
+			}
+		}
+
+		return "navigateToOpenQueryPage";
+	}
+	
+	
+	
 	public String updateSaveProfile() {
 
 		Patient newPatient = new Patient();
@@ -482,6 +691,9 @@ public class PatientBean {
 		return null;
 	}
 
+	
+
+	
 	public String backToHome() {
 		return "success";
 	}
@@ -503,6 +715,40 @@ public class PatientBean {
 		gender = null;
 		dateOfBirth = null;
 	}
+	
+	public String insertPatientHistory() throws ParseException {
+
+		String result = null;
+		PatientQuery insertPatientHistory= new PatientQuery();
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) context
+				.getExternalContext().getSession(true);
+		// =
+			//	(Patient)session.getAttribute("loggedInPatient");
+		Patient loginPatient = (Patient)session.getAttribute("loggedInPatient");
+		int patientId = loginPatient.getPatientId();
+		insertPatientHistory.setPatientId(patientId);
+		insertPatientHistory.setProblemDescription(patientHistoryDescription);
+		insertPatientHistory.setProblemDate(patientHistoryDate);
+
+		
+		try {
+
+			PatientDaoImpl patientDaoImpl = new PatientDaoImpl();
+			patientDaoImpl.insertPatientHistoryRecords(insertPatientHistory);
+			result = "navigatePatientHome";
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return result;
+
+	}
+	
+	
 	
 	public String insertPatientQuery() {
 
@@ -535,6 +781,8 @@ public class PatientBean {
 		return result;
 
 	}
+	
+	
 
 	/**
 	 * @return the showQuery
@@ -589,5 +837,10 @@ public class PatientBean {
 	public String goToQuery() {
 		
 		return "navigateToQuery";
+	}
+	
+	public String addMyHistory() {
+		
+		return "navigateToAddMyHistory";
 	}
 }

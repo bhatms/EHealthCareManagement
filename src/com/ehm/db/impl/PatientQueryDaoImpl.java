@@ -13,6 +13,7 @@ import java.util.List;
 import javax.faces.model.SelectItem;
 
 import com.ehm.db.config.EHMDataConnect;
+import com.ehm.db.model.Patient;
 import com.ehm.db.model.PatientQuery;
 
 public class PatientQueryDaoImpl implements PatientQueryDao {
@@ -59,6 +60,28 @@ public class PatientQueryDaoImpl implements PatientQueryDao {
 		return list;
 	}
 
+	public List<PatientQuery> patientOpenQuery(int patientId) throws SQLException, ClassNotFoundException {
+
+
+		PreparedStatement ps = dataConnection.prepareStatement(
+				"Select * from patient_query where patient_id = ? and query_status='New'");
+		
+		ps.setInt(1, patientId);
+		List<PatientQuery> list = new ArrayList<PatientQuery>();
+		ResultSet resultSet = ps.executeQuery();
+		PatientQuery patopenque = null;
+		
+		while(resultSet.next()){ 
+			patopenque = new PatientQuery();
+			patopenque.setQueryId(resultSet.getInt("query_id"));
+			patopenque.setQueryCategory(resultSet.getString("query_category"));
+			patopenque.setQueryDescription(resultSet.getString("query_description"));
+			patopenque.setQueryDate(resultSet.getDate("query_date"));
+			list.add(patopenque);
+		}
+		return list;
+	}
+	
 	public List<SelectItem> getPatientCategoryList() throws ClassNotFoundException, SQLException {
 
 		StringBuffer sqlBuf = new StringBuffer("select * from specializations ");
@@ -106,5 +129,52 @@ public class PatientQueryDaoImpl implements PatientQueryDao {
 		preparedStatement.executeUpdate();
 	
 	}
+	
+	
+	public PatientQuery getPatientQueryByQueryId(int selectedQueryId)
+			throws ClassNotFoundException, SQLException {
 
+		String sqlStr = "select * from patient_query where query_id = ?";
+
+		PatientQuery editPatient = null;
+		PreparedStatement ps = dataConnection.prepareStatement(
+				sqlStr);
+		ps.setInt(1, selectedQueryId);
+
+		ResultSet result = ps.executeQuery();
+
+		while(result.next()){
+
+			editPatient = new PatientQuery();
+			editPatient.setQueryId(result.getInt("query_id"));
+			editPatient.setQueryCategory(result.getString("query_category"));
+			editPatient.setQueryDescription(result.getString("query_description"));
+			editPatient.setQueryDate(result.getDate("query_date"));
+
+		}
+
+		return editPatient;
+	}
+
+
+	
+	
+	public void updateAndSaveQuery(PatientQuery newPatientOpenQuery)
+			throws ClassNotFoundException, SQLException {
+
+		StringBuffer sqlStr = new StringBuffer("update patient_query set query_description = ? where query_id = ?");
+
+
+
+		if(newPatientOpenQuery.getQueryDescription() != null && !newPatientOpenQuery.getQueryDescription().isEmpty())
+		{
+			PreparedStatement preparedStatement = dataConnection
+					.prepareStatement(sqlStr.toString());
+			preparedStatement.setString(1, newPatientOpenQuery.getQueryDescription());
+			preparedStatement.setInt(2, newPatientOpenQuery.getQueryId());
+			preparedStatement.executeUpdate();
+		}
+
+	}
+	
 }
