@@ -127,7 +127,7 @@ public class LoginBean {
 			} else {
 				FacesContext.getCurrentInstance().addMessage(
 						null,
-						new FacesMessage(FacesMessage.SEVERITY_WARN,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR,
 								"Invalid email or password.",
 								"Please Try Again!"));
 				loginResult = "failure";

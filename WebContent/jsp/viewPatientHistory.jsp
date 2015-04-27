@@ -80,7 +80,7 @@
 				<h3>Patient History</h3>
 				<h:form id="PatientHistory">
 					<h:dataTable id="patientQueryTable"
-						value="#{PatientBean.patientHistoryList}" var="pathist" rendered="#{PatientBean.showHistory}" border="1"
+						value="#{patientBean.patientHistoryList}" var="pathist" rendered="#{patientBean.showHistory}" border="1"
 						styleClass="table table-striped table-condensed table-bordered table-hover">
 
 						<h:column>

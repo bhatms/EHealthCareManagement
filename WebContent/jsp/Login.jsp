@@ -105,7 +105,7 @@
 
 
 				<footer>
-					<p>&copy; EHealth Management 2015</p>
+					<p>&copy; EHealthCare 2015</p>
 				</footer>
 			</div>
 		</h:form>

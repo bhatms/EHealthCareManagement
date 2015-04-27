@@ -115,7 +115,7 @@
 				<hr />
 
 				<footer>
-					<p>&copy; Company 2015</p>
+					<p>&copy; EHealthCare 2015</p>
 				</footer>
 			</div>
 			<!-- /container -->
