@@ -63,6 +63,8 @@ public class DoctorDaoImpl implements DoctorDao {
 			}
 			paramList.add("%"+lName+"%");
 		}
+		
+		sqlBuf.append(" order by specialization_id, first_name, last_name ");
 
 
 		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());

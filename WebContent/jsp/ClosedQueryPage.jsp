@@ -52,70 +52,75 @@
 
 				<h3>CLOSED QUERIES</h3>
 				<h:form id="closed">
-				
-		
-					<h:dataTable id="ClosedQueryTable" value="#{adminBean.closedQueriesList}"
-						var="closed" rendered="#{adminBean.showClosed}" border="1" 
+
+					<br>
+					<br>
+
+
+					<h:dataTable id="ClosedQueryTable"
+						value="#{adminBean.closedQueriesList}" var="closed"
+						rendered="#{adminBean.showClosed}" border="1"
 						styleClass="table table-striped table-condensed table-bordered table-hover">
-		
-		
+
+
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Patient ID" />
 							</f:facet>
 							<h:outputText value="#{closed.patientId}"></h:outputText>
 						</h:column>
-						
+
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query ID" />
 							</f:facet>
 							<h:outputText value="#{closed.queryId}"></h:outputText>
 						</h:column>
-						
+
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query Category" />
 							</f:facet>
 							<h:outputText value="#{closed.queryCategory}"></h:outputText>
 						</h:column>
-						
+
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query Description" />
 							</f:facet>
 							<h:outputText value="#{closed.queryDescription}"></h:outputText>
 						</h:column>
-						
+
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query Date" />
 							</f:facet>
 							<h:outputText value="#{closed.queryDate}"></h:outputText>
 						</h:column>
-						
+
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Doctor ID" />
 							</f:facet>
 							<h:outputText value="#{closed.doctorId}"></h:outputText>
 						</h:column>
-						
+
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Doctor Reply" />
 							</f:facet>
 							<h:outputText value="#{closed.doctorsReply}"></h:outputText>
 						</h:column>
-		
+
 					</h:dataTable>
 					<br>
-					<h:commandButton value="Back" action="#{loginBean.goToMyHome}" styleClass="btn btn-success"></h:commandButton>
-					
+					<h:commandButton value="Back" action="#{loginBean.goToMyHome}"
+						styleClass="btn btn-success"></h:commandButton>
+
 				</h:form>
 			</div>
-		</div>		
-		
+		</div>
+
 
 	</f:view>
 

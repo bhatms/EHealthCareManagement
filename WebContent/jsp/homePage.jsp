@@ -58,14 +58,19 @@
 
 							<ul class="nav">
 								<li><h:commandLink action="#{welcomeBean.goToSearchDoctor}"
-										value="Find Doctor"></h:commandLink></li>
+										value="Find Doctor"
+										styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink></li>
+										<br>
 								<% if( session.getAttribute("userfName") == null) {%>
 
 								<li><h:commandLink action="#{welcomeBean.goToLogin}"
-										value="Login"></h:commandLink></li>
+										value="Login"
+										styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink></li>
+										<br>
 								<li><h:commandLink
 										action="#{welcomeBean.goToCreateAccount}"
-										value="Create New Account"></h:commandLink></li>
+										value="Create New Account" 
+										styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink></li>
 								<% }%>
 
 							</ul>

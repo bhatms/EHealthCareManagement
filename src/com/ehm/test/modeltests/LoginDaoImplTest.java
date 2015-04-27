@@ -12,6 +12,7 @@ import org.junit.Test;
 import com.ehm.db.impl.LoginDao;
 import com.ehm.db.impl.LoginDaoImpl;
 import com.ehm.db.model.Patient;
+import com.ehm.db.model.User;
 
 public class LoginDaoImplTest implements BaseTest {
 
@@ -32,14 +33,14 @@ public class LoginDaoImplTest implements BaseTest {
 	@Test
 	public void testvalidate() {
 		try {
-			Patient testPatient = logObj.validate("6783287", "487386");
+			User testPatient = logObj.validateLogin("6783287", "487386");
 			if (testPatient == null) {
 				System.out.println("No User Found");
 			}
 
-			testPatient = logObj.validate("jt@uncc.edu", "opop");
+			testPatient = logObj.validateLogin("jt@uncc.edu", "opop");
 			if (testPatient != null) {
-				System.out.println("User Found" + testPatient.getFirstName());
+				System.out.println("User Found" + testPatient.getEmailId());
 			}
 		} catch (ClassNotFoundException e) {
 			Assert.fail(logger.getClass()

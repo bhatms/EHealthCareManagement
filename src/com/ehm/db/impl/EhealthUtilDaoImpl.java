@@ -49,7 +49,7 @@ public class EhealthUtilDaoImpl implements EhealthUtilDao{
 
 	public List<SelectItem> getSpecializationList()
 			throws ClassNotFoundException, SQLException {
-		StringBuffer sqlBuf = new StringBuffer("select * from specializations ");
+		StringBuffer sqlBuf = new StringBuffer("select * from specializations order by special_id ");
 
 
 		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());

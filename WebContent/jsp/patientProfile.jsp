@@ -12,22 +12,55 @@
 	href="/EHealthcareManagement/resources/css/bootstrap-theme.min.css"
 	rel="stylesheet" type="text/css" />
 
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
 <script type="text/javascript">
+
+$(function() {
+    $( "#datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "-100:+0",
+      maxDate: "+0M +0D"
+    });
+  });
+  
 	function cancelPage() {
 
 		document.getElementById("profileForm:cmdLnkIdSuppliers").click();
 
 	}
-	
-	function enablePasswordEdit(){
+
+	function enablePasswordEdit() {
 		document.getElementById("paswdDiv1").style.display = 'block';
 		document.getElementById("paswdDiv2").style.display = 'block';
+	}
+
+	function submitForm() {
+
+		if (document.getElementById("datepicker").value != null
+				&& document.getElementById("datepicker").value != "") {
+
+			
+			document.getElementById("profileForm:dobId").value = document
+					.getElementById("datepicker").value;
+			document.getElementById("profileForm:saveBtn").click();
+		}
+
+	}
+	
+function loadMethod(){
+		
+		document.getElementById("datepicker").value= document.getElementById("profileForm:dobId").value; 
 	}
 </script>
 </head>
 
 
-<body>
+<body onload="loadMethod();">
 	<f:view>
 		<h:form>
 			<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -86,11 +119,12 @@
 						</tr>
 						<tr>
 							<td><h:outputLabel value="Date Of Birth"></h:outputLabel></td>
-							<td><h:inputText value="#{patientBean.dateOfBirth}"
-									id="new_dob" required="true" styleClass="form-control"
-									requiredMessage="Please date of birth">
-								</h:inputText> <h:outputLabel value="mm/dd/yyyy" /></td>
-							<td><h:message for="new_dob" style="color:red" /></td>
+							<td><p>
+									<input type="text" id="datepicker" class="form-control"
+									autocomplete="off" required="required"> 
+									<h:inputHidden id="dobId" value="#{patientBean.dateOfBirth}" />
+								</p></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="Gender"></h:outputLabel></td>
@@ -138,9 +172,10 @@
 						<tr>
 							<td><h:outputLabel value="Zip"></h:outputLabel></td>
 							<td><h:inputText value="#{patientBean.zip}" id="zip"
-									maxlength="5" required="true" validatorMessage="Enter correct zip."
+									maxlength="5" required="true"
+									validatorMessage="Enter correct zip."
 									requiredMessage="Please Enter zip" styleClass="form-control">
-								<f:validateRegex pattern="^\d{5}$"/>
+									<f:validateRegex pattern="^\d{5}$" />
 								</h:inputText></td>
 							<td><h:message for="Zip" style="color:red" /></td>
 						</tr>
@@ -152,7 +187,7 @@
 								onclick="cancelPage();" class="btn btn-success" /></td>
 							<td>&nbsp; <h:commandButton value="Update Profile"
 									action="#{patientBean.updateSaveProfile}"
-									styleClass="btn btn-success" />
+									styleClass="btn btn-success" onclick="submitForm();" />
 							</td>
 							<td></td>
 						</tr>
@@ -161,6 +196,10 @@
 						action="#{patientBean.backToHome}" value="">
 						<f:verbatim></f:verbatim>
 					</h:commandLink>
+
+					<h:commandLink id="saveBtn"
+						action="#{patientBean.updateSaveProfile}" />
+
 				</h:form>
 			</div>
 		</div>

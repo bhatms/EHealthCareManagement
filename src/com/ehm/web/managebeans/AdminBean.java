@@ -11,7 +11,6 @@ import com.ehm.db.impl.AdminDao;
 import com.ehm.db.impl.AdminDaoImpl;
 import com.ehm.db.impl.EhealthUtilDao;
 import com.ehm.db.impl.EhealthUtilDaoImpl;
-import com.ehm.db.model.Doctor;
 import com.ehm.db.model.Patient;
 import com.ehm.db.model.PatientQuery;
 
@@ -22,11 +21,9 @@ public class AdminBean {
 
 	private List<SelectItem> specalizationList;
 
-	private List<Patient> patientList;
-
 	private String filterSpecalization;
-
-	private Doctor selectedDoctor;
+	
+	private String filterCateory;
 
 	private Patient selectedPatient;
 
@@ -45,8 +42,6 @@ public class AdminBean {
 	private boolean showQueryList;
 
 	private boolean showDoctorList;
-
-	private boolean showAssignBtn;
 
 	private List<PatientQuery> closedQueriesList;
 	private List<PatientQuery> inProgressQueriesList;
@@ -128,34 +123,7 @@ public class AdminBean {
 		this.specalizationList = specalizationList;
 	}
 
-	/**
-	 * @return the patientList
-	 */
-	public List<Patient> getPatientList() {
-		return patientList;
-	}
-
-	/**
-	 * @param patientList the patientList to set
-	 */
-	public void setPatientList(List<Patient> patientList) {
-		this.patientList = patientList;
-	}
-
-	/**
-	 * @return the selectedDoctor
-	 */
-	public Doctor getSelectedDoctor() {
-		return selectedDoctor;
-	}
-
-	/**
-	 * @param selectedDoctor the selectedDoctor to set
-	 */
-	public void setSelectedDoctor(Doctor selectedDoctor) {
-		this.selectedDoctor = selectedDoctor;
-	}
-
+	
 	/**
 	 * @return the selectedPatient
 	 */
@@ -227,8 +195,6 @@ public class AdminBean {
 
 	public String viewAssignQueries(){
 
-
-		showAssignBtn = false;
 
 		showDoctorList = false;
 
@@ -401,19 +367,6 @@ public class AdminBean {
 		this.showDoctorList = showDoctorList;
 	}
 
-	/**
-	 * @return the showAssignBtn
-	 */
-	public boolean isShowAssignBtn() {
-		return showAssignBtn;
-	}
-
-	/**
-	 * @param showAssignBtn the showAssignBtn to set
-	 */
-	public void setShowAssignBtn(boolean showAssignBtn) {
-		this.showAssignBtn = showAssignBtn;
-	}
 
 	/**
 	 * @return the selectedQueryId
@@ -483,4 +436,19 @@ public class AdminBean {
 		this.showInProgress = showInProgress;
 	}
 
+
+	/**
+	 * @return the filterCateory
+	 */
+	public String getFilterCateory() {
+		return filterCateory;
+	}
+
+
+	/**
+	 * @param filterCateory the filterCateory to set
+	 */
+	public void setFilterCateory(String filterCateory) {
+		this.filterCateory = filterCateory;
+	}
 }

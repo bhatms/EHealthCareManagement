@@ -63,11 +63,13 @@
 					<ul class="nav nav-pills nav-stacked">
 						<li><h:commandLink value="New Queries"
 								action="#{doctorBean.viewNewQueries}"
-								styleClass="list-group-item"></h:commandLink></li>
-
+								styleClass="list-group-item btn btn-primary btn-lg active"
+								></h:commandLink></li>
+						<br>
 						<li><h:commandLink value="Answered Queries"
 								action="#{doctorBean.viewOtherQueries}"
-								styleClass="list-group-item"></h:commandLink></li>
+								styleClass="list-group-item btn btn-primary btn-lg active">
+								</h:commandLink></li>
 
 
 					</ul>

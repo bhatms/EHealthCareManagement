@@ -24,7 +24,9 @@
 
 						<h3 style="color: white;">EHealthcare</h3>
 					</div>
-					<% if( session.getAttribute("userfName") != null) {%>
+					<%
+						if (session.getAttribute("userfName") != null) {
+					%>
 					<div class="navbar-header navbar-right">
 						<h:commandLink value="Logout" style="color: white;"
 							action="#{loginBean.userLogout }" />
@@ -34,7 +36,9 @@
 							action="#{loginBean.goToMyHome }" />
 					</div>
 
-					<% }%>
+					<%
+						}
+					%>
 
 				</div>
 			</div>
@@ -44,50 +48,53 @@
 
 			<!-- Main jumbotron for a primary marketing message or call to action -->
 			<div class="jumbotron">
-				<div class="container">
+				<div class="container ">
 
-					<!-- 		<div class="row">
-						<div class="col-md-6"> -->
-					<h2>Log in</h2>
-					<h:messages errorStyle="color:red;" infoStyle="color:green;"  globalOnly="true"></h:messages>
-					<br>
-					<table>
-						<tr>
-							<td><h:outputLabel value="Email id: " for="email"></h:outputLabel></td>
-							<td><h:inputText id="email" value="#{loginBean.email}"
-									required="true" requiredMessage="Please Enter User Name"
-									validatorMessage="Username value is invalid."
-									styleClass="form-control" tabindex="1">
-								</h:inputText></td>
-							<td><h:message for="email" style="color:red;" /></td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-						</tr>
-						<tr>
-							<td><h:outputLabel value="Password: " for="password"></h:outputLabel></td>
-							<td><h:inputSecret id="password" tabindex="2"
-									value="#{loginBean.password}" required="true"
-									requiredMessage="Please Enter Password."
-									styleClass="form-control"
-									validatorMessage="Password value is invalid.">
-								</h:inputSecret></td>
-							<td><h:message for="password" style="color:red;" /></td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td><h:commandButton value="Login" tabindex="3"
-									action="#{loginBean.validateLogin}"
-									styleClass="btn btn-success"></h:commandButton> &nbsp;</td>
-							<td></td>
+					<div class="row">
+						<div class="col-md-7">
+							<h2>Log in</h2>
+							<h:messages errorStyle="color:red;" infoStyle="color:green;"
+								globalOnly="true"></h:messages>
+							<br>
+							<table>
+								<tr>
+									<td><h:outputLabel value="Email id: " for="email"></h:outputLabel></td>
+									<td><h:inputText id="email" value="#{loginBean.email}"
+											required="true" requiredMessage="Please Enter User Name"
+											validatorMessage="Username value is invalid."
+											styleClass="form-control" tabindex="1">
+										</h:inputText></td>
+									<td><h:message for="email" style="color:red;" /></td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+								</tr>
+								<tr>
+									<td><h:outputLabel value="Password: " for="password"></h:outputLabel></td>
+									<td><h:inputSecret id="password" tabindex="2"
+											value="#{loginBean.password}" required="true"
+											requiredMessage="Please Enter Password."
+											styleClass="form-control"
+											validatorMessage="Password value is invalid.">
+										</h:inputSecret></td>
+									<td><h:message for="password" style="color:red;" /></td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td><h:commandButton value="Login" tabindex="3"
+											action="#{loginBean.validateLogin}"
+											styleClass="btn btn-success"></h:commandButton> &nbsp;</td>
+									<td></td>
 
-						</tr>
-					</table>
+								</tr>
+							</table>
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- </div>
@@ -96,10 +103,9 @@
 				<!-- Example row of columns -->
 
 
-				<hr />
 
 				<footer>
-					<p>&copy; Company 2015</p>
+					<p>&copy; EHealth Management 2015</p>
 				</footer>
 			</div>
 		</h:form>

@@ -61,22 +61,26 @@
 			<div class="row">
 				<div class="col-md-3">
 					<ul class="nav nav-pills nav-stacked">
-						<h:commandLink value="My Profile"
+						<h:commandLink value="My Profile" 
 							action="#{patientBean.viewPatientProfile}"
-							styleClass="list-group-item"></h:commandLink>
-
+							styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink>
+						<br>
 						<h:commandLink value="Post a Question"
-							action="#{patientBean.goToQuery}" styleClass="list-group-item"></h:commandLink>
-
+							action="#{patientBean.goToQuery}" 
+							styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink>
+						<br>
 						<h:commandLink value="View My Questions"
-							action="#{patientBean.displayQuery}" styleClass="list-group-item"></h:commandLink>
-							
+							action="#{patientBean.displayQuery}" 
+							styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink>
+						<br>
 						<h:commandLink value="Add History"
-							action="#{patientBean.displayQuery}" styleClass="list-group-item"></h:commandLink>
-				
+							action="#{patientBean.displayQuery}" 
+							styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink>
+						<br>
 						<h:commandLink value="View History"
-							action="#{patientBean.displayQuery}" styleClass="list-group-item"></h:commandLink>
-							
+							action="#{patientBean.displayQuery}" 
+							styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink>
+						<br>
 					</ul>
 				</div>
 

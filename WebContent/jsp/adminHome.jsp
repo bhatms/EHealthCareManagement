@@ -56,22 +56,22 @@
 
 			</div>
 
-			<ul class="nav nav-pills nav-stacked col-md-2">
+			<ul class="nav nav-pills nav-stacked col-md-3">
 				<li><h:commandLink value="New Queries"
 						action="#{adminBean.viewPatientQueries}"
-						styleClass="list-group-item"></h:commandLink></li>
-
+						styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink></li>
+				<br>
 				<li><h:commandLink value="Assign New Query"
 						action="#{adminBean.goToAssignQueries}"
-						styleClass="list-group-item"></h:commandLink></li>
-				
+						styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink></li>
+				<br>
 				<li><h:commandLink value="View Assigned Queries"
 						action="#{adminBean.viewInProgressQueries}"
-						styleClass="list-group-item"></h:commandLink></li>
-					
+						styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink></li>
+				<br>	
 				<li><h:commandLink value="View Closed Queries"
 						action="#{adminBean.viewClosedQueries}"
-						styleClass="list-group-item"></h:commandLink></li>
+						styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink></li>
 					
 			</ul>
 
