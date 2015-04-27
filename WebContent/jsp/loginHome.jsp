@@ -78,7 +78,7 @@
 						<h:commandLink value="View My Questions"
 							action="#{patientBean.displayQuery}" 
 							styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink>
-						<br>
+						<%-- <br>
 						<h:commandLink value="Add History"
 							action="#{patientBean.addMyHistory}" 
 							styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink>
@@ -86,7 +86,7 @@
 						<h:commandLink value="View History"
 							action="#{patientBean.viewMyHistory}" 
 							styleClass="list-group-item btn btn-primary btn-lg active"></h:commandLink>
-						<br>
+						<br> --%>
 					</ul>
 				</div>
 

@@ -58,14 +58,14 @@
 						var="other" rendered="#{doctorBean.showOther}" border="1" 
 						styleClass="table table-striped table-condensed table-bordered table-hover">
 		
-		
+		<%-- 
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Patient ID" />
 							</f:facet>
 							<h:outputText value="#{other.patientId}"></h:outputText>
 						</h:column>
-						
+		 --%>				
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query ID" />

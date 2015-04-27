@@ -65,17 +65,18 @@
 
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="Patient ID" />
-							</f:facet>
-							<h:outputText value="#{closed.patientId}"></h:outputText>
-						</h:column>
-
-						<h:column>
-							<f:facet name="header">
 								<h:outputText value="Query ID" />
 							</f:facet>
 							<h:outputText value="#{closed.queryId}"></h:outputText>
 						</h:column>
+						
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Patient Name" />
+							</f:facet>
+							<h:outputText value="#{closed.patientName}"></h:outputText>
+						</h:column>
+						
 
 						<h:column>
 							<f:facet name="header">
@@ -100,9 +101,9 @@
 
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="Doctor ID" />
+								<h:outputText value="Doctor Name" />
 							</f:facet>
-							<h:outputText value="#{closed.doctorId}"></h:outputText>
+							<h:outputText value="#{closed.doctorName}"></h:outputText>
 						</h:column>
 
 						<h:column>

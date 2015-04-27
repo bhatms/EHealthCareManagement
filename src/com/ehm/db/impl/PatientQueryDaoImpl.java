@@ -13,7 +13,6 @@ import java.util.List;
 import javax.faces.model.SelectItem;
 
 import com.ehm.db.config.EHMDataConnect;
-import com.ehm.db.model.Patient;
 import com.ehm.db.model.PatientQuery;
 
 public class PatientQueryDaoImpl implements PatientQueryDao {
@@ -41,7 +40,8 @@ public class PatientQueryDaoImpl implements PatientQueryDao {
 		 */
 
 		PreparedStatement ps = dataConnection.prepareStatement(
-				"Select * from patient_query where patient_id = ? order by query_date desc");
+				"Select * from patient_query where patient_id = ? order by query_status desc ,"
+				+ " query_date desc");
 		
 		ps.setInt(1, patientId);
 		List<PatientQuery> list = new ArrayList<PatientQuery>();

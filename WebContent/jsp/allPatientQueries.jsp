@@ -96,19 +96,20 @@
 						</h:column>
 
 --%>
-						<%-- <h:column>
-							<f:facet name="header">
-								<h:outputText value="Patient ID" />
-							</f:facet>
-							<h:outputText value="#{patque.patientId}"></h:outputText>
-						</h:column>
 						
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query ID" />
 							</f:facet>
 							<h:outputText value="#{patque.queryId}"></h:outputText>
-						</h:column> --%>
+						</h:column> 
+						
+						 <h:column>
+							<f:facet name="header">
+								<h:outputText value="Patient Name" />
+							</f:facet>
+							<h:outputText value="#{patque.patientName}"></h:outputText>
+						</h:column>
 						
 						<h:column>
 							<f:facet name="header">

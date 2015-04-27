@@ -30,16 +30,15 @@
 	$(window).on('shown.bs.modal', function(event) {
 
 		document.getElementById("problemPar").innerHTML = "";
-		document.getElementById("historyPat").innerHTML = "";
-		//alert(document.getElementById("new:message-text"));
+		//document.getElementById("historyPat").innerHTML = "";
 		document.getElementById("new:message-text").value = "";
 		document.getElementById("new:thisQueryId").value = "";
 
 		var button = $(event.relatedTarget) // Button that triggered the modal
 		var recipient = button.data('whatever') // Extract info from data-* attributes
 		document.getElementById("problemPar").innerHTML = recipient;
-		var recipientHis = button.data('history') // Extract info from data-* attributes
-		document.getElementById("historyPat").innerHTML = recipientHis;
+		//var recipientHis = button.data('history') // Extract info from data-* attributes
+		//document.getElementById("historyPat").innerHTML = recipientHis;
 		
 		document.getElementById("new:thisQueryId").value = button.data('qid');
 
@@ -266,12 +265,12 @@
 										<label id="problemPar"></label>
 									</div>
 									
-									<div class="form-group">
+<!-- 									<div class="form-group">
 										<label for="recipient-name" class="control-label"
 											style="color: #265a88;">Patient History:</label><br>
 										<label id="historyPat"></label>
 									</div>								
-									
+ -->									
 									
 									<div class="form-group">
 										<label for="message-text" class="control-label"

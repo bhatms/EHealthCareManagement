@@ -52,70 +52,73 @@
 
 				<h3>ASSIGNED QUERIES</h3>
 				<h:form id="inprog">
-					
-		
-					<h:dataTable id="InProgressQueryTable" value="#{adminBean.inProgressQueriesList}"
-						var="inprogress" rendered="#{adminBean.showInProgress}" border="1"
+
+
+					<h:dataTable id="InProgressQueryTable"
+						value="#{adminBean.inProgressQueriesList}" var="inprogress"
+						rendered="#{adminBean.showInProgress}" border="1"
 						styleClass="table table-striped table-condensed table-bordered table-hover">
-		
-		
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Patient ID" />
-							</f:facet>
-							<h:outputText value="#{inprogress.patientId}"></h:outputText>
-						</h:column>
-						
+
+
+
+
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query ID" />
 							</f:facet>
 							<h:outputText value="#{inprogress.queryId}"></h:outputText>
 						</h:column>
-						
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Patient Name" />
+							</f:facet>
+							<h:outputText value="#{inprogress.patientName}"></h:outputText>
+						</h:column>
+
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query Category" />
 							</f:facet>
 							<h:outputText value="#{inprogress.queryCategory}"></h:outputText>
 						</h:column>
-						
+
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query Description" />
 							</f:facet>
 							<h:outputText value="#{inprogress.queryDescription}"></h:outputText>
 						</h:column>
-						
+
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Query Date" />
 							</f:facet>
 							<h:outputText value="#{inprogress.queryDate}"></h:outputText>
 						</h:column>
-						
+
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Doctor Name" />
 							</f:facet>
-							<h:outputText value="#{inprogress.doctorId}"></h:outputText>
+							<h:outputText value="#{inprogress.doctorName}"></h:outputText>
 						</h:column>
-<%-- 						
+						<%-- 						
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Doctor Reply" />
 							</f:facet>
 							<h:outputText value="#{inprogress.doctorsReply}"></h:outputText>
 						</h:column>
---%>		
+--%>
 					</h:dataTable>
-		
+
 					<br>
-					<h:commandButton value="Back" action="#{loginBean.goToMyHome}" styleClass="btn btn-success"></h:commandButton>
-		
-					
-					
-							
+					<h:commandButton value="Back" action="#{loginBean.goToMyHome}"
+						styleClass="btn btn-success"></h:commandButton>
+
+
+
+
 				</h:form>
 			</div>
 		</div>

@@ -1,7 +1,6 @@
 package com.ehm.db.model;
 
 import java.util.Date;
-import java.sql.*;
 
 public class PatientQuery {
 
@@ -20,6 +19,9 @@ public class PatientQuery {
 	
 	private String problemDescription;
 	private String problemDate;
+	private String doctorName;
+	
+	private String patientName;
 	
 	
 	public String getProblemDescription() {
@@ -127,5 +129,33 @@ public class PatientQuery {
 	public void setQueryDate(Date queryDate) {
 		this.queryDate = queryDate;
 	}
-	
+
+	/**
+	 * @return the doctorName
+	 */
+	public String getDoctorName() {
+		return doctorName;
+	}
+
+	/**
+	 * @param doctorName the doctorName to set
+	 */
+	public void setDoctorName(String doctorName) {
+		this.doctorName = doctorName;
+	}
+
+	/**
+	 * @return the patientName
+	 */
+	public String getPatientName() {
+		return patientName;
+	}
+
+	/**
+	 * @param patientName the patientName to set
+	 */
+	public void setPatientName(String patientName) {
+		this.patientName = patientName;
+	}
+
 }

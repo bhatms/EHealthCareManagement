@@ -34,8 +34,10 @@ public class AdminDaoImpl  implements AdminDao{
 	public List<PatientQuery> getAllQyeries() throws ClassNotFoundException, SQLException {
 
 
-		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status = 'New' "
-				+ " order by query_date ");
+		StringBuffer sqlBuf = new StringBuffer("select pq.*, pt.first_name, pt.last_name"
+				+ " from patient_query pq, patient pt"
+				+ " where pq.query_status = 'New' and pt.patient_id = pq.patient_id"
+				+ " order by pq.query_date ");
 
 		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
 		// get customer data from database
@@ -56,6 +58,7 @@ public class AdminDaoImpl  implements AdminDao{
 			patientQuery.setQueryDate(result.getDate("query_date"));
 			patientQuery.setDoctorId(result.getInt("doctor_id"));
 			patientQuery.setDoctorsReply(result.getString("doctors_reply"));
+			patientQuery.setPatientName(result.getString("first_name") +" "+result.getString("last_name"));
 
 			list.add(patientQuery);
 		}
@@ -136,7 +139,12 @@ public class AdminDaoImpl  implements AdminDao{
 
 	public List<PatientQuery> getClosedQuery() throws SQLException, ClassNotFoundException {
 
-		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status = ? ");
+		StringBuffer sqlBuf = new StringBuffer("select pq.*, d.first_name as doct_fname, "
+				+ " d.last_name as doct_lname, p.first_name as pat_fname, p.last_name as pat_lname "
+				+ " from patient_query pq, doctor d, patient p "
+				+ " where d.doctor_id = pq.doctor_id "
+				+ " and  p.patient_id = pq.patient_id "
+				+ " and pq.query_status = ? ");
 
 		PreparedStatement ps = dataConnection.prepareStatement(sqlBuf.toString());
 
@@ -157,6 +165,8 @@ public class AdminDaoImpl  implements AdminDao{
 			patientQuery.setQueryDate(result.getDate("query_date"));
 			patientQuery.setDoctorId(result.getInt("doctor_id"));
 			patientQuery.setDoctorsReply(result.getString("doctors_reply"));
+			patientQuery.setDoctorName(result.getString("doct_fname") +" "+result.getString("doct_lname"));
+			patientQuery.setPatientName(result.getString("pat_fname") +" "+result.getString("pat_lname"));
 			closedList.add(patientQuery);
 		}
 
@@ -169,7 +179,12 @@ public class AdminDaoImpl  implements AdminDao{
 
 	public List<PatientQuery> getInProgressQuery() throws SQLException, ClassNotFoundException{
 
-		StringBuffer sqlBuf = new StringBuffer("select * from patient_query where query_status = ?");
+		StringBuffer sqlBuf = new StringBuffer("select pq.*, d.first_name as doct_fname, "
+				+ " d.last_name as doct_lname, p.first_name as pat_fname, p.last_name as pat_lname "
+				+ " from patient_query pq, doctor d, patient p "
+				+ " where d.doctor_id = pq.doctor_id "
+				+ " and  p.patient_id = pq.patient_id "
+				+ " and pq.query_status = ? ");
 
 		PreparedStatement ps = EHMDataConnect.getDataConn().prepareStatement(sqlBuf.toString());
 
@@ -190,6 +205,8 @@ public class AdminDaoImpl  implements AdminDao{
 			patientQuery.setQueryDate(result.getDate("query_date"));
 			patientQuery.setDoctorId(result.getInt("doctor_id"));
 			patientQuery.setDoctorsReply(result.getString("doctors_reply"));
+			patientQuery.setDoctorName(result.getString("doct_fname") +" "+result.getString("doct_lname"));
+			patientQuery.setPatientName(result.getString("pat_fname") +" "+result.getString("pat_lname"));
 			inProgressList.add(patientQuery);
 
 		}
