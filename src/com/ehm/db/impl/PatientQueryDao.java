@@ -11,15 +11,8 @@ import com.ehm.db.model.PatientQuery;
 public interface PatientQueryDao {
 
 	List<PatientQuery> patientQuery(int patientId) throws SQLException, ClassNotFoundException;
-	
-	List<PatientQuery> patientOpenQuery(int patientId) throws SQLException, ClassNotFoundException;
 
 	List<SelectItem> getPatientCategoryList() throws ClassNotFoundException, SQLException;
 
 	void insertPatientQueryRecords(PatientQuery insertPatientQuery) throws SQLException, ClassNotFoundException;
-	
-	public PatientQuery getPatientQueryByQueryId(int selectedQueryId) throws ClassNotFoundException, SQLException;
-	
-	public void updateAndSaveQuery(PatientQuery newPatientOpenQuery)
-			throws ClassNotFoundException, SQLException;
 }

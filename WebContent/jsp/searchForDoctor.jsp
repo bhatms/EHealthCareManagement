@@ -98,7 +98,7 @@
 
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Desination" />
+						<h:outputText value="Designation" />
 					</f:facet>
 					<h:outputText value="#{doct.designation}"></h:outputText>
 
