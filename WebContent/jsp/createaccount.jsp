@@ -90,7 +90,8 @@ $(function() {
 									id="new_fname" required="true" styleClass="form-control"
 									requiredMessage="Please Enter first name" maxlength="15"
 									validatorMessage="Correct value of first name.">
-									<f:validateRegex pattern="[a-zA-Z]{2,30}" />
+									<f:validateRegex pattern="[a-zA-Z]+[ a-zA-Z-_]*" />
+									<f:validateLength minimum="1" maximum="15"/>
 								</h:inputText></td>
 							<td><h:message for="new_fname" style="color:red" /></td>
 						</tr>
@@ -101,7 +102,8 @@ $(function() {
 									requiredMessage="Please Enter last name"
 									styleClass="form-control"
 									validatorMessage="Correct value of last name.">
-									<f:validateRegex pattern="[a-zA-Z]{2,30}" />
+									<f:validateRegex pattern="[a-zA-Z]+[ a-zA-Z-_]*" />
+									<f:validateLength minimum="1" maximum="15"/>
 								</h:inputText></td>
 							<td><h:message for="new_lname" style="color:red" /></td>
 						</tr>
@@ -131,10 +133,9 @@ $(function() {
 									id="phone_no" required="true" maxlength="13"
 									requiredMessage="Please Enter phone no."
 									styleClass="form-control"
-									validatorMessage="Correct the phone no, allowed format is (***)***-*** or ***-***-**** 
-								minimum 10 digit number.">
-									<f:validateRegex pattern="^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$" />
-									<f:validateLength minimum="10" />
+									validatorMessage="Correct the phone no, length shoukd be 10 digit number.">
+									<f:validateRegex pattern="^\d{10}$" />
+									<f:validateLength minimum="10" maximum="10"/>
 								</h:inputText></td>
 
 							<td><h:message for="phone_no" style="color:red" /></td>

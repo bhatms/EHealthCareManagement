@@ -1,6 +1,4 @@
 package com.ehm.web.managebeans;
-import java.text.ParseException;
-import java.util.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -403,8 +401,8 @@ public class PatientBean {
 			PatientDaoImpl patientDaoImpl = new PatientDaoImpl();
 			currentPatient = patientDaoImpl.getPatientByEmail(((Patient) session.getAttribute("loggedInPatient")).getEmailId());
 			
-			firstName = currentPatient.getFirstName();
-			lastName = currentPatient.getLastName();
+			firstName = currentPatient.getFirstName().trim();
+			lastName = currentPatient.getLastName().trim();
 			addressLine = currentPatient.getAddrLine1();
 			zip = currentPatient.getZip();
 			// emailId = currentPatient.getEmailId();
@@ -489,6 +487,10 @@ public class PatientBean {
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_INFO,
 								"Data updated successfully.", "Success"));
+				if(newPatient.getFirstName() != null){
+					session.setAttribute("userfName",newPatient.getFirstName());
+				}
+				
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 				FacesContext.getCurrentInstance().addMessage(

@@ -38,11 +38,13 @@ public class AdminDaoImplTest implements BaseTest {
 	public void testGetAllQueries() {
 		try {
 			List<PatientQuery> testPatientQueryList = adminDao.getAllQyeries();
-			if (testPatientQueryList == null || testPatientQueryList.isEmpty()) {
-				Assert.assertNull("No new queries open",testPatientQueryList);
-			} else{
+
+
+			if(testPatientQueryList != null && !testPatientQueryList.isEmpty()){
 				Assert.assertTrue("OP=pen queries found  ", !testPatientQueryList.isEmpty());
 
+			} else{
+				Assert.assertTrue("No new queries open",testPatientQueryList == null);
 			}
 		} catch (ClassNotFoundException e) {
 			Assert.fail(logger.getClass()
@@ -76,7 +78,7 @@ public class AdminDaoImplTest implements BaseTest {
 	@Test
 	public void testGetQueryByCateg2() {
 		try {
-			List<SelectItem> queryList = adminDao.getQyeryByCateg("General");
+			List<SelectItem> queryList = adminDao.getQyeryByCateg("Cardiology");
 
 			Assert.assertFalse("Invalid query category, tets fail", queryList.size() < 2);
 
@@ -95,8 +97,8 @@ public class AdminDaoImplTest implements BaseTest {
 		}
 	}
 
-	
-	
+
+
 	@Test
 	public void testGetDoctorByCateg1() {
 		try {
@@ -138,18 +140,14 @@ public class AdminDaoImplTest implements BaseTest {
 					+ ":method testGetDoctorByCateg2() failed due to" + e);
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testGetInProgressQueries() {
 		try {
 			List<PatientQuery> testPatientQueryList = adminDao.getInProgressQuery();
-			if (testPatientQueryList == null || testPatientQueryList.isEmpty()) {
-				Assert.assertNull("No In Progress queries open",testPatientQueryList);
-			} else{
+				Assert.assertFalse("No In Progress queries open",testPatientQueryList == null);
 				Assert.assertTrue("In Progress queries found  ", !testPatientQueryList.isEmpty());
-
-			}
 		} catch (ClassNotFoundException e) {
 			Assert.fail(logger.getClass()
 					+ ":method testGetInProgressQueries() failed due to" + e);
@@ -158,18 +156,16 @@ public class AdminDaoImplTest implements BaseTest {
 					+ ":method testGetInProgressQueries() failed due to" + e);
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testGetClosedQueries() {
 		try {
 			List<PatientQuery> testPatientQueryList = adminDao.getClosedQuery();
-			if (testPatientQueryList == null || testPatientQueryList.isEmpty()) {
-				Assert.assertNull("No closed queries open",testPatientQueryList);
-			} else{
-				Assert.assertTrue("closed queries found  ", !testPatientQueryList.isEmpty());
-
-			}
+			
+			Assert.assertTrue("No Closed queries found",(testPatientQueryList == null || testPatientQueryList.isEmpty()));
+			Assert.assertFalse("Wrong closed queries found  ", (testPatientQueryList != null &&
+					!testPatientQueryList.isEmpty()));
 		} catch (ClassNotFoundException e) {
 			Assert.fail(logger.getClass()
 					+ ":method testGetClosedQueries() failed due to" + e);

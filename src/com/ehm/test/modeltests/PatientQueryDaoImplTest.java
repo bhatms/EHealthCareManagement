@@ -53,11 +53,9 @@ public class PatientQueryDaoImplTest implements BaseTest {
 	public void testpatientQueryValidId() {
 		try {
 			List<PatientQuery> testPatientQueryList = patqueObj.patientQuery(Integer.valueOf("5"));
-			if (testPatientQueryList != null && testPatientQueryList.isEmpty()) {
-				Assert.assertNull("No datafound",testPatientQueryList);
-			} else {
-				Assert.assertNotNull("Query found for this patient", testPatientQueryList.get(0).getQueryDescription());
-			}
+				Assert.assertTrue("No datafound test pass",(testPatientQueryList == null ||testPatientQueryList.isEmpty()));
+				Assert.assertFalse("Query found for this patient",(testPatientQueryList != null && !testPatientQueryList.isEmpty()));
+			
 
 		} catch (ClassNotFoundException e) {
 			Assert.fail(logger.getClass()

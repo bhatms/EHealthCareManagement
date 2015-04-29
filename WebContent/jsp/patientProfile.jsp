@@ -107,14 +107,21 @@ function loadMethod(){
 							<td><h:outputLabel value="First Name"></h:outputLabel></td>
 							<td><h:inputText styleClass="form-control"
 									value="#{patientBean.firstName}" id="new_fname" required="true"
-									requiredMessage="Please Enter first name"></h:inputText></td>
+									requiredMessage="Please Enter first name" 
+									validatorMessage="Correct value of first name.">
+									<f:validateRegex pattern="[a-zA-Z]+[ a-zA-Z-_]*" />
+									<f:validateLength minimum="1" maximum="15"/></h:inputText></td>
 							<td><h:message for="new_fname" style="color:red" /></td>
 						</tr>
 						<tr>
 							<td><h:outputLabel value="Last Name"></h:outputLabel></td>
 							<td><h:inputText styleClass="form-control"
 									value="#{patientBean.lastName}" id="new_lname" required="true"
-									requiredMessage="Please Enter last name"></h:inputText></td>
+									requiredMessage="Please Enter last name" 
+									validatorMessage="Correct value of last name.">
+									<f:validateRegex pattern="[a-zA-Z]+[ a-zA-Z-_]*" />
+									<f:validateLength minimum="1" maximum="15"/>
+									</h:inputText></td>
 							<td><h:message for="new_lname" style="color:red" /></td>
 						</tr>
 						<tr>
@@ -140,7 +147,11 @@ function loadMethod(){
 							<td><h:outputLabel value="Phone No"></h:outputLabel></td>
 							<td><h:inputText styleClass="form-control"
 									value="#{patientBean.phoneNo}" id="phone_no" required="true"
-									requiredMessage="Please Enter phone no."></h:inputText></td>
+									requiredMessage="Please Enter phone no."
+									validatorMessage="Enter correct phone number.">
+									<f:validateRegex pattern="^\d{10}$" />
+									<f:validateLength minimum="10" maximum="10"/>
+									</h:inputText></td>
 
 							<td><h:message for="phone_no" style="color:red" /></td>
 						</tr>

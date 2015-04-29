@@ -413,3 +413,8 @@ Foreign Key (patient_id) References patient (patient_id)
 INSERT INTO patient_query 
  (patient_id, query_category, query_description, query_status, query_date) 
  values ( 1, 'Cardiology', 'Fever', 'New', '2015-04-10'); 
+ 
+ INSERT INTO patient_query 
+
+  (patient_id, query_category, query_description, query_status, query_date, doctor_id) 
+ values ( 1, 'Cardiology', 'Fever', 'In-Progress', '2015-04-10',3); 

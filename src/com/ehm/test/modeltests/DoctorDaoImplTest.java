@@ -23,13 +23,13 @@ public class DoctorDaoImplTest implements BaseTest {
 
 	final static Logger logger = Logger.getLogger(DoctorDaoImplTest.class);
 	private DoctorDao docObj;
-	
+
 	private String specialization;
-	
+
 	private String fName;
-	
+
 	private String lName;
-	
+
 
 	@Before
 	public void beforeSetting() throws ClassNotFoundException, SQLException {
@@ -44,13 +44,15 @@ public class DoctorDaoImplTest implements BaseTest {
 	@Test
 	public void testGetSearchDoctorRecords() {
 		try {
-			
+
 			createSearchDoctorStub(null,null,null);
 
 			List<Doctor> testDocList = docObj.getSearchDoctorRecords(specialization, fName, lName);
 
 			if (testDocList == null || testDocList.isEmpty()) {
 				Assert.assertNull("No record found");
+			} else if(testDocList != null && !testDocList.isEmpty()){
+				Assert.assertNotNull("Doctor record found");
 			}
 
 		} catch (SQLException e) {
@@ -58,7 +60,7 @@ public class DoctorDaoImplTest implements BaseTest {
 					+ ":method testGetSearchDoctorRecords() failed due to" + e);
 		}
 	}
-	
+
 	@Test
 	public void testGetDoctorProfile1() {
 		try {
@@ -66,7 +68,7 @@ public class DoctorDaoImplTest implements BaseTest {
 			Doctor testDoc = docObj.getDoctorProfile(Integer.valueOf("1"));
 
 			if (testDoc == null) {
-				Assert.assertNull("No record found");
+				Assert.fail("Invalid result for getdoctor profile");
 			}
 
 		} catch (SQLException e) {
@@ -74,17 +76,16 @@ public class DoctorDaoImplTest implements BaseTest {
 					+ ":method testGetDoctorProfile1() failed due to" + e);
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testGetDoctorProfile2() {
 		try {
 
 			Doctor testDoc = docObj.getDoctorProfile(Integer.valueOf("-999"));
 
-			if (testDoc == null) {
-				Assert.assertNull("No record found");
-			}
+				Assert.assertTrue("No record found", testDoc == null);
+				Assert.assertFalse("Invalid doctor found", testDoc != null);
 
 		} catch (SQLException e) {
 			Assert.fail(logger.getClass()
@@ -95,13 +96,13 @@ public class DoctorDaoImplTest implements BaseTest {
 	@Test
 	public void testGetSpecializationList() {
 
-		
+
 		try {
 			EhealthUtilDao docObj = new EhealthUtilDaoImpl("testing");
 			List<SelectItem> testSpecList = docObj.getSpecializationList();
 
 			if (testSpecList == null || testSpecList.isEmpty()) {
-				System.out.println("Fail test no specialization list in database.");
+				Assert.fail("Fail test no specialization list in database.");
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -114,24 +115,22 @@ public class DoctorDaoImplTest implements BaseTest {
 
 	}
 
-	
+
 	private void createSearchDoctorStub(String firstNme, String lastName, String special){
-		
+
 		fName = firstNme;
 		lName = lastName;
 		specialization = special;
-		
+
 	}
-	
+
 	@Test
 	public void testGetNewQueryInvalidId() {
 		try {
 			List<PatientQuery> testGetNewQueryList = docObj.getNewQuery(Integer.valueOf("-9999"));
-			if (testGetNewQueryList == null) {
-				Assert.assertNull(testGetNewQueryList);
-			} else{
-				Assert.assertTrue("No result found for invalid doctor id - New Query ", testGetNewQueryList.isEmpty());
-			}
+			Assert.assertFalse("Wrong query list found", (testGetNewQueryList != null && !testGetNewQueryList.isEmpty() ));
+			Assert.assertTrue("No result found for invalid doctor id - New Query ", (testGetNewQueryList == null ||
+					testGetNewQueryList.isEmpty()));
 
 		} catch (SQLException e) {
 			Assert.fail(logger.getClass()
@@ -144,11 +143,10 @@ public class DoctorDaoImplTest implements BaseTest {
 	public void testGetNewQueryValidId() {
 		try {
 			List<PatientQuery> testGetNewQueryList = docObj.getNewQuery(Integer.valueOf("2"));
-			if (testGetNewQueryList != null && testGetNewQueryList.isEmpty()) {
-				Assert.assertNull("No datafound",testGetNewQueryList);
-			} else {
-				Assert.assertNotNull("Patients and their corresponding Query's found for this doctor", testGetNewQueryList.get(0).getQueryDescription());
-			}
+
+			Assert.assertFalse("Wrogn data found",(testGetNewQueryList != null && !testGetNewQueryList.isEmpty()));
+			Assert.assertTrue("Patients and their corresponding Query's found for this doctor", 
+					(testGetNewQueryList == null || testGetNewQueryList.isEmpty()));
 
 		} catch (SQLException e) {
 			Assert.fail(logger.getClass()
@@ -160,11 +158,9 @@ public class DoctorDaoImplTest implements BaseTest {
 	public void testGetOtherQueryInvalidId() {
 		try {
 			List<PatientQuery> testGetOtherQueryList = docObj.getOtherQuery(Integer.valueOf("-9999"));
-			if (testGetOtherQueryList == null) {
-				Assert.assertNull(testGetOtherQueryList);
-			} else{
-				Assert.assertTrue("No result found for invalid doctor id - Other Query ", testGetOtherQueryList.isEmpty());
-			}
+
+			Assert.assertTrue("No result found for invalid doctor id - Other Query ", testGetOtherQueryList.isEmpty());
+			Assert.assertFalse(!testGetOtherQueryList.isEmpty());
 
 		} catch (SQLException e) {
 			Assert.fail(logger.getClass()
@@ -176,50 +172,47 @@ public class DoctorDaoImplTest implements BaseTest {
 	public void testGetOtherQueryValidId() {
 		try {
 			List<PatientQuery> testGetOtherQueryList = docObj.getOtherQuery(Integer.valueOf("2"));
-			if (testGetOtherQueryList != null && testGetOtherQueryList.isEmpty()) {
-				Assert.assertNull("No datafound",testGetOtherQueryList);
-			} else {
-				Assert.assertNotNull("Patients and their corresponding Query's found for this doctor", testGetOtherQueryList.get(0).getQueryDescription());
-			}
+			Assert.assertFalse("No datafound test fail",testGetOtherQueryList == null);
+			Assert.assertTrue("Patients and their corresponding Query's found for this doctor", testGetOtherQueryList != null);
 
 		} catch (SQLException e) {
 			Assert.fail(logger.getClass()
 					+ ":method testGetNewQuery() failed due to" + e);
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testGetDoctorByEmail1() {
 		try {
 
-			Doctor testDoc = docObj.getDoctorByEmail("dsajja@uncc.edu");
+			Doctor testDoc = docObj.getDoctorByEmail("amzz");
 
-			if (testDoc == null) {
-				Assert.assertNull("No record found");
-			}
+			Assert.assertTrue("No record found test pass", testDoc == null);
+
+			Assert.assertFalse("Record found test fail", testDoc != null);
 
 		} catch (SQLException e) {
 			Assert.fail(logger.getClass()
 					+ ":method testGetDoctorByEmail1() failed due to" + e);
 		}
 	}
-	
-	
+
+
 	@Test
 	public void testGetDoctorByEmail2() {
 		try {
 
-			Doctor testDoc = docObj.getDoctorByEmail("rdusari@uncc.edu");
+			Doctor testDoc = docObj.getDoctorByEmail("novakj@gmail.com");
 
-			if (testDoc == null) {
-				Assert.assertNull("No record found");
-			}
+			Assert.assertFalse("No record found test fail", testDoc == null);
+
+			Assert.assertTrue("Record found test pass", testDoc != null);
 
 		} catch (SQLException e) {
 			Assert.fail(logger.getClass()
 					+ ":method testGetDoctorByEmail2() failed due to" + e);
 		}
 	}
-	
+
 }

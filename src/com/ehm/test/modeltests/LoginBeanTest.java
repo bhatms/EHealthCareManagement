@@ -6,6 +6,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -32,9 +34,11 @@ public class LoginBeanTest extends Mockito{
 		when(context.getExternalContext()).thenReturn(externalContext);
 		when(externalContext.getSession(true)).thenReturn(session);
 		
-		User logedPatient = loginDao.validateLogin("jwatson@ssdi.com", "password11");		
+		User logedPatient = loginDao.validateLogin("admin@ehealth.com", "adminadmin");		
 		
-		System.out.println("test patient: "+logedPatient);
+		Assert.assertTrue("Valid user found", logedPatient != null);
+		
+		Assert.assertFalse("Valid user found", logedPatient == null);
 		
 	}
 

@@ -11,7 +11,6 @@ import org.junit.Test;
 
 import com.ehm.db.impl.LoginDao;
 import com.ehm.db.impl.LoginDaoImpl;
-import com.ehm.db.model.Patient;
 import com.ehm.db.model.User;
 
 public class LoginDaoImplTest implements BaseTest {
@@ -34,14 +33,27 @@ public class LoginDaoImplTest implements BaseTest {
 	public void testvalidate() {
 		try {
 			User testPatient = logObj.validateLogin("6783287", "487386");
-			if (testPatient == null) {
-				System.out.println("No User Found");
-			}
+			Assert.assertTrue("No user found valid test",testPatient == null);
+			Assert.assertFalse("No user found valid test",testPatient != null);
 
-			testPatient = logObj.validateLogin("jt@uncc.edu", "opop");
-			if (testPatient != null) {
-				System.out.println("User Found" + testPatient.getEmailId());
-			}
+		} catch (ClassNotFoundException e) {
+			Assert.fail(logger.getClass()
+					+ ":method testValidate() failed due to" + e);
+		} catch (SQLException e) {
+			Assert.fail(logger.getClass()
+					+ ":method testValidate() failed due to" + e);
+		}
+	}
+
+
+	@Test
+	public void testvalidate1() {
+		try {
+			User testPatient = logObj.validateLogin("admin@ehealth.com", "adminadmin");
+			Assert.assertTrue("No user found valid test",testPatient != null);
+			Assert.assertFalse("No user found valid test",testPatient == null);
+			
+		
 		} catch (ClassNotFoundException e) {
 			Assert.fail(logger.getClass()
 					+ ":method testValidate() failed due to" + e);
